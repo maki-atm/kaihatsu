@@ -12,3 +12,19 @@ table td, th {
 padding: 5px 10px;
 }
 
+.button {
+  display       : inline-block;
+  border-radius : 50%;          /* 角丸       */
+  font-size     : 9pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 11px 3px;   /* 余白       */
+  background    : rgba(77, 166, 255, 0.93);     /* 背景色     */
+  color         : #0000ff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  opacity       : 1;           /* 透明度     */
+  transition    : .3s;         /* なめらか変化 */
+}
+.button:hover {
+  opacity       : 0.8;         /* カーソル時透明度 */
+}
