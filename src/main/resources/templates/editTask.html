@@ -10,21 +10,21 @@
 
 <h2>タスクの編集</h2>
 
-<form action="">
+<form th:action="'/todo/'+${task.code}+'/edit'" method="post">
 <table border="1">
 	<tr>
-		<th>タスク</th><td><input type="text" name="task" th:value=""></td>
+		<th>タスク</th><td><input type="text" name="task" th:value="${task.task}"></td>
 	</tr>
 	<tr>
 		<th>期限</th>
-		<td> <input type="date" name="date" th:value="">　<input type="time" name="time" th:value=""></input></td>
+		<td> <input type="date" name="date" th:value="${task.date}">　<input type="time" name="time" th:value="${task.time}"></input></td>
 	</tr>
 	<tr>
-		<th>場所</th><td><input type="text" name="place" th:value=""></td>
+		<th>場所</th><td><input type="text" name="place" th:value="${task.place}"></td>
 
 	</tr>
 	<tr>
-		<th>優先度</th><td><input type="text" name="priority" th:value=""></td>
+		<th>優先度</th><td><input type="text" name="priority" th:value="${task.priority}"></td>
 	</tr>
 	</table>
 <br>

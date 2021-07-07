@@ -8,30 +8,47 @@
 </head>
 <body>
 
-<h2>タスク</h2>
+	<h2>タスク</h2>
 
-<form action="">
-<table border="1">
-	<tr>
-		<th>タスク</th><th>期限</th><th>場所</th><th>優先度</th><th>編集</th><th>削除</th>
-	</tr>
-	<tr>
-		<td rowspan="2">洗濯する</td>
-		<td >7月7日</td>
-		<td rowspan="2"></td>
-		<td rowspan="2">高</td>
-		<form>
-		<td rowspan="2"><input type="submit" value="編集"></td>
-		</form>
-		<td rowspan="2"><input type="submit" value="×"></td>
-	</tr>
-		<td>11:00</td>
-	<tr>
-	</tr>
+
+	<table border="1">
+		<tr>
+			<th>実行済み</th>
+			<th>タスク</th>
+			<th>期限</th>
+			<th>場所</th>
+			<th>優先度</th>
+			<th>編集</th>
+			<th>削除</th>
+		</tr>
+		<tr  rowspan="2" th:each="task:${tasK}">
+
+			<from th:action="'/todo/'+${task.code}+'/completed'">
+				<td><input type="submit" value="✓"></td>
+			</from>
+				<td rowspan="2" th:text="${task,text}"></td>
+			    <td th:text="${task,date}">7月7日</td>
+				<td rowspan="2" th:text="${task,priority}"></td>
+				<td rowspan="2" th:text="${task,priority}">高</td>
+			<form th:action="'/todo/'+${task.code}+'/edit'">
+				<td rowspan="2"><input type="submit" value="編集"></td>
+			</form>
+			<form>
+				<td rowspan="2"><input type="submit" value="×"></td>
+			</form>
+		</tr>
+
+		<tr>
+
+			<td th:text="${task,time}"></td>
+
+		</tr>
 	</table>
-
 	<br>
-	<input type="submit" value="＋ 新しく追加">
-</form>
+
+	<form action="/todo/new">
+		<input type="submit" value="＋ 新しく追加">
+	</form>
+
 </body>
 </html>

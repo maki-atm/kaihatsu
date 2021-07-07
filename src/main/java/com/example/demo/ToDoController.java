@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,7 +68,7 @@ public class ToDoController {
 	@RequestMapping("/todo/{code}/edit")
 	public ModelAndView editTask(
 			ModelAndView mv,
-			@RequestParam("code") int code) {
+			@PathParam("code") int code) {
 		Task tasK = null;
 
 		//指定したコードのタスク情報を取得
@@ -113,7 +115,7 @@ public class ToDoController {
 
 		//指定したコードのタスク情報を取得
 		Optional<Task> recode = taskRepository.findById(code);
-
+			
 		Completed comp = new Completed(recode.task, recode.date, recode.time, recode.place, recode.priority);
 		completedRepository.saveAndFlush(comp);
 
