@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ToDo</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<h2>タスク</h2>
+
+<form action="">
+<table border="1">
+	<tr>
+		<th>タスク</th><th>期限</th><th>場所</th><th>優先度</th><th>編集</th><th>削除</th>
+	</tr>
+	<tr>
+		<td rowspan="2">洗濯する</td>
+		<td >7月7日</td>
+		<td rowspan="2"></td>
+		<td rowspan="2">高</td>
+		<form>
+		<td rowspan="2"><input type="submit" value="編集"></td>
+		</form>
+		<td rowspan="2"><input type="submit" value="×"></td>
+	</tr>
+		<td>11:00</td>
+	<tr>
+	</tr>
+	</table>
+
+	<br>
+	<input type="submit" value="＋ 新しく追加">
+</form>
+</body>
+</html>
