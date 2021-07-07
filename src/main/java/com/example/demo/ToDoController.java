@@ -110,11 +110,16 @@ public class ToDoController {
 	public ModelAndView compTask(
 			ModelAndView mv,
 			@RequestParam("code") int code) {
+		Task tasK = null;
 
 		//指定したコードのタスク情報を取得
 		Optional<Task> recode = taskRepository.findById(code);
 
-		Completed comp = new Completed(recode.task, recode.date, recode.time, recode.place, recode.priority);
+		if (!recode.isEmpty()) {
+			tasK = recode.get();
+		}
+
+		Completed comp = new Completed(tasK.getTask(), tasK.getDate(), tasK.getTime(), tasK.getPlace(), tasK.getPriority());
 		completedRepository.saveAndFlush(comp);
 
 		//指定したコードのユーザ情報を削除
@@ -147,7 +152,7 @@ public class ToDoController {
 			@RequestParam("code") int code) {
 
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
-		Task tasK = new Task(task, date, place, priority);
+		Task tasK = new Task(tasK.getTask(), tasK.getDate(), tasK.getPlace(), tasK.getPriority());
 		taskRepository.saveAndFlush(tasK);
 
 		//指定したコードのタスク情報を取得
