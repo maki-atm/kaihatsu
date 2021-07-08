@@ -33,7 +33,7 @@
 			<form th:action="'/todo/'+${task.code}+'/edit'">
 				<td rowspan="2"><input type="submit" value="編集" class="button"></td>
 			</form>
-			<form>
+			<form th:action="/todo/delete">
 				<td rowspan="2"><input type="submit" value="×" class="button"></td>
 			</form>
 		</tr>
