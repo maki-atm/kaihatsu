@@ -31,9 +31,9 @@
 				<td  th:text="${task.text}"></td>
 			    <td th:text="${task.date}"></td>
 			    <td th:text="${#dates.format(task.time, 'H:mm')}"></td>
-				<td  th:text="${task.priority}"></td>
-				<td th:text="${task.place}"></td>
 
+				<td th:text="${task.place}"></td>
+                <td  th:text="${task.priority}"></td>
 			<form th:action="'/todo/'+${task.code}+'/edit'">
 				<td ><input type="submit" value="編集" class="button"></td>
 			</form>
@@ -42,12 +42,6 @@
 				<input type="hidden" name="code" th:value="${task.code}">
 				<td ><input type="submit" value="×" class="button"></td>
 			</form>
-		</tr>
-
-		<tr>
-
-
-
 		</tr>
 		</span>
 	</table>
