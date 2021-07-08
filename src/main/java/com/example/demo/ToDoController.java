@@ -59,13 +59,13 @@ public class ToDoController {
 			@RequestParam("place") String place,
 			@RequestParam("priority") String priority) {
 		//task,date,time,place,priorityを元にタスク情報を登録
-		
+
 		//日付の「/」を「-」に置換して、Date型に変換
 		Date date = Date.valueOf(strDate.replace("/", "-"));
-		
+
 		//Time型に変換
 		Time time = Time.valueOf(strTime);
-		
+
 		Task tasK = new Task(task, date, time, place, priority);
 		taskRepository.saveAndFlush(tasK);
 
@@ -110,10 +110,10 @@ public class ToDoController {
 
 		//日付の「/」を「-」に置換して、Date型に変換
 			Date date = Date.valueOf(strDate.replace("/", "-"));
-				
+
 		//Time型に変換
 			Time time = Time.valueOf(strTime);
-		
+
 		//指定したコードのタスク情報を変更
 		Task tasK = new Task(code, task, date, time, place, priority);
 		taskRepository.saveAndFlush(tasK);
@@ -171,6 +171,7 @@ public class ToDoController {
 			ModelAndView mv,
 			@RequestParam("code") int code) {
 
+		//エラー中
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
 		Task tasK = new Task(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());
 		taskRepository.saveAndFlush(tasK);
@@ -181,7 +182,7 @@ public class ToDoController {
 		if (!recode.isEmpty()) {
 			tasK = recode.get();
 		}
-		
+
 		Completed comp = new Completed(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());
 
 		//実行済みテーブルから指定したコードのタスク情報を削除
