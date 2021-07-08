@@ -26,7 +26,7 @@ public class ToDoController {
 	@RequestMapping("/todo")
 	public ModelAndView displayTask(ModelAndView mv) {
 		//全タスク情報取得
-		List<Task> t = taskRepository.findAll();
+		List<Task> t = taskRepository.findByOrderByDateAscTimeAsc() ;
 
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);
@@ -183,7 +183,7 @@ public class ToDoController {
 			ModelAndView mv) {
 
 		//全タスク情報取得
-		List<Completed> t = completedRepository.findAll();
+		List<Completed> t = completedRepository.findByOrderByDateAscTimeAsc();
 
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);
