@@ -17,7 +17,7 @@ public class Task {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer code;
 
-	private String task;
+	private String text;
 
 	private Date date;
 
@@ -32,17 +32,17 @@ public class Task {
 
 	}
 
-	public Task( String task, Date date, Time time, String place, String priority) {
-		this.task = task;
+	public Task( String text, Date date, Time time, String place, String priority) {
+		this.text = text;
 		this.date = date;
 		this.time = time;
 		this.place = place;
 		this.priority = priority;
 	}
 
-	public Task(Integer code, String task, Date date, Time time, String place, String priority) {
+	public Task(Integer code, String text, Date date, Time time, String place, String priority) {
 		this.code = code;
-		this.task = task;
+		this.text = text;
 		this.date = date;
 		this.time = time;
 		this.place = place;
@@ -57,12 +57,12 @@ public class Task {
 		this.code = code;
 	}
 
-	public String getTask() {
-		return task;
+	public String getText() {
+		return text;
 	}
 
-	public void setTask(String task) {
-		this.task = task;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public Date getDate() {
