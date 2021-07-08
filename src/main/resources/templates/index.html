@@ -34,6 +34,7 @@
 				<td rowspan="2"><input type="submit" value="編集" class="button"></td>
 			</form>
 			<form th:action="/todo/delete">
+				<input type="hidden" th:value="${task.code}">
 				<td rowspan="2"><input type="submit" value="×" class="button"></td>
 			</form>
 		</tr>
