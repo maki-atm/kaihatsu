@@ -36,7 +36,7 @@
 
 		<tr>
 
-			<td th:text="${task.time}"></td>
+			<td th:text="${#dates.format(task.time, 'H:mm')}"></td>
 
 		</tr>
 		</span>
