@@ -1,6 +1,8 @@
 package com.example.demo;
 
-import java.util.Date;
+
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,12 +54,19 @@ public class ToDoController {
 	public ModelAndView addTask(
 			ModelAndView mv,
 			@RequestParam("task") String task,
-			@RequestParam("date") Date date,
-			@RequestParam("time") int time,
+			@RequestParam("date") String strDate,
+			@RequestParam("time") String strTime,
 			@RequestParam("place") String place,
 			@RequestParam("priority") String priority) {
 		//task,date,time,place,priorityを元にタスク情報を登録
-		Task tasK = new Task(task, date, place, priority);
+		
+		//日付の「/」を「-」に置換して、Date型に変換
+		Date date = Date.valueOf(strDate.replace("/", "-"));
+		
+		//Time型に変換
+		Time time = Time.valueOf(strTime);
+		
+		Task tasK = new Task(task, date, time, place, priority);
 		taskRepository.saveAndFlush(tasK);
 
 		return displayTask(mv);
@@ -94,11 +103,17 @@ public class ToDoController {
 			ModelAndView mv,
 			@RequestParam("code") int code,
 			@RequestParam("task") String task,
-			@RequestParam("date") Date date,
-			@RequestParam("time") Time time,
+			@RequestParam("date") String strDate,
+			@RequestParam("time") String strTime,
 			@RequestParam("place") String place,
 			@RequestParam("priority") String priority) {
 
+		//日付の「/」を「-」に置換して、Date型に変換
+			Date date = Date.valueOf(strDate.replace("/", "-"));
+				
+		//Time型に変換
+			Time time = Time.valueOf(strTime);
+		
 		//指定したコードのタスク情報を変更
 		Task tasK = new Task(code, task, date, time, place, priority);
 		taskRepository.saveAndFlush(tasK);
@@ -157,13 +172,17 @@ public class ToDoController {
 			@RequestParam("code") int code) {
 
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
-		Task tasK = new Task(tasK.getTask(), tasK.getDate(), tasK.getPlace(), tasK.getPriority());
+		Task tasK = new Task(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());
 		taskRepository.saveAndFlush(tasK);
 
 		//指定したコードのタスク情報を取得
 		Optional<Task> recode = taskRepository.findById(code);
 
-		Completed comp = new Completed(task, date, time, place, priority);
+		if (!recode.isEmpty()) {
+			tasK = recode.get();
+		}
+		
+		Completed comp = new Completed(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());
 
 		//実行済みテーブルから指定したコードのタスク情報を削除
 		Optional<Completed> record = completedRepository.findById(code);
