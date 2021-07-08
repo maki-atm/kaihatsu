@@ -90,7 +90,7 @@ public class ToDoController {
 		Optional<Task> record = taskRepository.findById(code);
 
 		if (!record.isEmpty()) {
-			completedRepository.deleteById(code);
+			taskRepository.deleteById(code);
 		}
 
 		//実行済みタスク一覧表示
