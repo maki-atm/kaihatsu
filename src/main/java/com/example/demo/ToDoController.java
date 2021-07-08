@@ -189,23 +189,23 @@ public class ToDoController {
 			ModelAndView mv,
 			@RequestParam("code") int code) {
 
-		Task tasK = null;
+		Task task = null;
 
 
 //指定したコードのタスク情報を取得
 		Optional<Task> recode = taskRepository.findById(code);
 
 		if (!recode.isEmpty()) {
-			tasK = recode.get();
+			task = recode.get();
 		}
 
 		//エラー中が直らない・・・
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
-		Task tasK = new Task(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());
+		Task tasK = new Task(task.getTask(), task.getDate(), task.getTime(),task.getPlace(), task.getPriority());
 		taskRepository.saveAndFlush(tasK);
 
 
-		Completed comp = new Completed(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());
+//		Completed comp = new Completed(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());
 
 		//実行済みテーブルから指定したコードのタスク情報を削除
 		Optional<Completed> record = completedRepository.findById(code);
