@@ -73,12 +73,30 @@ public class ToDoController {
 
 	}
 
+	//タスク一覧から削除
+	@PostMapping("/todo/delete")
+	public ModelAndView addTask(
+			ModelAndView mv,
+			@RequestParam("code")int code
+	) {
+		//指定したコードのユーザ情報を削除
+		Optional<Task> record = taskRepository.findById(code);
+
+		if (!record.isEmpty()) {
+			completedRepository.deleteById(code);
+		}
+
+		//実行済みタスク一覧表示
+		return displayTask(mv);
+
+	}
+
 	//タスク変更画面表示
 	@RequestMapping("/todo/{code}/edit")
 	public ModelAndView editTask(
 			ModelAndView mv,
 			@PathParam("code") int code) {
-		Task tasK = null;
+		Task tasK = null;	
 
 		//指定したコードのタスク情報を取得
 		Optional<Task> recode = taskRepository.findById(code);
