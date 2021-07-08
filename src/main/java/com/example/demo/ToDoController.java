@@ -171,17 +171,21 @@ public class ToDoController {
 			ModelAndView mv,
 			@RequestParam("code") int code) {
 
-		//エラー中
-		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
-		Task tasK = new Task(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());
-		taskRepository.saveAndFlush(tasK);
+		Task tasK = null;
 
-		//指定したコードのタスク情報を取得
+
+//指定したコードのタスク情報を取得
 		Optional<Task> recode = taskRepository.findById(code);
 
 		if (!recode.isEmpty()) {
 			tasK = recode.get();
 		}
+
+		//エラー中
+		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
+		Task tasK = new Task(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());
+		taskRepository.saveAndFlush(tasK);
+
 
 		Completed comp = new Completed(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());
 

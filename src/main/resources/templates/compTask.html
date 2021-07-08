@@ -16,14 +16,14 @@
 		<th>タスク</th><th>期限</th><th>場所</th><th>優先度</th><th>編集</th><th>削除</th>
 	</tr>
 	<tr>
-		<td rowspan="2">選択する</td>
+		<td rowspan="2">洗濯する</td>
 		<td >7月7日</td>
 		<td rowspan="2"></td>
 		<td rowspan="2">高</td>
 		<form>
-		<td rowspan="2"><input type="submit" value="戻す" class="button"></td>
+		<td rowspan="2"><input type="submit" value="戻す" class="button"><input type="hidden" name="code" th:value="${tasK.code}"></td>
 		</form>
-		<td rowspan="2"><input type="submit" value="×" class="button"></td>
+		<td rowspan="2"><input type="submit" value="×" class="button"><input type="hidden" name="code" th:value="${tasK.code}"></td>
 	</tr>
 		<td>11:00</td>
 	<tr>
