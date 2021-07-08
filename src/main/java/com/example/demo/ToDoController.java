@@ -213,7 +213,7 @@ public class ToDoController {
 			t = recode.get();
 		}
 
-		//エラー中が直らない・・・
+
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
 		Task task = new Task(t.getText(), t.getDate(), t.getTime(),t.getPlace(), t.getPriority());
 		taskRepository.saveAndFlush(task);
