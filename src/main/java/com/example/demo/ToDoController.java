@@ -31,6 +31,7 @@ public class ToDoController {
 
 		//Thmeleafで表示する準備
 		mv.addObject("task", tasK);
+		
 
 		//index.htmlにフォワード
 		mv.setViewName("index");
