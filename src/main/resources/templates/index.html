@@ -31,10 +31,10 @@
 				<td rowspan="2" th:text="${task,priority}"></td>
 				<td rowspan="2" th:text="${task,priority}">高</td>
 			<form th:action="'/todo/'+${task.code}+'/edit'">
-				<td rowspan="2"><input type="submit" value="編集"></td>
+				<td rowspan="2"><input type="submit" value="編集" class="button"></td>
 			</form>
-			<form>
-				<td rowspan="2"><input type="submit" value="×"></td>
+			<form th:action="/todo/delete">
+				<td rowspan="2"><input type="submit" value="×" class="button"></td>
 			</form>
 		</tr>
 
@@ -47,7 +47,7 @@
 	<br>
 
 	<form action="/todo/new">
-		<input type="submit" value="＋ 新しく追加">
+		<input type="submit" value="＋ 新しく追加" class="button">
 	</form>
 
 </body>
