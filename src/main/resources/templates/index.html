@@ -45,7 +45,7 @@
 
 		<tr>
 
-			<td th:text="${task.time}"></td>
+			<td th:text="${#dates.format(task.time, 'hh:mm')}"></td>
 
 		</tr>
 		</span>
@@ -55,7 +55,7 @@
 	<form action="/todo/new">
 		<input type="submit" value="＋ 新しく追加" class="button">
 	</form>
-	
+
 	<form action="/todo/completed">
 		<input type="submit" value="実行済みタスク一覧" class="button">
 	</form>

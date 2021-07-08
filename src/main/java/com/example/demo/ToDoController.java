@@ -63,11 +63,14 @@ public class ToDoController {
 			@RequestParam("priority") String priority) {
 		//task,date,time,place,priorityを元にタスク情報を登録
 
+		System.out.println("date=" + strDate);
+		System.out.println("time=" + strTime);
 		//日付の「/」を「-」に置換して、Date型に変換
-		Date date = Date.valueOf(strDate.replace("/", "-"));
+		Date date = Date.valueOf(strDate);
 
 		//Time型に変換
-		Time time = Time.valueOf(strTime);
+
+		Time time = Time.valueOf(strTime+":00");
 
 		Task t = new Task(text, date, time, place, priority);
 		taskRepository.saveAndFlush(t);
