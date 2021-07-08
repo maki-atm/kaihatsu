@@ -15,7 +15,7 @@
 		<tr>
 			<th>実行済み</th>
 			<th>タスク</th>
-			<th>期限</th>
+			<th colspan="2">期限</th>
 			<th>場所</th>
 			<th>優先度</th>
 			<th>編集</th>
@@ -23,29 +23,30 @@
 		</tr>
 
 		<span  th:each="task:${t}">
-		<tr  rowspan="2">
+		<tr  >
 
 			<form th:action="'/todo/'+${task.code}+'/completed'">
-				<td rowspan="2"><input type="submit" value="✓"></td>
+				<td ><input type="submit" value="✓"></td>
 			</form>
-				<td rowspan="2" th:text="${task.text}"></td>
+				<td  th:text="${task.text}"></td>
 			    <td th:text="${task.date}"></td>
-				<td rowspan="2" th:text="${task.priority}"></td>
-				<td rowspan="2" th:text="${task.place}"></td>
+			    <td th:text="${#dates.format(task.time, 'H:mm')}"></td>
+				<td  th:text="${task.priority}"></td>
+				<td th:text="${task.place}"></td>
 
 			<form th:action="'/todo/'+${task.code}+'/edit'">
-				<td rowspan="2"><input type="submit" value="編集" class="button"></td>
+				<td ><input type="submit" value="編集" class="button"></td>
 			</form>
 
 			<form action="/todo/delete" method="post">
 				<input type="hidden" name="code" th:value="${task.code}">
-				<td rowspan="2"><input type="submit" value="×" class="button"></td>
+				<td ><input type="submit" value="×" class="button"></td>
 			</form>
 		</tr>
 
 		<tr>
 
-			<td th:text="${#dates.format(task.time, 'H:mm')}"></td>
+
 
 		</tr>
 		</span>
@@ -56,6 +57,7 @@
 		<input type="submit" value="＋ 新しく追加" class="button">
 	</form>
 
+    <br>
 	<form action="/todo/completed">
 		<input type="submit" value="実行済みタスク一覧" class="button">
 	</form>

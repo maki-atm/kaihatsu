@@ -13,7 +13,7 @@
 <form th:action="'/todo/'+${t.code}+'/edit'" method="post">
 <table border="1">
 	<tr>
-		<th>タスク</th><td><input type="text" name="task" th:value="${t.text}"></td>
+		<th>タスク</th><td><input type="text" name="text" th:value="${t.text}"></td>
 	</tr>
 	<tr>
 		<th>期限</th>
@@ -24,7 +24,12 @@
 
 	</tr>
 	<tr>
-		<th>優先度</th><td><input type="text" name="priority" th:value="${t.priority}"></td>
+		<th>優先度</th>
+		<td><select name="priority">
+				<option value="高">高</option>
+				<option value="中">中</option>
+				<option value="低">低</option>
+				</select></td>
 	</tr>
 	</table>
 <br>
