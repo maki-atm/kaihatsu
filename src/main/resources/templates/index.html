@@ -21,29 +21,34 @@
 			<th>編集</th>
 			<th>削除</th>
 		</tr>
-		<tr  rowspan="2" th:each="task:${task}">
+
+		<span  th:each="task:${task}">
+		<tr  rowspan="2">
 
 			<form th:action="'/todo/'+${task.code}+'/completed'">
-				<td><input type="submit" value="✓"></td>
+				<td rowspan="2"><input type="submit" value="✓"></td>
 			</form>
 				<td rowspan="2" th:text="${task.task}"></td>
 			    <td th:text="${task.date}"></td>
 				<td rowspan="2" th:text="${task.priority}"></td>
 				<td rowspan="2" th:text="${task.place}"></td>
+
 			<form th:action="'/todo/'+${task.code}+'/edit'">
 				<td rowspan="2"><input type="submit" value="編集" class="button"></td>
 			</form>
-			<form th:action="/todo/delete">
-				<input type="hidden" th:value="${task.code}">
+
+			<form action="/todo/delete" method="post">
+				<input type="hidden" name="code" th:value="${task.code}">
 				<td rowspan="2"><input type="submit" value="×" class="button"></td>
 			</form>
 		</tr>
 
 		<tr>
 
-			<td ></td>
+			<td th:text="${task.time}"></td>
 
 		</tr>
+		</span>
 	</table>
 	<br>
 
