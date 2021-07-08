@@ -27,11 +27,11 @@ public class ToDoController {
 	@RequestMapping("/todo")
 	public ModelAndView displayTask(ModelAndView mv) {
 		//全タスク情報取得
-		List<Task> tasK = taskRepository.findAll();
+		List<Task> t = taskRepository.findAll();
 
 		//Thmeleafで表示する準備
-		mv.addObject("task", tasK);
-		
+		mv.addObject("task", t);
+
 
 		//index.htmlにフォワード
 		mv.setViewName("index");
@@ -54,7 +54,7 @@ public class ToDoController {
 	@PostMapping("/todo/new")
 	public ModelAndView addTask(
 			ModelAndView mv,
-			@RequestParam("task") String task,
+			@RequestParam("text") String text,
 			@RequestParam("date") String strDate,
 			@RequestParam("time") String strTime,
 			@RequestParam("place") String place,
@@ -67,8 +67,8 @@ public class ToDoController {
 		//Time型に変換
 		Time time = Time.valueOf(strTime);
 
-		Task tasK = new Task(task, date, time, place, priority);
-		taskRepository.saveAndFlush(tasK);
+		Task t = new Task(text, date, time, place, priority);
+		taskRepository.saveAndFlush(t);
 
 		return displayTask(mv);
 
@@ -97,17 +97,17 @@ public class ToDoController {
 	public ModelAndView editTask(
 			ModelAndView mv,
 			@PathParam("code") int code) {
-		Task tasK = null;
+		Task t = null;
 
 		//指定したコードのタスク情報を取得
 		Optional<Task> recode = taskRepository.findById(code);
 
 		if (!recode.isEmpty()) {
-			tasK = recode.get();
+			t = recode.get();
 		}
 
 		//Thmeleafで表示する準備
-		mv.addObject("task", tasK);
+		mv.addObject("task", t);
 
 		//editTask.htmlへフォワード
 		mv.setViewName("editTask");
@@ -121,7 +121,7 @@ public class ToDoController {
 	public ModelAndView editTask(
 			ModelAndView mv,
 			@RequestParam("code") int code,
-			@RequestParam("task") String task,
+			@RequestParam("text") String text,
 			@RequestParam("date") String strDate,
 			@RequestParam("time") String strTime,
 			@RequestParam("place") String place,
@@ -134,8 +134,8 @@ public class ToDoController {
 			Time time = Time.valueOf(strTime);
 
 		//指定したコードのタスク情報を変更
-		Task tasK = new Task(code, task, date, time, place, priority);
-		taskRepository.saveAndFlush(tasK);
+		Task t = new Task(code, text, date, time, place, priority);
+		taskRepository.saveAndFlush(t);
 
 		return displayTask(mv);
 
@@ -146,17 +146,17 @@ public class ToDoController {
 	public ModelAndView compTask(
 			ModelAndView mv,
 			@RequestParam("code") int code) {
-		Task tasK = null;
+		Task t = null;
 
 		//指定したコードのタスク情報を取得
 		Optional<Task> recode = taskRepository.findById(code);
 
 
 		if (!recode.isEmpty()) {
-			tasK = recode.get();
+			t = recode.get();
 		}
 
-		Completed comp = new Completed(tasK.getTask(), tasK.getDate(), tasK.getTime(), tasK.getPlace(), tasK.getPriority());
+		Completed comp = new Completed(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority());
 
 
 		completedRepository.saveAndFlush(comp);
@@ -190,20 +190,20 @@ public class ToDoController {
 			ModelAndView mv,
 			@RequestParam("code") int code) {
 
-		Task task = null;
+		Task t = null;
 
 
 //指定したコードのタスク情報を取得
 		Optional<Task> recode = taskRepository.findById(code);
 
 		if (!recode.isEmpty()) {
-			task = recode.get();
+			t = recode.get();
 		}
 
 		//エラー中が直らない・・・
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
-		Task tasK = new Task(task.getTask(), task.getDate(), task.getTime(),task.getPlace(), task.getPriority());
-		taskRepository.saveAndFlush(tasK);
+		Task t = new Task(t.getText(), t.getDate(), t.getTime(),t.getPlace(), t.getPriority());
+		taskRepository.saveAndFlush(t);
 
 
 //		Completed comp = new Completed(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());

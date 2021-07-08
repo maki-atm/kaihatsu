@@ -22,13 +22,13 @@
 			<th>削除</th>
 		</tr>
 
-		<span  th:each="task:${task}">
+		<span  th:each="task:${t}">
 		<tr  rowspan="2">
 
 			<form th:action="'/todo/'+${task.code}+'/completed'">
 				<td rowspan="2"><input type="submit" value="✓"></td>
 			</form>
-				<td rowspan="2" th:text="${task.task}"></td>
+				<td rowspan="2" th:text="${task.text}"></td>
 			    <td th:text="${task.date}"></td>
 				<td rowspan="2" th:text="${task.priority}"></td>
 				<td rowspan="2" th:text="${task.place}"></td>
