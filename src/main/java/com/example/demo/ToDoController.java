@@ -30,7 +30,7 @@ public class ToDoController {
 		List<Task> t = taskRepository.findAll();
 
 		//Thmeleafで表示する準備
-		mv.addObject("task", t);
+		mv.addObject("t", t);
 
 
 		//index.htmlにフォワード
@@ -39,6 +39,7 @@ public class ToDoController {
 		return mv;
 
 	}
+
 
 	//タスク新規登録画面表示
 	@RequestMapping("/todo/new")
@@ -49,6 +50,7 @@ public class ToDoController {
 		return mv;
 
 	}
+
 
 	//新規タスク登録
 	@PostMapping("/todo/new")
@@ -74,6 +76,7 @@ public class ToDoController {
 
 	}
 
+
 	//タスク一覧から削除
 	@PostMapping("/todo/delete")
 	public ModelAndView addTask(
@@ -93,10 +96,10 @@ public class ToDoController {
 	}
 
 	//タスク変更画面表示
-	@RequestMapping("/todo/{code}/edit")
+	@RequestMapping("/todo/{task.code}/edit")
 	public ModelAndView editTask(
 			ModelAndView mv,
-			@PathParam("code") int code) {
+			@PathParam("task.code") int code) {
 		Task t = null;
 
 		//指定したコードのタスク情報を取得
@@ -107,7 +110,7 @@ public class ToDoController {
 		}
 
 		//Thmeleafで表示する準備
-		mv.addObject("task", t);
+		mv.addObject("t", t);
 
 		//editTask.htmlへフォワード
 		mv.setViewName("editTask");
@@ -117,10 +120,10 @@ public class ToDoController {
 	}
 
 	//タスク変更
-	@PostMapping("/todo/{code}/edit")
+	@PostMapping("/todo/{t.code}/edit")
 	public ModelAndView editTask(
 			ModelAndView mv,
-			@RequestParam("code") int code,
+			@PathParam("t.code") int code,
 			@RequestParam("text") String text,
 			@RequestParam("date") String strDate,
 			@RequestParam("time") String strTime,
@@ -142,10 +145,10 @@ public class ToDoController {
 	}
 
 	//実行済みタスクへ移動
-	@RequestMapping("/todo/{code}/completed")
+	@RequestMapping("/todo/{task.code}/completed")
 	public ModelAndView compTask(
 			ModelAndView mv,
-			@RequestParam("code") int code) {
+			@RequestParam("task.code") int code) {
 		Task t = null;
 
 		//指定したコードのタスク情報を取得
@@ -177,6 +180,12 @@ public class ToDoController {
 	public ModelAndView completedTask(
 			ModelAndView mv) {
 
+		//全タスク情報取得
+		List<Completed> t = completedRepository.findAll();
+
+		//Thmeleafで表示する準備
+		mv.addObject("t", t);
+
 		//compTask.htmlへフォワード
 		mv.setViewName("compTask");
 
@@ -184,7 +193,7 @@ public class ToDoController {
 
 	}
 
-	//実行済みタスク一覧表示
+	//実行済みタスク一覧から未実行タスクへ戻す
 	@PostMapping("/todo/completed")
 	public ModelAndView completedTask(
 			ModelAndView mv,
@@ -193,7 +202,7 @@ public class ToDoController {
 		Task t = null;
 
 
-//指定したコードのタスク情報を取得
+		//指定したコードのタスク情報を取得
 		Optional<Task> recode = taskRepository.findById(code);
 
 		if (!recode.isEmpty()) {
