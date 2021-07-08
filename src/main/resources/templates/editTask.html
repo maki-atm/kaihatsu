@@ -13,7 +13,7 @@
 <form th:action="'/todo/'+${t.code}+'/edit'" method="post">
 <table border="1">
 	<tr>
-		<th>タスク</th><td><input type="text" name="task" th:value="${t.task}"></td>
+		<th>タスク</th><td><input type="text" name="task" th:value="${t.text}"></td>
 	</tr>
 	<tr>
 		<th>期限</th>
