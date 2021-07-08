@@ -6,10 +6,9 @@ import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,10 +60,8 @@ public class ToDoController {
 			@RequestParam("time") String strTime,
 			@RequestParam("place") String place,
 			@RequestParam("priority") String priority) {
-		//task,date,time,place,priorityを元にタスク情報を登録
 
-		System.out.println("date=" + strDate);
-		System.out.println("time=" + strTime);
+
 		//日付の「/」を「-」に置換して、Date型に変換
 		Date date = Date.valueOf(strDate);
 
@@ -72,6 +69,7 @@ public class ToDoController {
 
 		Time time = Time.valueOf(strTime+":00");
 
+		//task,date,time,place,priorityを元にタスク情報を登録
 		Task t = new Task(text, date, time, place, priority);
 		taskRepository.saveAndFlush(t);
 
@@ -103,7 +101,7 @@ public class ToDoController {
 	@RequestMapping("/todo/{task.code}/edit")
 	public ModelAndView editTask(
 			ModelAndView mv,
-			@PathParam("task.code") int code) {
+			@PathVariable("task.code") int code) {
 		Task t = null;
 
 		//指定したコードのタスク情報を取得
@@ -127,14 +125,14 @@ public class ToDoController {
 	@PostMapping("/todo/{t.code}/edit")
 	public ModelAndView editTask(
 			ModelAndView mv,
-			@PathParam("t.code") int code,
+			@PathVariable(name="t.code") int code,
 			@RequestParam("text") String text,
 			@RequestParam("date") String strDate,
 			@RequestParam("time") String strTime,
 			@RequestParam("place") String place,
 			@RequestParam("priority") String priority) {
 
-		//日付の「/」を「-」に置換して、Date型に変換
+		//Date型に変換
 			Date date = Date.valueOf(strDate);
 
 		//Time型に変換
