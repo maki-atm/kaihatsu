@@ -134,10 +134,10 @@ public class ToDoController {
 			@RequestParam("priority") String priority) {
 
 		//日付の「/」を「-」に置換して、Date型に変換
-			Date date = Date.valueOf(strDate.replace("/", "-"));
+			Date date = Date.valueOf(strDate);
 
 		//Time型に変換
-			Time time = Time.valueOf(strTime);
+			Time time = Time.valueOf(strTime+":00");
 
 		//指定したコードのタスク情報を変更
 		Task t = new Task(code, text, date, time, place, priority);

@@ -33,7 +33,7 @@
 				<td rowspan="2" th:text="${task.priority}"></td>
 				<td rowspan="2" th:text="${task.place}"></td>
 
-			<form th:action="'/todo/'+${task.code}+'/edit'">
+			<form th:action="'/todo/'+${task.code}'+/edit'">
 				<td rowspan="2"><input type="submit" value="編集" class="button"></td>
 			</form>
 
