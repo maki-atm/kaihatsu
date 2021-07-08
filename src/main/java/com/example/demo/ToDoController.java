@@ -1,6 +1,5 @@
 package com.example.demo;
 
-
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
@@ -26,11 +25,10 @@ public class ToDoController {
 	@RequestMapping("/todo")
 	public ModelAndView displayTask(ModelAndView mv) {
 		//全タスク情報取得
-		List<Task> t = taskRepository.findByOrderByDateAscTimeAsc() ;
+		List<Task> t = taskRepository.findByOrderByDateAscTimeAsc();
 
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);
-
 
 		//index.htmlにフォワード
 		mv.setViewName("index");
@@ -38,7 +36,6 @@ public class ToDoController {
 		return mv;
 
 	}
-
 
 	//タスク新規登録画面表示
 	@RequestMapping("/todo/new")
@@ -50,7 +47,6 @@ public class ToDoController {
 
 	}
 
-
 	//新規タスク登録
 	@PostMapping("/todo/new")
 	public ModelAndView addTask(
@@ -61,13 +57,12 @@ public class ToDoController {
 			@RequestParam("place") String place,
 			@RequestParam("priority") String priority) {
 
-
 		//日付の「/」を「-」に置換して、Date型に変換
 		Date date = Date.valueOf(strDate);
 
 		//Time型に変換
 
-		Time time = Time.valueOf(strTime+":00");
+		Time time = Time.valueOf(strTime + ":00");
 
 		//task,date,time,place,priorityを元にタスク情報を登録
 		Task t = new Task(text, date, time, place, priority);
@@ -77,13 +72,11 @@ public class ToDoController {
 
 	}
 
-
 	//タスク一覧から削除
 	@PostMapping("/todo/delete")
 	public ModelAndView addTask(
 			ModelAndView mv,
-			@RequestParam("code")int code
-	) {
+			@RequestParam("code") int code) {
 		//指定したコードのユーザ情報を削除
 		Optional<Task> record = taskRepository.findById(code);
 
@@ -125,7 +118,7 @@ public class ToDoController {
 	@PostMapping("/todo/{t.code}/edit")
 	public ModelAndView editTask(
 			ModelAndView mv,
-			@PathVariable(name="t.code") int code,
+			@PathVariable(name = "t.code") int code,
 			@RequestParam("text") String text,
 			@RequestParam("date") String strDate,
 			@RequestParam("time") String strTime,
@@ -133,10 +126,19 @@ public class ToDoController {
 			@RequestParam("priority") String priority) {
 
 		//Date型に変換
-			Date date = Date.valueOf(strDate);
+		Date date = Date.valueOf(strDate);
+
+		//strTimeの文字数取得
+		int tm = strTime.length();
+
+		//文字数が5（hh:㎜）のとき「:00」を追加（時間を変更したとき）
+		//時間を変更していないときはそのまま（hh：㎜：ss）でOK
+		if (tm == 5) {
+			strTime += ":00";
+		}
 
 		//Time型に変換
-			Time time = Time.valueOf(strTime+":00");
+		Time time = Time.valueOf(strTime);
 
 		//指定したコードのタスク情報を変更
 		Task t = new Task(code, text, date, time, place, priority);
@@ -150,19 +152,17 @@ public class ToDoController {
 	@RequestMapping("/todo/{task.code}/completed")
 	public ModelAndView compTask(
 			ModelAndView mv,
-			@RequestParam("task.code") int code) {
+			@PathVariable(name="task.code") int code) {
 		Task t = null;
 
 		//指定したコードのタスク情報を取得
 		Optional<Task> recode = taskRepository.findById(code);
-
 
 		if (!recode.isEmpty()) {
 			t = recode.get();
 		}
 
 		Completed comp = new Completed(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority());
-
 
 		completedRepository.saveAndFlush(comp);
 
@@ -203,7 +203,6 @@ public class ToDoController {
 
 		Task t = null;
 
-
 		//指定したコードのタスク情報を取得
 		Optional<Task> recode = taskRepository.findById(code);
 
@@ -211,13 +210,11 @@ public class ToDoController {
 			t = recode.get();
 		}
 
-
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
-		Task task = new Task(t.getText(), t.getDate(), t.getTime(),t.getPlace(), t.getPriority());
+		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority());
 		taskRepository.saveAndFlush(task);
 
-
-//		Completed comp = new Completed(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());
+		//		Completed comp = new Completed(tasK.getTask(), tasK.getDate(), tasK.getTime(),tasK.getPlace(), tasK.getPriority());
 
 		//実行済みテーブルから指定したコードのタスク情報を削除
 		Optional<Completed> record = completedRepository.findById(code);
