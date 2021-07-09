@@ -68,3 +68,5 @@ table tr{
 table tr:hover{
   background-color: #d4faff;
 }
+
+div.right{text-align:right;}
