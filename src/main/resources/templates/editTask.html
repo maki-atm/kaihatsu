@@ -13,11 +13,11 @@
 <form th:action="'/todo/'+${t.code}+'/edit'" method="post">
 <table border="1">
 	<tr>
-		<th>タスク</th><td><input type="text" name="text" th:value="${t.text}"></td>
+		<th>タスク</th><td><input type="text" name="text" th:value="${t.text}" required></td>
 	</tr>
 	<tr>
 		<th>期限</th>
-		<td> <input type="date" name="date" th:value="${t.date}">　<input type="time" name="time" th:value="${t.time}"></input></td>
+		<td> <input type="date" name="date" th:value="${t.date}" required>　<input type="time" name="time" th:value="${t.time}"></input></td>
 	</tr>
 	<tr>
 		<th>場所</th><td><input type="text" name="place" th:value="${t.place}"></td>
