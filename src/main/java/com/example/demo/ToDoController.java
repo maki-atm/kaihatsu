@@ -21,6 +21,7 @@ public class ToDoController {
 	@Autowired
 	CompletedRepository completedRepository;
 
+
 	//タスク情報一覧表示
 	@RequestMapping("/todo")
 	public ModelAndView displayTask(ModelAndView mv) {
