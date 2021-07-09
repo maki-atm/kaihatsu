@@ -5,6 +5,8 @@ import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,14 +23,27 @@ public class ToDoController {
 	@Autowired
 	CompletedRepository completedRepository;
 
+	@Autowired
+	UserRepository userRepository;
+
+	@Autowired
+	HttpSession session;
+
 
 	//タスク情報一覧表示
 	@RequestMapping("/todo")
 	public ModelAndView displayTask(ModelAndView mv) {
 
+//		User user = (User)session.getAttribute("userInfo");
+//		if(user == null) {
+//			user = new Cart();
+//			session.setAttribute("cart", cart);
+//		}
 
 		//全タスク情報取得
 		List<Task> t = taskRepository.findByOrderByDateAscTimeAsc();
+
+		session.setAttribute("task", t);
 
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);
@@ -83,7 +98,14 @@ public class ToDoController {
 			@RequestParam("place") String place,
 			@RequestParam("priority") int priNum) {
 
-		System.out.println("時間："+strTime);
+
+		@SuppressWarnings("unchecked")
+//		List<Task>t = (List<Task>)session.getAttribute("task");
+//		if(t == null) {
+//			t = new ArrayList<Task>();
+//			session.setAttribute("task", t);
+//		}
+//
 
 		//優先度を数字で受け取り、対応した文字を格納
 		String priority=null;
@@ -112,6 +134,12 @@ public class ToDoController {
 		}
 		//task,date,time,place,priorityを元にタスク情報を登録
 		Task t = new Task(text, date, time, place, priority,priNum);
+
+
+		//セッション
+
+
+
 		taskRepository.saveAndFlush(t);
 
 		return displayTask(mv);
