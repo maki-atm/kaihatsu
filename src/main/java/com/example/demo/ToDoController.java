@@ -183,7 +183,8 @@ public class ToDoController {
 			ModelAndView mv) {
 
 		//全タスク情報取得
-		List<Completed> t = completedRepository.findByOrderByDateAscTimeAsc();
+		//List<Completed> t = completedRepository.findByOrderByDateAscTimeAsc();
+		List<Completed> t = completedRepository.findAll();
 
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);
@@ -196,10 +197,10 @@ public class ToDoController {
 	}
 
 	//実行済みタスク一覧から未実行タスクへ戻す
-	@PostMapping("/todo/completed")
+	@PostMapping("/todo/{task.code}/completed2")
 	public ModelAndView completedTask(
 			ModelAndView mv,
-			@RequestParam("code") int code) {
+			@PathVariable(name="task.code") int code) {
 
 		Completed t = null;
 
@@ -215,13 +216,13 @@ public class ToDoController {
 		taskRepository.saveAndFlush(task);
 
 		//実行済みテーブルから指定したコードのタスク情報を削除
-		Optional<Completed> record = completedRepository.findById(code);
+		//Optional<Completed> record = completedRepository.findById(code);
 
-		if (!record.isEmpty()) {
-			taskRepository.deleteById(code);
+		if (!recode.isEmpty()) {
+			completedRepository.deleteById(code);
 		}
 
-		return displayTask(mv);
+		return completedTask(mv);
 
 	}
 
