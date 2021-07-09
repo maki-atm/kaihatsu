@@ -24,8 +24,32 @@ public class ToDoController {
 	//タスク情報一覧表示
 	@RequestMapping("/todo")
 	public ModelAndView displayTask(ModelAndView mv) {
+
 		//全タスク情報取得
 		List<Task> t = taskRepository.findByOrderByDateAscTimeAsc();
+
+		//Thmeleafで表示する準備
+		mv.addObject("t", t);
+
+		//index.htmlにフォワード
+		mv.setViewName("index");
+
+		return mv;
+
+	}
+
+	//並べ替え
+	@PostMapping("/todo")
+	public ModelAndView sortTask(ModelAndView mv,
+			@RequestParam("sort") String sort) {
+
+		List<Task> t=null;
+
+		if(sort.equals("DATE")) {
+			 t = taskRepository.findByOrderByDateAscTimeAsc();
+		}else if(sort.equals("PRIORITY")) {
+			 t =taskRepository.findByOrderByPriNumAsc();
+		}
 
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);
@@ -55,9 +79,21 @@ public class ToDoController {
 			@RequestParam("date") String strDate,
 			@RequestParam("time") String strTime,
 			@RequestParam("place") String place,
-			@RequestParam("priority") String priority) {
+			@RequestParam("priority") int priNum) {
 
-		//日付の「/」を「-」に置換して、Date型に変換
+		//優先度を数字で受け取り、対応した文字を格納
+		String priority=null;
+
+		if(priNum==1) {
+			priority = "高";
+		}else if(priNum == 2) {
+			priority = "中";
+		}else if(priNum == 3) {
+			priority = "低";
+		}
+
+
+		//Date型に変換
 		Date date = Date.valueOf(strDate);
 
 		//Time型に変換
@@ -65,7 +101,7 @@ public class ToDoController {
 		Time time = Time.valueOf(strTime + ":00");
 
 		//task,date,time,place,priorityを元にタスク情報を登録
-		Task t = new Task(text, date, time, place, priority);
+		Task t = new Task(text, date, time, place, priority,priNum);
 		taskRepository.saveAndFlush(t);
 
 		return displayTask(mv);
@@ -89,7 +125,7 @@ public class ToDoController {
 
 	}
 
-	//エラー中
+
 	//タスク変更画面表示
 	@RequestMapping("/todo/{task.code}/edit")
 	public ModelAndView editTask(
@@ -123,7 +159,18 @@ public class ToDoController {
 			@RequestParam("date") String strDate,
 			@RequestParam("time") String strTime,
 			@RequestParam("place") String place,
-			@RequestParam("priority") String priority) {
+			@RequestParam("priority") int priNum) {
+
+		//優先度を数字で受け取り、対応した文字を格納
+		String priority=null;
+
+		if(priNum==1) {
+			priority = "高";
+		}else if(priNum == 2) {
+			priority = "中";
+		}else if(priNum == 3) {
+			priority = "低";
+		}
 
 		//Date型に変換
 		Date date = Date.valueOf(strDate);
@@ -141,7 +188,7 @@ public class ToDoController {
 		Time time = Time.valueOf(strTime);
 
 		//指定したコードのタスク情報を変更
-		Task t = new Task(code, text, date, time, place, priority);
+		Task t = new Task(code, text, date, time, place, priority,priNum);
 		taskRepository.saveAndFlush(t);
 
 		return displayTask(mv);
@@ -162,7 +209,7 @@ public class ToDoController {
 			t = recode.get();
 		}
 
-		Completed comp = new Completed(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority());
+		Completed comp = new Completed(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getPriNum());
 
 		completedRepository.saveAndFlush(comp);
 
@@ -183,8 +230,7 @@ public class ToDoController {
 			ModelAndView mv) {
 
 		//全タスク情報取得
-		//List<Completed> t = completedRepository.findByOrderByDateAscTimeAsc();
-		List<Completed> t = completedRepository.findAll();
+		List<Completed> t = completedRepository.findByOrderByDateAscTimeAsc();
 
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);
@@ -212,7 +258,7 @@ public class ToDoController {
 		}
 
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
-		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority());
+		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getPriNum());
 		taskRepository.saveAndFlush(task);
 
 		//実行済みテーブルから指定したコードのタスク情報を削除

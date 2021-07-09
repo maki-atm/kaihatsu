@@ -3,6 +3,7 @@ package com.example.demo;
 import java.sql.Date;
 import java.sql.Time;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,26 +28,31 @@ public class Completed {
 
 	private String priority;
 
+	@Column(name="pri_num")
+	private int priNum;
+
 
 	public Completed() {
 
 	}
 
-	public Completed( String text, Date date, Time time, String place, String priority) {
+	public Completed( String text, Date date, Time time, String place, String priority,int priNum) {
 		this.text = text;
 		this.date = date;
 		this.time = time;
 		this.place = place;
 		this.priority = priority;
+		this.priNum = priNum;
 	}
 
-	public Completed(Integer code, String text, Date date, Time time, String place, String priority) {
+	public Completed(Integer code, String text, Date date, Time time, String place, String priority ,int priNum) {
 		this.code = code;
 		this.text = text;
 		this.date = date;
 		this.time = time;
 		this.place = place;
 		this.priority = priority;
+		this.priNum = priNum;
 	}
 
 	public Integer getCode() {
@@ -95,6 +101,14 @@ public class Completed {
 
 	public void setPriority(String priority) {
 		this.priority = priority;
+	}
+
+	public int getPriNum() {
+		return priNum;
+	}
+
+	public void setPriNum(int priNum) {
+		this.priNum= priNum;
 	}
 
 
