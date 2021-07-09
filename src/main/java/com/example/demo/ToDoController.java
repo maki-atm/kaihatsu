@@ -81,6 +81,8 @@ public class ToDoController {
 			@RequestParam("place") String place,
 			@RequestParam("priority") int priNum) {
 
+		System.out.println("時間："+strTime);
+
 		//優先度を数字で受け取り、対応した文字を格納
 		String priority=null;
 
@@ -98,8 +100,14 @@ public class ToDoController {
 
 		//Time型に変換
 
-		Time time = Time.valueOf(strTime + ":00");
+		Time time = null;
 
+		if(!strTime.equals("")) {
+
+		time = Time.valueOf(strTime + ":00");
+		}else {
+
+		}
 		//task,date,time,place,priorityを元にタスク情報を登録
 		Task t = new Task(text, date, time, place, priority,priNum);
 		taskRepository.saveAndFlush(t);
