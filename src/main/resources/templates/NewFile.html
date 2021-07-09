@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TAG index Webサイト</title>
+
+<script type="text/javascript">
+
+
+function disp(){
+
+	var now = new Date();
+
+
+	var watch1 = now.toLocaleString();
+	var watch2 = now.toGMTString();
+	var watch3 = now.toUTCString();
+	document.form1.field1.value = watch1;
+	document.form1.field2.value = watch2;
+	document.form1.field3.value = watch3;
+
+	setTimeout("disp()", 1000);
+
+}
+
+
+</script>
+
+</head>
+<body onLoad="disp()">
+
+<form action="#" name="form1">
+<input type="text" name="field1" size="30"> ローカル時<br>
+<input type="text" name="field2" size="30"> グリニッジ標準時<br>
+<input type="text" name="field3" size="30"> 世界標準時
+</form>
+
+</body>
+</html>

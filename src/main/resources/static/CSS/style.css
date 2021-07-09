@@ -32,7 +32,7 @@ table {
   border-collapse: collapse;
   margin: 0 auto;
   padding: 0;
-  width: 600px;
+  width: 1000px;
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 0 15px -6px #00000073;
@@ -54,7 +54,7 @@ table td {
 table  th {
   width: 20%;
   padding: 10px 0;
-  font-size: 14px;
+  font-size: 20px;
   padding: 15px;
   background-color: #FFC107;
   color:#fff;
@@ -73,3 +73,7 @@ table tr:hover{
 }
 
 div.right{text-align:right;}
+
+#TEXT{
+	width:45%;
+}

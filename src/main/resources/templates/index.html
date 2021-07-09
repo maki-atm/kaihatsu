@@ -39,7 +39,7 @@
 			<form th:action="'/todo/'+${task.code}+'/completed'">
 				<td ><input type="submit" value="✓"></td>
 			</form>
-				<td  th:text="${task.text}"></td>
+				<td  th:text="${task.text}" id="TEXT"></td>
 			    <td th:text="${task.date}"></td>
 			    <td th:text="${#dates.format(task.time, 'H:mm')}"></td>
 
@@ -66,6 +66,10 @@
 	<form action="/todo/completed">
 		<input type="submit" value="実行済みタスク一覧" class="button">
 	</form>
+
+
+
+
 
 </body>
 </html>
