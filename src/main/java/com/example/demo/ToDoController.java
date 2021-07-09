@@ -25,6 +25,7 @@ public class ToDoController {
 	@RequestMapping("/todo")
 	public ModelAndView displayTask(ModelAndView mv) {
 
+
 		//全タスク情報取得
 		List<Task> t = taskRepository.findByOrderByDateAscTimeAsc();
 
