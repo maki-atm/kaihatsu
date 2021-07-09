@@ -4,6 +4,9 @@ body {
 	text-align: center;
 }
 
+h1{
+	color:orange;
+}
 h2:first-letter {
   font-size: 150%;
   color: #eb6100;
@@ -77,3 +80,4 @@ div.right{text-align:right;}
 #TEXT{
 	width:45%;
 }
+
