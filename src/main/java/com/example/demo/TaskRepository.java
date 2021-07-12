@@ -12,5 +12,6 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 	List<Task> findByOrderByDateAscTimeAsc();
 	List<Task> findByOrderByPriNumAsc();
 	List<Task> findByUserCode(Integer code);
+	List<Task> findByTextLike(String text);
 
 }

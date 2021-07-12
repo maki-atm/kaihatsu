@@ -58,6 +58,25 @@ public class ToDoController {
 
 	}
 
+	//検索
+	@PostMapping("/search")
+	public ModelAndView search(
+			ModelAndView mv,
+			@RequestParam("keyword")String keyword) {
+		List<Task> task=null;
+
+		task=taskRepository.findByTextLike("%" + keyword + "%");
+
+		mv.addObject("t", task);
+		mv.addObject("keyword" , keyword);
+
+		mv.setViewName("index");
+
+		return mv;
+	}
+
+
+
 	//並べ替え
 	@PostMapping("/todo")
 	public ModelAndView sortTask(ModelAndView mv,

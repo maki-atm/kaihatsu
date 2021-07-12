@@ -23,6 +23,11 @@
 	</select>
 	<input type="submit" value="並べ替え" class="button">
 	</form>
+	<br>
+	<form action="/search" method="post">
+	<input type="text" name="keyword" th:value="${keyword}">
+	<input type="submit" value="検索" class="button">
+	</form>
      </div>
 
      <br>
