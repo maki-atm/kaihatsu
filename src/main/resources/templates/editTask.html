@@ -9,7 +9,8 @@
 <body>
 <span th:replace="menu"></span>
 <h2>タスクの編集</h2>
-
+<span th:replace="time"></span>
+<br>
 <form th:action="'/todo/'+${t.code}+'/edit'" method="post">
 <table border="1">
 	<tr>

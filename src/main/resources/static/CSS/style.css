@@ -77,10 +77,47 @@ table tr:hover{
 
 div.right{text-align:right;}
 
+header{
+	text-align:right;
+	background-color:#FFFF99}
+
 #TEXT{
 	width:45%;
 }
 
 #right{
 	text-align:right;
+}
+
+/* Google Fonts 読み込み */
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+
+
+
+/* 時計の共通スタイル */
+.clock {
+  font-family: 'Share Tech Mono', monospace;
+  color: black;
+  line-height: 1.2;
+
+}
+
+/* 日付のスタイル */
+.clock-date {
+  font-size: 25px;
+}
+
+/* 時間のスタイル */
+.clock-time {
+  font-size: 25px;
+}
+
+/* 文字サイズ調整 */
+@media screen and (max-width: 500px) {
+  .clock-date {
+    font-size: 5vw;
+  }
+  .clock-time {
+    font-size: 20vw;
+  }
 }
