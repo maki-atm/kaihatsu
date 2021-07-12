@@ -1,6 +1,7 @@
 package com.example.demo;
 
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +14,6 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 	List<Task> findByOrderByPriNumAsc();
 	List<Task> findByUserCode(Integer code);
 	List<Task> findByTextLike(String text);
+	List<Task> findByUserCodeAndDate(Integer userCode,Date date);
 
 }
