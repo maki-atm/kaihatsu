@@ -31,21 +31,27 @@ public class Completed {
 	@Column(name="pri_num")
 	private int priNum;
 
+	@Column(name="user_code")
+	private int userCode;
+
+
+
 
 	public Completed() {
 
 	}
 
-	public Completed( String text, Date date, Time time, String place, String priority,int priNum) {
+	public Completed( String text, Date date, Time time, String place, String priority,int priNum,int userCode) {
 		this.text = text;
 		this.date = date;
 		this.time = time;
 		this.place = place;
 		this.priority = priority;
 		this.priNum = priNum;
+		this.userCode = userCode;
 	}
 
-	public Completed(Integer code, String text, Date date, Time time, String place, String priority ,int priNum) {
+	public Completed(Integer code, String text, Date date, Time time, String place, String priority ,int priNum,int userCode) {
 		this.code = code;
 		this.text = text;
 		this.date = date;
@@ -53,6 +59,7 @@ public class Completed {
 		this.place = place;
 		this.priority = priority;
 		this.priNum = priNum;
+		this.userCode = userCode;
 	}
 
 	public Integer getCode() {
@@ -109,6 +116,14 @@ public class Completed {
 
 	public void setPriNum(int priNum) {
 		this.priNum= priNum;
+	}
+
+	public int getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(int userCode) {
+		this.userCode= userCode;
 	}
 
 

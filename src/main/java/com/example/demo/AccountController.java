@@ -20,6 +20,9 @@ public class AccountController {
 	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
+	TaskRepository taskRepository;
+
 	@RequestMapping("/")
 	public String login() {
 		// セッション情報はクリアする
@@ -49,7 +52,7 @@ public class AccountController {
 			//顧客情報のリストを取得
 			 User userInfo = list.get(0);
 
-			 if( !(userInfo.getPassword()== password)) {
+			 if( !(userInfo.getPassword().equals(password))) {
 
 				 mv.addObject("message", "パスワードが一致しません");
 				 mv.setViewName("login");
@@ -58,7 +61,15 @@ public class AccountController {
 			 }else {
 				//セッションスコープに顧客情報とカテゴリ情報を格納する
 				session.setAttribute("userInfo", userInfo);
+
+				User u =(User)session.getAttribute("userInfo");
+				List<Task> t = taskRepository.findByUserCode(u.getCode());
+				//Thmeleafで表示する準備
+				mv.addObject("t", t);
+
+				//index.htmlにフォワード
 				mv.setViewName("index");
+
 				return mv;
 
 			 }

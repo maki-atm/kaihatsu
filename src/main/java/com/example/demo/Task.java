@@ -31,21 +31,25 @@ public class Task {
 	@Column(name="pri_num")
 	private int priNum;
 
+	@Column(name="user_code")
+	private int userCode;
+
 
 	public Task() {
 
 	}
 
-	public Task( String text, Date date, Time time, String place, String priority ,int priNum) {
+	public Task( String text, Date date, Time time, String place, String priority ,int priNum,int userCode) {
 		this.text = text;
 		this.date = date;
 		this.time = time;
 		this.place = place;
 		this.priority = priority;
 		this.priNum = priNum;
+		this.userCode = userCode;
 	}
 
-	public Task(Integer code, String text, Date date, Time time, String place, String priority ,int priNum) {
+	public Task(Integer code, String text, Date date, Time time, String place, String priority ,int priNum,int userCode) {
 		this.code = code;
 		this.text = text;
 		this.date = date;
@@ -53,6 +57,7 @@ public class Task {
 		this.place = place;
 		this.priority = priority;
 		this.priNum = priNum;
+		this.userCode = userCode;
 	}
 
 	public Integer getCode() {
@@ -109,6 +114,14 @@ public class Task {
 
 	public void setPriNum(int priNum) {
 		this.priNum= priNum;
+	}
+
+	public int getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(int userCode) {
+		this.userCode= userCode;
 	}
 
 

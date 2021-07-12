@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CompletedRepository extends JpaRepository<Completed, Integer> {
 	List<Completed> findByOrderByDateAscTimeAsc();
-	List<Task> findByOrderByPriNumAsc();
+	List<Completed> findByOrderByPriNumAsc();
 
 	}

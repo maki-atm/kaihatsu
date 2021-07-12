@@ -40,10 +40,13 @@ public class ToDoController {
 //			session.setAttribute("cart", cart);
 //		}
 
-		//全タスク情報取得
-		List<Task> t = taskRepository.findByOrderByDateAscTimeAsc();
+		User u =(User)session.getAttribute("userInfo");
+		List<Task> t = taskRepository.findByUserCode(u.getCode());
 
-		session.setAttribute("task", t);
+		//全タスク情報取得
+		//List<Task> t = taskRepository.findByOrderByDateAscTimeAsc();
+
+		//session.setAttribute("task", t);
 
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);
@@ -99,7 +102,7 @@ public class ToDoController {
 			@RequestParam("priority") int priNum) {
 
 
-		@SuppressWarnings("unchecked")
+		//@SuppressWarnings("unchecked")
 //		List<Task>t = (List<Task>)session.getAttribute("task");
 //		if(t == null) {
 //			t = new ArrayList<Task>();
@@ -132,13 +135,12 @@ public class ToDoController {
 		}else {
 
 		}
+
+		//ユーザ情報のセッションを受け取る
+		User u =(User)session.getAttribute("userInfo");
+
 		//task,date,time,place,priorityを元にタスク情報を登録
-		Task t = new Task(text, date, time, place, priority,priNum);
-
-
-		//セッション
-
-
+		Task t = new Task(text, date, time, place, priority,priNum,u.getCode());
 
 		taskRepository.saveAndFlush(t);
 
@@ -225,8 +227,12 @@ public class ToDoController {
 		//Time型に変換
 		Time time = Time.valueOf(strTime);
 
+
+		//ユーザ情報のセッションを受け取る
+		User u =(User)session.getAttribute("userInfo");
+
 		//指定したコードのタスク情報を変更
-		Task t = new Task(code, text, date, time, place, priority,priNum);
+		Task t = new Task(code, text, date, time, place, priority,priNum,u.getCode());
 		taskRepository.saveAndFlush(t);
 
 		return displayTask(mv);
@@ -247,7 +253,7 @@ public class ToDoController {
 			t = recode.get();
 		}
 
-		Completed comp = new Completed(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getPriNum());
+		Completed comp = new Completed(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getPriNum(),t.getUserCode());
 
 		completedRepository.saveAndFlush(comp);
 
@@ -296,7 +302,7 @@ public class ToDoController {
 		}
 
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
-		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getPriNum());
+		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getPriNum(),t.getUserCode());
 		taskRepository.saveAndFlush(task);
 
 		//実行済みテーブルから指定したコードのタスク情報を削除
