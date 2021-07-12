@@ -18,9 +18,13 @@
 <script type="text/javascript">
 	$(function() {
 		$("#datepicker").datepicker({
+			altField: '#output',
+	        altFormat: 'yy-mm-d',
 			// 日付が選択された時、日付をテキストフィールドへセット
 			onSelect : function(dateText, inst) {
+
 				$("#date_val").val(dateText);
+
 			}
 		});
 	});
@@ -32,9 +36,15 @@
 
 <span th:replace="menu"></span>
 <h2>カレンダー</h2>
-	<div id="datepicker" /></div>
-	<br />
+	<div id="datepicker"></div>
+	<br>
+	<br>
+	<form action="">
+		<input type="text" id="output" >
+		<input type="submit" value="確定">
+	</form>
 
+	<br>
 <a href="/todo">タスク一覧へ戻る</a>
 </body>
 </html>

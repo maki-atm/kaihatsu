@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ToDo</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>
+<span th:replace="menu"></span>
+
+	<h2>タスク</h2>
+	<font color="orange">
+<span th:replace="time"></span>
+<br>
+</font>
+	<div class="right">
+	<form action="/todo" method="post">
+	<select name="sort">
+	<option value="DATE">期限の早い順</option>
+	<option value="PRIORITY">優先度の高い順</option>
+	</select>
+	<input type="submit" value="並べ替え" class="button">
+	</form>
+	<br>
+	<form action="/search" method="post">
+	<input type="text" name="keyword" th:value="${keyword}">
+	<input type="submit" value="検索" class="button">
+	</form>
+     </div>
+
+     <br>
+
+	<table border="1">
+		<tr>
+			<th>実行済み</th>
+			<th>タスク</th>
+			<th colspan="2">期限</th>
+			<th>場所</th>
+			<th>優先度</th>
+			<th>編集</th>
+			<th>削除</th>
+		</tr>
+
+		<span  th:each="task:${t}">
+		<tr  >
+
+			<form th:action="'/todo/'+${task.code}+'/completed'">
+				<td ><input type="submit" value="✓"></td>
+			</form>
+				<td  th:text="${task.text}" id="TEXT"></td>
+			    <td th:text="${task.date}"></td>
+			    <td th:text="${#dates.format(task.time, 'H:mm')}"></td>
+
+				<td th:text="${task.place}"></td>
+                <td  th:text="${task.priority}"></td>
+			<form th:action="'/todo/'+${task.code}+'/edit'">
+				<td ><input type="submit" value="編集" class="button"></td>
+			</form>
+
+			<form action="/todo/delete" method="post">
+				<input type="hidden" name="code" th:value="${task.code}">
+				<td ><input type="submit" value="×" class="button"></td>
+			</form>
+		</tr>
+		</span>
+	</table>
+	<br>
+
+	<form action="/todo/new">
+		<input type="submit" value="＋ 新しく追加" class="button">
+	</form>
+
+    <br>
+	<form action="/todo/completed">
+		<input type="submit" value="実行済みタスク一覧" class="button">
+	</form>
+
+	 <br>
+	<form action="/todo/calender">
+		<input type="submit" value="カレンダー" class="button">
+	</form>
+
+
+
+
+
+</body>
+</html>
