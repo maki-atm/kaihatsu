@@ -10,7 +10,11 @@
 <body>
 <span th:replace="menu"></span>
 
-	<h2>タスク</h2>
+<div style="display:inline-flex">
+	<h2 th:text="${#dates.format(date, 'M月d日')}+'のタスク'" ></h2>
+</div>
+
+
 	<font color="orange">
 <span th:replace="time"></span>
 <br>
@@ -43,7 +47,7 @@
 			<th>削除</th>
 		</tr>
 
-		<span  th:each="task:${t}">
+<span  th:each="task:${td}">
 		<tr  >
 
 			<form th:action="'/todo/'+${task.code}+'/completed'">

@@ -43,9 +43,10 @@ public class CalenderController {
 		//Date型に変換
 				Date date = Date.valueOf(strDate);
 
-				List<Task> t =taskRepository.findByUserCodeAndDate(u.getCode(),date);
+				List<Task> td =taskRepository.findByUserCodeAndDate(u.getCode(),date);
 
-		mv.addObject("t", t);
+		mv.addObject("td", td);
+		mv.addObject("date",date);
 		mv.setViewName("calDate");
 
 		//実行済みタスク一覧表示
