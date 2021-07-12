@@ -1,11 +1,13 @@
 package com.example.demo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -87,4 +89,64 @@ public class AccountController {
 			return login();
 		}
 
+	 //新規登録画面表示
+	 @RequestMapping("/newUser")
+	 public ModelAndView newUser(ModelAndView mv) {
+
+		 mv.setViewName("newUser");
+		 return mv;
+	 }
+
+	//新規登録
+		 @PostMapping("/newUser")
+		 public ModelAndView newUser(
+				 ModelAndView mv,
+				 @RequestParam("name")String name,
+				 @RequestParam("email")String  email,
+				 @RequestParam("password")String password) {
+
+			 User u=new User(name,email,password);
+			 List<User> user = userRepository.findByEmail(u.getEmail());
+
+
+
+			 if (!(user.size()==0) ){
+					user = new ArrayList<User>();
+					mv.addObject("msg", "既に登録済みです");
+					mv.setViewName("newUser");
+				}else {
+					 userRepository.saveAndFlush(u);
+
+						mv.addObject("msg", "登録が完了しました");
+
+						mv.setViewName("login");//フォワード先
+				}
+
+//			 boolean check =true;
+
+//				for (User u : users) {
+//					if (id.equals(u.getCode())) {
+//
+//						check=false;
+//						break;
+//
+//					}
+//				}
+
+//				if(check==false) {
+//					mv.addObject("msg", "登録済みのユーザーIDです");
+//					mv.setViewName("newUser");
+//
+//				}else {
+//					 userRepository.saveAndFlush(u);
+//
+//					mv.addObject("msg", "登録が完了しました");
+//
+//					mv.setViewName("login");//フォワード先
+//
+//					}
+
+
+			 return mv;
+		 }
 }

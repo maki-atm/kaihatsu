@@ -3,22 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
-<title>ログイン</title>
+<title>新規登録</title>
 </head>
 <body>
-
-<h1>ToDoリストログイン</h1>
+<h1>新規登録</h1>
 <font color="red" th:text="${msg}"></font>
-<p th:text="${message}">
-<form action="/login" method="post">
+<br>
+<form action="/newUser" method="post">
+　　　　　名前：<input type="text" name="name"required>
+<br>
 メールアドレス：<input type="text" name="email" required>
 <br>
 　　パスワード：<input type="password" name="password" required>
 <br>
 <br>
-<input type="submit" value="ログイン" class="button">
+<input type="submit" value="登録" class="button">
 </form>
 <br>
-<a href="newUser">新規登録</a>
+<a href="/">ログイン画面に戻る</a>
 </body>
 </html>
