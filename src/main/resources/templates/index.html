@@ -12,7 +12,7 @@
 
 	<h2>タスク</h2>
 	<font color="orange">
-<span th:replace="time"></span>
+<span th:replace="time" id="body"></span>
 <br>
 </font>
 	<div class="right">
@@ -67,24 +67,6 @@
 		</span>
 	</table>
 	<br>
-
-	<form action="/todo/new">
-		<input type="submit" value="＋ 新しく追加" class="button">
-	</form>
-
-    <br>
-	<form action="/todo/completed">
-		<input type="submit" value="実行済みタスク一覧" class="button">
-	</form>
-
-	 <br>
-	<form action="/todo/calender">
-		<input type="submit" value="カレンダー" class="button">
-	</form>
-
-
-
-
 
 </body>
 </html>

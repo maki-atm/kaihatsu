@@ -11,6 +11,8 @@ h2:first-letter {
   font-size: 150%;
   color: #eb6100;
 }
+
+/* ボタン    */
 .button {
   display       : inline-block;
   border-radius : 7%;          /* 角丸       */
@@ -31,6 +33,7 @@ h2:first-letter {
   background    : #ffffff;     /* 文字色     */
 }
 
+/* テーブル     */
 table {
   border-collapse: collapse;
   margin: 0 auto;
@@ -77,9 +80,6 @@ table tr:hover{
 
 div.right{text-align:right;}
 
-header{
-	text-align:right;
-	background-color:#FFFF99}
 
 #TEXT{
 	width:45%;
@@ -89,6 +89,7 @@ header{
 	text-align:right;
 }
 
+/* 時計   */
 /* Google Fonts 読み込み */
 @import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
 

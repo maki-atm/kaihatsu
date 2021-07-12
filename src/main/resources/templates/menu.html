@@ -1,13 +1,21 @@
-<header>
-  <div class="right">
-<font color="#FF6600" >
-<a th:text="${session.userInfo.name}"></a>さん、こんにちは！
-</font>
-</div>
-<br>
-<div class="right">
-<a href="/logout">ログアウトはこちら</a>
-</div >
+<link th:href="@{/css/menu.css}" rel="stylesheet" type="text/css">
 
-<hr>
+<header>
+<nav >
+<h3 th:text="${session.userInfo.name}"></h3>
+<ul>
+<li><a href="/todo">未達成タスク一覧</a></li>
+<li><a href="/todo/new">新規タスク追加</a></li>
+<li><a href="/todo/completed">実行済みタスク一覧</a></li>
+<li><a href="/todo/calender">カレンダー</a></li>
+<li><a href="/logout">ログアウト</a></li>
+</ul>
+</nav>
+<br>
+<br>
+<br>
+
+
+
+
 </header>
