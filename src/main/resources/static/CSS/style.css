@@ -81,6 +81,10 @@ table tr:hover{
   background-color: #d4faff;
 }
 
+.countTask{
+	text-align:center;
+
+}
 div.right{text-align:right;}
 
 

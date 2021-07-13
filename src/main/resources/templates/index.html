@@ -10,7 +10,7 @@
 <body>
 <span th:replace="menu"></span>
 
-	<h2>タスク</h2>
+	<h2>未達成タスク</h2>
 	<font color="orange">
 <span th:replace="time" id="body"></span>
 <br>
@@ -25,7 +25,10 @@
 		<input type="submit" value="並べ替え" class="button">
 	</form>
 
-	<div th:text="'本日のタスクは' +${countTask}+ '件です'"></div>
+	<div class="countTask">
+	<a th:text="本日のタスクは" ></a>
+	<font color="blue" size="20" th:text="${countTask}"></font>
+	<a th:text=" 件です"></a></div>
 	<br>
 
 	<form action="/search" method="post">
@@ -52,7 +55,7 @@
 		<tr  >
 
 			<form th:action="'/todo/'+${task.code}+'/completed'">
-				<td ><input type="submit" value="✓"></td>
+				<td ><input type="submit" value="✓" class="button"></td>
 			</form>
 				<td  th:text="${task.text}" id="TEXT"></td>
 			    <td th:text="${task.date}"></td>
