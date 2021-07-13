@@ -44,7 +44,7 @@ table {
   border-collapse: collapse;
   margin: 0 auto;
   padding: 0;
-  width: 1000px;
+  width: 1100px;
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 0 15px -6px #00000073;
@@ -68,14 +68,18 @@ table td {
   border-right: 1px solid #666666;
 }
 
+#title{
+	height:50px;
+}
+
 table  th {
   width: 20%;
   padding: 10px 0;
   font-size: 20px;
-  padding: 15px;
+  padding: 0px 10px;
   background-color: #FFC107;
   color:#fff;
-  
+
 }
 
 table tr{
@@ -98,8 +102,33 @@ div.right{text-align:right;}
 
 
 #TEXT{
-	width:45%;
+	width:40%;
 }
+
+#CHECK{
+	width:10%;
+}
+
+#PLACE{
+	width:10%;
+}
+
+#DATE{
+	width:10%;
+}
+
+#PRI{
+	width:8%;
+}
+
+#EDIT{
+	width:8%;
+}
+
+#DEL{
+	width:10%;
+}
+
 
 #right{
 	text-align:right;

@@ -42,24 +42,24 @@
 
 <div style="display:inline-flex">
 	<table border="1">
-		<tr>
-			<th>実行済み</th>
-			<th>タスク</th>
+		<tr id="title">
+			<th id="CHECK">実行済み</th>
+			<th id="TEXT">タスク</th>
 			<th colspan="2">期限</th>
-			<th>場所</th>
-			<th>優先度</th>
-			<th>編集</th>
-			<th>削除</th>
+			<th id="PLACE">場所</th>
+			<th id="PRI">優先度</th>
+			<th id="EDIT">編集</th>
+			<th id="DEL">削除</th>
 		</tr>
 
 		<span  th:each="task:${t}">
 		<tr >
 
 			<form th:action="'/todo/'+${task.code}+'/completed'">
-				<td ><input type="submit" value="✓" class="button"></td>
+				<td><input type="submit" value="✓" class="button"></td>
 			</form>
-				<td  th:text="${task.text}" id="TEXT"></td>
-			    <td th:text="${task.date}"></td>
+				<td  th:text="${task.text}" ></td>
+			    <td id="DATE" th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
 			    <td th:text="${#dates.format(task.time, 'H:mm')}"></td>
 				<td th:text="${task.place}"></td>
                 <td  th:text="${task.priority}"></td>
@@ -79,7 +79,7 @@
 	<table id="t">
 	<tr><th>残り日数</th></tr>
 	 <tr th:each="list:${list}">
-	 <td th:text="${list}"></td>
+	 <td th:text="${list}+'日'"></td>
 	 </tr>
 	</table>
 

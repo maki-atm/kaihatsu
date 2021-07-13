@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +77,18 @@ public class AccountController {
 				//今日のタスクの件数取得
 				List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(),today);
 				int countTask = d.size();
+
+				ArrayList<Long> l=new ArrayList<Long>();
+				long dif = 0;
+					for(Task i : t) {
+						//i.getDate();
+						LocalDate localD = i.getDate().toLocalDate();
+						LocalDate localT = today.toLocalDate();
+						dif = ChronoUnit.DAYS.between(localT,localD);
+						l.add(dif);
+					}
+
+				mv.addObject("list", l);
 
 				//Thmeleafで表示する準備
 				mv.addObject("countTask", countTask);
