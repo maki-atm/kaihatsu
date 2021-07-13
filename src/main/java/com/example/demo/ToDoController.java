@@ -34,19 +34,8 @@ public class ToDoController {
 	@RequestMapping("/todo")
 	public ModelAndView displayTask(ModelAndView mv) {
 
-//		User user = (User)session.getAttribute("userInfo");
-//		if(user == null) {
-//			user = new Cart();
-//			session.setAttribute("cart", cart);
-//		}
-
 		User u =(User)session.getAttribute("userInfo");
-		List<Task> t = taskRepository.findByUserCode(u.getCode());
-
-		//全タスク情報取得
-		//List<Task> t = taskRepository.findByOrderByDateAscTimeAsc();
-
-		//session.setAttribute("task", t);
+		List<Task> t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
 
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);
@@ -65,7 +54,8 @@ public class ToDoController {
 			@RequestParam("keyword")String keyword) {
 		List<Task> task=null;
 
-		task=taskRepository.findByTextLike("%" + keyword + "%");
+		User u =(User)session.getAttribute("userInfo");
+		task=taskRepository.findByUserCodeAndTextLike(u.getCode(),"%" + keyword + "%");
 
 		mv.addObject("t", task);
 		mv.addObject("keyword" , keyword);
@@ -82,12 +72,14 @@ public class ToDoController {
 	public ModelAndView sortTask(ModelAndView mv,
 			@RequestParam("sort") String sort) {
 
+
+		User u =(User)session.getAttribute("userInfo");
 		List<Task> t=null;
 
 		if(sort.equals("DATE")) {
-			 t = taskRepository.findByOrderByDateAscTimeAsc();
+			 t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
 		}else if(sort.equals("PRIORITY")) {
-			 t =taskRepository.findByOrderByPriNumAsc();
+			 t =taskRepository.findByUserCodeOrderByPriNumAsc(u.getCode());
 		}
 
 		//Thmeleafで表示する準備
@@ -120,14 +112,6 @@ public class ToDoController {
 			@RequestParam("place") String place,
 			@RequestParam("priority") int priNum) {
 
-
-		//@SuppressWarnings("unchecked")
-//		List<Task>t = (List<Task>)session.getAttribute("task");
-//		if(t == null) {
-//			t = new ArrayList<Task>();
-//			session.setAttribute("task", t);
-//		}
-//
 
 		//優先度を数字で受け取り、対応した文字を格納
 		String priority=null;
@@ -292,8 +276,9 @@ public class ToDoController {
 	public ModelAndView completedTask(
 			ModelAndView mv) {
 
+		User u =(User)session.getAttribute("userInfo");
 		//全タスク情報取得
-		List<Completed> t = completedRepository.findByOrderByDateAscTimeAsc();
+		List<Completed> t = completedRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
 
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);

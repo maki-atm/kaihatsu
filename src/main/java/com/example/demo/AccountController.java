@@ -65,7 +65,7 @@ public class AccountController {
 				session.setAttribute("userInfo", userInfo);
 
 				User u =(User)session.getAttribute("userInfo");
-				List<Task> t = taskRepository.findByUserCode(u.getCode());
+				List<Task> t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
 				//Thmeleafで表示する準備
 				mv.addObject("t", t);
 

@@ -21,17 +21,20 @@ public class CalenderController {
 	@Autowired
 	TaskRepository taskRepository;
 
+
+	//カレンダー表示
 	@RequestMapping("/todo/calender")
 	public ModelAndView goClender(
 			ModelAndView mv) {
 
 		mv.setViewName("calender");
 
-		//実行済みタスク一覧表示
+
 		return mv;
 
 	}
 
+	//日付ごとのタスク表示
 	@PostMapping("/todo/calender")
 	public ModelAndView ClenderDate(
 			@RequestParam("date") String strDate,

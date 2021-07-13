@@ -37,6 +37,7 @@ h2:first-letter {
 
 /* テーブル     */
 table {
+  empty-cells: show;
   border-collapse: collapse;
   margin: 0 auto;
   padding: 0;

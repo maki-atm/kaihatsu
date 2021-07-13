@@ -9,5 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface CompletedRepository extends JpaRepository<Completed, Integer> {
 	List<Completed> findByOrderByDateAscTimeAsc();
 	List<Completed> findByOrderByPriNumAsc();
+	List<Completed> findByUserCodeOrderByDateAscTimeAsc(Integer code);
+	List<Completed> findByUserCodeOrderByPriNumAsc(Integer code);
 
 	}
