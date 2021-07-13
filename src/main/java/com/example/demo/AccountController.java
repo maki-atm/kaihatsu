@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,11 +68,16 @@ public class AccountController {
 				User u =(User)session.getAttribute("userInfo");
 				List<Task> t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
 
-				int countTask = t.size();
-				mv.addObject("countTask", countTask);
+				//今日の日付取得
+				long miliseconds = System.currentTimeMillis();
+				Date today = new Date(miliseconds);
 
+				//今日のタスクの件数取得
+				List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(),today);
+				int countTask = d.size();
 
 				//Thmeleafで表示する準備
+				mv.addObject("countTask", countTask);
 				mv.addObject("t", t);
 
 				//index.htmlにフォワード
@@ -80,11 +86,6 @@ public class AccountController {
 				return mv;
 
 			 }
-
-
-
-
-//			session.setAttribute("categories", categoryRepository.findAll());
 
 	}
 
