@@ -40,6 +40,7 @@ public class ToDoController {
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);
 
+
 		//index.htmlにフォワード
 		mv.setViewName("index");
 
