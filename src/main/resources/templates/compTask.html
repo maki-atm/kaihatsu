@@ -41,7 +41,6 @@
 
 				<td th:text="${task.place}"></td>
                 <td th:text="${task.priority}"></td>
-
 			<form action="/todo/completed/delete" method="post">
 				<input type="hidden" name="code" th:value="${task.code}">
 				<td ><input type="submit" value="×" class="button"></td>
