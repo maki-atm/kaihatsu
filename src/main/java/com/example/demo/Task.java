@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="task")
@@ -34,9 +35,23 @@ public class Task {
 	@Column(name="user_code")
 	private int userCode;
 
+	@Transient
+	private long dif;
+
 
 	public Task() {
 
+	}
+
+	public Task( String text, Date date, Time time, String place, String priority ,int priNum,int userCode,long dif) {
+		this.text = text;
+		this.date = date;
+		this.time = time;
+		this.place = place;
+		this.priority = priority;
+		this.priNum = priNum;
+		this.userCode = userCode;
+		this.dif = dif;
 	}
 
 	public Task( String text, Date date, Time time, String place, String priority ,int priNum,int userCode) {
@@ -58,23 +73,17 @@ public class Task {
 		this.priority = priority;
 		this.priNum = priNum;
 		this.userCode = userCode;
+
 	}
 
 	public Integer getCode() {
 		return code;
 	}
 
-	public void setCode(Integer code) {
-		this.code = code;
-	}
-
 	public String getText() {
 		return text;
 	}
 
-	public void setText(String text) {
-		this.text = text;
-	}
 
 	public Date getDate() {
 		return date;
@@ -122,6 +131,14 @@ public class Task {
 
 	public void setUserCode(int userCode) {
 		this.userCode= userCode;
+	}
+
+	public long getDif() {
+		return dif;
+	}
+
+	public void setDif(long dif) {
+		this.dif = dif;
 	}
 
 

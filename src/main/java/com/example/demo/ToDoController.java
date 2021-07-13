@@ -2,6 +2,9 @@ package com.example.demo;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +40,8 @@ public class ToDoController {
 		User u =(User)session.getAttribute("userInfo");
 		List<Task> t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
 
+
+
 		//今日の日付取得
 		long miliseconds = System.currentTimeMillis();
         Date today = new Date(miliseconds);
@@ -44,6 +49,19 @@ public class ToDoController {
         //今日のタスク件数取得
 		List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(),today);
 		int countTask = d.size();
+
+
+		ArrayList<Long> list=new ArrayList<Long>();
+		long dif = 0;
+			for(Task i : t) {
+				//i.getDate();
+				LocalDate localD = i.getDate().toLocalDate();
+				LocalDate localT = today.toLocalDate();
+				dif = ChronoUnit.DAYS.between(localT,localD);
+				list.add(dif);
+			}
+
+		mv.addObject("list", list);
 
 		//Thmeleafで表示する準備
 		mv.addObject("countTask", countTask);
@@ -92,7 +110,16 @@ public class ToDoController {
 			 t =taskRepository.findByUserCodeOrderByPriNumAsc(u.getCode());
 		}
 
+		//今日の日付取得
+			long miliseconds = System.currentTimeMillis();
+		 	Date today = new Date(miliseconds);
+
+		//今日のタスク件数取得
+			List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(),today);
+			int countTask = d.size();
+
 		//Thmeleafで表示する準備
+		mv.addObject("countTask", countTask);
 		mv.addObject("t", t);
 
 		//index.htmlにフォワード
@@ -107,7 +134,6 @@ public class ToDoController {
 	public ModelAndView addTask(ModelAndView mv) {
 		//addTask.htmlにフォワード
 		mv.setViewName("addTask");
-
 		return mv;
 
 	}
@@ -134,17 +160,14 @@ public class ToDoController {
 			priority = "低";
 		}
 
-
 		//Date型に変換
 		Date date = Date.valueOf(strDate);
 
 		//Time型に変換
-
 		Time time = null;
 
 		if(!strTime.equals("")) {
-
-		time = Time.valueOf(strTime + ":00");
+			time = Time.valueOf(strTime + ":00");
 		}else {
 
 		}

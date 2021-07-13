@@ -40,6 +40,7 @@
 
      <br>
 
+<div style="display:inline-flex">
 	<table border="1">
 		<tr>
 			<th>実行済み</th>
@@ -52,7 +53,7 @@
 		</tr>
 
 		<span  th:each="task:${t}">
-		<tr  >
+		<tr >
 
 			<form th:action="'/todo/'+${task.code}+'/completed'">
 				<td ><input type="submit" value="✓" class="button"></td>
@@ -60,7 +61,6 @@
 				<td  th:text="${task.text}" id="TEXT"></td>
 			    <td th:text="${task.date}"></td>
 			    <td th:text="${#dates.format(task.time, 'H:mm')}"></td>
-
 				<td th:text="${task.place}"></td>
                 <td  th:text="${task.priority}"></td>
 			<form th:action="'/todo/'+${task.code}+'/edit'">
@@ -75,6 +75,15 @@
 		</span>
 
 	</table>
+
+	<table id="t">
+	<tr><th>残り日数</th></tr>
+	 <tr th:each="list:${list}">
+	 <td th:text="${list}"></td>
+	 </tr>
+	</table>
+
+</div>
 	<br>
 
 </body>
