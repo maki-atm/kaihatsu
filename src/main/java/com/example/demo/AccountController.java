@@ -66,6 +66,11 @@ public class AccountController {
 
 				User u =(User)session.getAttribute("userInfo");
 				List<Task> t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
+
+				int countTask = t.size();
+				mv.addObject("countTask", countTask);
+
+
 				//Thmeleafで表示する準備
 				mv.addObject("t", t);
 

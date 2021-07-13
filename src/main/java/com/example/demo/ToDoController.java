@@ -35,7 +35,16 @@ public class ToDoController {
 	public ModelAndView displayTask(ModelAndView mv) {
 
 		User u =(User)session.getAttribute("userInfo");
-		List<Task> t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
+
+		long miliseconds = System.currentTimeMillis();
+        Date today = new Date(miliseconds);
+
+		List<Task> t = taskRepository.findByUserCodeAndDate(u.getCode(),today);
+
+
+	//	List<Task> d = findByUserCodeAndDate(u.getCode(),today);
+		int countTask = t.size();
+		mv.addObject("countTask", countTask);
 
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);
