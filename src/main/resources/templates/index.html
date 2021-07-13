@@ -52,13 +52,13 @@
 			<th>削除</th>
 		</tr>
 
-		<span  th:each="task:${t}">
+		<span  th:each="task:${t}" style="color:"${task.color}"">
 		<tr >
 
 			<form th:action="'/todo/'+${task.code}+'/completed'">
 				<td ><input type="submit" value="✓" class="button"></td>
 			</form>
-				<td  th:text="${task.text}" id="TEXT"></td>
+				<td  th:text="${task.text}" id="TEXT" ></td>
 			    <td th:text="${task.date}"></td>
 			    <td th:text="${#dates.format(task.time, 'H:mm')}"></td>
 				<td th:text="${task.place}"></td>

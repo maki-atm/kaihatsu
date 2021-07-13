@@ -146,7 +146,8 @@ public class ToDoController {
 			@RequestParam("date") String strDate,
 			@RequestParam("time") String strTime,
 			@RequestParam("place") String place,
-			@RequestParam("priority") int priNum) {
+			@RequestParam("priority") int priNum,
+			@RequestParam("color") String color) {
 
 
 		//優先度を数字で受け取り、対応した文字を格納
@@ -176,7 +177,7 @@ public class ToDoController {
 		User u =(User)session.getAttribute("userInfo");
 
 		//task,date,time,place,priorityを元にタスク情報を登録
-		Task t = new Task(text, date, time, place, priority,priNum,u.getCode());
+		Task t = new Task(text, date, time, place, priority,color,priNum,u.getCode());
 
 		taskRepository.saveAndFlush(t);
 

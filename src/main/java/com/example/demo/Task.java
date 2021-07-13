@@ -29,6 +29,10 @@ public class Task {
 
 	private String priority;
 
+	private String color;
+
+
+
 	@Column(name="pri_num")
 	private int priNum;
 
@@ -43,6 +47,20 @@ public class Task {
 
 	}
 
+ public Task( String text, Date date, Time time, String place, String priority, String color,
+			int priNum, int userCode) {
+
+
+		this.text = text;
+		this.date = date;
+		this.time = time;
+		this.place = place;
+		this.priority = priority;
+		this.color = color;
+		this.priNum = priNum;
+		this.userCode = userCode;
+
+	}
 	public Task( String text, Date date, Time time, String place, String priority ,int priNum,int userCode,long dif) {
 		this.text = text;
 		this.date = date;
