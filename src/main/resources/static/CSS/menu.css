@@ -28,14 +28,14 @@ li {
 }
 
 nav {
-	background: #f5f5f5;
+	background: #FFD700;
 	text-align:center;
 }
 nav ul li{
 	float: left;
 	width: 20%;
-	border-right: 1px solid #e6e4e4;
-	border-bottom: 1px solid #e6e4e4;
+	border-right: 1px solid #eb6100;
+	border-bottom: 1px solid #eb6100;
 	box-sizing: border-box;
 }
 nav ul li:last-child {
