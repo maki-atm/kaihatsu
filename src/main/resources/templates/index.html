@@ -60,10 +60,7 @@
 			</form>
 
 				<td  th:text="${task.text}" id="TEXT" style="color:'${task.color}';" ></td>
-			    <td th:text="${task.date}"></td>
-
-				<td  th:text="${task.text}" ></td>
-			    <td id="DATE" th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
+			    <td th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
 
 			    <td th:text="${#dates.format(task.time, 'H:mm')}"></td>
 				<td th:text="${task.place}"></td>
