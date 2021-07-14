@@ -15,9 +15,9 @@
 <span th:replace="time" id="body"></span>
 <br>
 </font>
-	<div class="right">
 
-	<form action="/todo" method="post">
+    <div class="right1">
+	<form action="/todo" method="post" id="right1">
 		<select name="sort">
 			<option value="DATE">期限の早い順</option>
 			<option value="PRIORITY">優先度の高い順</option>
@@ -25,18 +25,21 @@
 		<input type="submit" value="並べ替え" class="button">
 	</form>
 
+	<form action="/search" method="post" id="right1">
+		<input type="text" name="keyword" th:value="${keyword}" placeholder="search for task">
+		<input type="submit" value="検索" class="button">
+	</form>
+	</div>
+
+
 	<div class="countTask">
 	<a th:text="本日のタスクは" ></a>
 	<font color="blue" size="20" th:text="${countTask}"></font>
 	<a th:text=" 件です"></a></div>
 	<br>
 
-	<form action="/search" method="post">
-		<input type="text" name="keyword" th:value="${keyword}" placeholder="search for task">
-		<input type="submit" value="検索" class="button">
-	</form>
 
-    </div>
+
 
      <br>
 
@@ -55,6 +58,7 @@
 			<th colspan="2">期限</th>
 			<th class="PLACE">場所</th>
 			<th class="PRI">優先度</th>
+			<th class="RE">備考</th>
 			<th class="EDIT">編集</th>
 			<th class="DEL">削除</th>
 		</tr>
@@ -72,6 +76,7 @@
 			    <td th:text="${#dates.format(task.time, 'H:mm')}"></td>
 				<td th:text="${task.place}"></td>
                 <td  th:text="${task.priority}"></td>
+                <td th:text="${task.remarks}"></td>
 			<form th:action="'/todo/'+${task.code}+'/edit'">
 				<td ><input type="submit" value="編集" class="button"></td>
 			</form>

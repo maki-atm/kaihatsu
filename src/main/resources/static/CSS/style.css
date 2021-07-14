@@ -97,7 +97,10 @@ table tr:hover{
 	text-align:center;
 
 }
-div.right{text-align:right;}
+
+div.right1{
+	text-align:right;
+}
 
 
 .TEXT{
