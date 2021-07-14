@@ -258,14 +258,19 @@ public class ToDoController {
 		//strTimeの文字数取得
 		int tm = strTime.length();
 
+		Time time=null;
 		//文字数が5（hh:㎜）のとき「:00」を追加（時間を変更したとき）
 		//時間を変更していないときはそのまま（hh：㎜：ss）でOK
-		if (tm == 5) {
-			strTime += ":00";
+		if(tm == 0) {
+
+		}
+		else if(tm == 5) {
+			time = Time.valueOf(strTime + ":00");
 		}
 
 		//Time型に変換
-		Time time = Time.valueOf(strTime);
+
+	//	Time time = Time.valueOf(strTime);
 
 
 		//ユーザ情報のセッションを受け取る
