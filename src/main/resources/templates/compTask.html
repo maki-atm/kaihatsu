@@ -27,7 +27,12 @@
 
 <table border="1">
 	<tr>
-		<th></th><th>タスク</th><th colspan="2">期限</th><th>場所</th><th>優先度</th><th>削除</th>
+		<th class="CHECK"></th>
+		<th class="TEXT">タスク</th>
+		<th colspan="2">期限</th>
+		<th class="PLACE">場所</th>
+		<th class="PRI">優先度</th>
+		<th class="DEL">削除</th>
 	</tr>
 
 		<tr th:each="task:${t}">

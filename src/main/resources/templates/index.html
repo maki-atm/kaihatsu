@@ -41,15 +41,22 @@
      <br>
 
 <div style="display:inline-flex">
+	<table id="t">
+		<tr><th>残り日数</th></tr>
+	 	<tr th:each="list:${list}">
+	 		<td th:text="${list}+'日'"></td>
+	 	</tr>
+	</table>
+
 	<table border="1">
-		<tr id="title">
-			<th id="CHECK">実行済み</th>
-			<th id="TEXT">タスク</th>
+		<tr>
+			<th class="CHECK">実行済み</th>
+			<th class="TEXT">タスク</th>
 			<th colspan="2">期限</th>
-			<th id="PLACE">場所</th>
-			<th id="PRI">優先度</th>
-			<th id="EDIT">編集</th>
-			<th id="DEL">削除</th>
+			<th class="PLACE">場所</th>
+			<th class="PRI">優先度</th>
+			<th class="EDIT">編集</th>
+			<th class="DEL">削除</th>
 		</tr>
 
 		<span  th:each="task:${t}">
@@ -78,12 +85,6 @@
 
 	</table>
 
-	<table id="t">
-	<tr><th>残り日数</th></tr>
-	 <tr th:each="list:${list}">
-	 <td th:text="${list}+'日'"></td>
-	 </tr>
-	</table>
 
 </div>
 	<br>

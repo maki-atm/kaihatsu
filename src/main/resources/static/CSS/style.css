@@ -68,11 +68,10 @@ table td {
   border-right: 1px solid #666666;
 }
 
-#title{
-	height:50px;
-}
+
 
 table  th {
+  height: 100px;
   width: 20%;
   padding: 10px 0;
   font-size: 20px;
@@ -101,31 +100,31 @@ table tr:hover{
 div.right{text-align:right;}
 
 
-#TEXT{
+.TEXT{
 	width:40%;
 }
 
-#CHECK{
+.CHECK{
 	width:10%;
 }
 
-#PLACE{
+.PLACE{
 	width:10%;
 }
 
-#DATE{
+.DATE{
 	width:10%;
 }
 
-#PRI{
+.PRI{
 	width:8%;
 }
 
-#EDIT{
+.EDIT{
 	width:6%;
 }
 
-#DEL{
+.DEL{
 	width:6%;
 }
 
