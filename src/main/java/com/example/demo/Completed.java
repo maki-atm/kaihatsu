@@ -27,7 +27,9 @@ public class Completed {
 	private String place;
 
 	private String priority;
-	
+
+	private String remarks;
+
 	private String color;
 
 	@Column(name="pri_num")
@@ -43,27 +45,35 @@ public class Completed {
 
 	}
 
-	public Completed( String text, Date date, Time time, String place, String priority,int priNum,int userCode) {
+	public Completed( String text, Date date, Time time, String place, String priority, String remarks, String color,
+			int priNum, int userCode) {
+
+
 		this.text = text;
 		this.date = date;
 		this.time = time;
 		this.place = place;
 		this.priority = priority;
+		this.remarks = remarks;
+		this.color = color;
 		this.priNum = priNum;
 		this.userCode = userCode;
+
 	}
 
-	public Completed(Integer code, String text, Date date, Time time, String place, String priority ,int priNum,int userCode) {
+	public Completed(Integer code, String text, Date date, Time time, String place, String priority , String remarks, String color,int priNum,int userCode) {
 		this.code = code;
 		this.text = text;
 		this.date = date;
 		this.time = time;
 		this.place = place;
 		this.priority = priority;
+		this.remarks = remarks;
+		this.color = color;
 		this.priNum = priNum;
 		this.userCode = userCode;
-	}
 
+	}
 	public Integer getCode() {
 		return code;
 	}
@@ -110,6 +120,14 @@ public class Completed {
 
 	public void setPriority(String priority) {
 		this.priority = priority;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 	public int getPriNum() {

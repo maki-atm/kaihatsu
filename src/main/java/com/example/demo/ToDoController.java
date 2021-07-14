@@ -147,6 +147,7 @@ public class ToDoController {
 			@RequestParam("time") String strTime,
 			@RequestParam("place") String place,
 			@RequestParam("priority") int priNum,
+			@RequestParam("remarks") String remarks,
 			@RequestParam("color") String color) {
 
 
@@ -177,7 +178,7 @@ public class ToDoController {
 		User u =(User)session.getAttribute("userInfo");
 
 		//task,date,time,place,priorityを元にタスク情報を登録
-		Task t = new Task(text, date, time, place, priority,color,priNum,u.getCode());
+		Task t = new Task(text, date, time, place, priority,remarks,color,priNum,u.getCode());
 
 		taskRepository.saveAndFlush(t);
 
@@ -237,6 +238,7 @@ public class ToDoController {
 			@RequestParam("time") String strTime,
 			@RequestParam("place") String place,
 			@RequestParam("priority") int priNum,
+			@RequestParam("remarks") String remarks,
 			@RequestParam("color") String color) {
 
 		//優先度を数字で受け取り、対応した文字を格納
@@ -270,7 +272,7 @@ public class ToDoController {
 		User u =(User)session.getAttribute("userInfo");
 
 		//指定したコードのタスク情報を変更
-		Task t = new Task(code, text, date, time, place, priority,color,priNum,u.getCode());
+		Task t = new Task(code, text, date, time, place, priority,remarks,color,priNum,u.getCode());
 		taskRepository.saveAndFlush(t);
 
 		return displayTask(mv);
@@ -291,7 +293,7 @@ public class ToDoController {
 			t = recode.get();
 		}
 
-		Completed comp = new Completed(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getPriNum(),t.getUserCode());
+		Completed comp = new Completed(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getRemarks(),t.getColor(),t.getPriNum(),t.getUserCode());
 
 		completedRepository.saveAndFlush(comp);
 
@@ -341,7 +343,7 @@ public class ToDoController {
 		}
 
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
-		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getColor(),t.getPriNum(),t.getUserCode());
+		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getColor(),t.getRemarks(),t.getPriNum(),t.getUserCode());
 		taskRepository.saveAndFlush(task);
 
 		//実行済みテーブルから指定したコードのタスク情報を削除
