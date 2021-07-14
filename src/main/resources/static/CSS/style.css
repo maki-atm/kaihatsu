@@ -51,7 +51,8 @@ table {
 }
 
 #t{
-	 width:80px;
+
+	 width:70px;
 }
 
 
@@ -69,12 +70,11 @@ table td {
 }
 
 
-
 table  th {
   height: 100px;
   width: 20%;
   padding: 10px 0;
-  font-size: 20px;
+  font-size: 18px;
   padding: 0px 10px;
   background-color: #FFC107;
   color:#fff;
@@ -104,23 +104,32 @@ div.right1{
 
 
 .TEXT{
-	width:40%;
+	width:30%;
 }
 
 .CHECK{
-	width:10%;
+	width:9%;
 }
 
 .PLACE{
-	width:10%;
+	width:8%;
 }
 
 .DATE{
-	width:10%;
+	width:8%;
+	padding : 10px;
+}
+.TIME{
+	width:6%;
+	padding : 10px;
 }
 
 .PRI{
-	width:8%;
+	width:7%;
+}
+
+.RE{
+	width:20%;
 }
 
 .EDIT{
