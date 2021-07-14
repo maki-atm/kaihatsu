@@ -236,7 +236,8 @@ public class ToDoController {
 			@RequestParam("date") String strDate,
 			@RequestParam("time") String strTime,
 			@RequestParam("place") String place,
-			@RequestParam("priority") int priNum) {
+			@RequestParam("priority") int priNum,
+			@RequestParam("color") String color) {
 
 		//優先度を数字で受け取り、対応した文字を格納
 		String priority=null;
@@ -269,7 +270,7 @@ public class ToDoController {
 		User u =(User)session.getAttribute("userInfo");
 
 		//指定したコードのタスク情報を変更
-		Task t = new Task(code, text, date, time, place, priority,priNum,u.getCode());
+		Task t = new Task(code, text, date, time, place, priority,color,priNum,u.getCode());
 		taskRepository.saveAndFlush(t);
 
 		return displayTask(mv);
@@ -340,7 +341,7 @@ public class ToDoController {
 		}
 
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
-		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getPriNum(),t.getUserCode());
+		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getColor(),t.getPriNum(),t.getUserCode());
 		taskRepository.saveAndFlush(task);
 
 		//実行済みテーブルから指定したコードのタスク情報を削除
