@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name="task")
@@ -32,15 +31,11 @@ public class Task {
 	private String color;
 
 
-
 	@Column(name="pri_num")
 	private int priNum;
 
 	@Column(name="user_code")
 	private int userCode;
-
-	@Transient
-	private long dif;
 
 
 	public Task() {
@@ -61,34 +56,15 @@ public class Task {
 		this.userCode = userCode;
 
 	}
-	public Task( String text, Date date, Time time, String place, String priority ,int priNum,int userCode,long dif) {
-		this.text = text;
-		this.date = date;
-		this.time = time;
-		this.place = place;
-		this.priority = priority;
-		this.priNum = priNum;
-		this.userCode = userCode;
-		this.dif = dif;
-	}
 
-	public Task( String text, Date date, Time time, String place, String priority ,int priNum,int userCode) {
-		this.text = text;
-		this.date = date;
-		this.time = time;
-		this.place = place;
-		this.priority = priority;
-		this.priNum = priNum;
-		this.userCode = userCode;
-	}
-
-	public Task(Integer code, String text, Date date, Time time, String place, String priority ,int priNum,int userCode) {
+	public Task(Integer code, String text, Date date, Time time, String place, String priority , String color,int priNum,int userCode) {
 		this.code = code;
 		this.text = text;
 		this.date = date;
 		this.time = time;
 		this.place = place;
 		this.priority = priority;
+		this.color = color;
 		this.priNum = priNum;
 		this.userCode = userCode;
 
@@ -151,13 +127,15 @@ public class Task {
 		this.userCode= userCode;
 	}
 
-	public long getDif() {
-		return dif;
+	public String getColor() {
+		return color;
 	}
 
-	public void setDif(long dif) {
-		this.dif = dif;
+	public void setColor(String color) {
+		this.color = color;
 	}
+
+
 
 
 

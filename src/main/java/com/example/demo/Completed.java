@@ -27,6 +27,8 @@ public class Completed {
 	private String place;
 
 	private String priority;
+	
+	private String color;
 
 	@Column(name="pri_num")
 	private int priNum;
@@ -124,6 +126,14 @@ public class Completed {
 
 	public void setUserCode(int userCode) {
 		this.userCode= userCode;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 
