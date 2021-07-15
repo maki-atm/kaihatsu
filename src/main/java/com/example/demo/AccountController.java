@@ -86,7 +86,7 @@ public class AccountController {
 				ArrayList<Difference> dlist = difference.getDifDay(t);
 
 				List<Category> cate=categoryRepository.findAll();
-				cate.get(1).getCategoryName();
+
 
 				//Thymeleafで表示する準備
 				mv.addObject("cate", cate);

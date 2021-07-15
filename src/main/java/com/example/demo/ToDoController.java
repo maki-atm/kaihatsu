@@ -54,7 +54,10 @@ public class ToDoController {
 		//残り日数のリスト取得
 		ArrayList<Difference> list = difference.getDifDay(t);
 
-//		List<Category> c=categoryRepository.findByCategoryCode(categoryCode);
+		List<Category> cate=categoryRepository.findAll();
+
+		//Thymeleafで表示する準備
+		mv.addObject("cate", cate);
 
 
 		mv.addObject("list", list);
