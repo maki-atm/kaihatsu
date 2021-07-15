@@ -2,7 +2,9 @@ package com.example.demo;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -90,6 +92,15 @@ public class AccountController {
 
 				List<Category> cate=categoryRepository.findAll();
 
+				 //Mapの宣言
+		        Map<Integer, String> map = new HashMap<>();
+
+		        for(Category c : cate) {
+		            // MapにListのキーと値を追加
+		            map.put(c.getCategoryCode(), c.getCategoryName());
+		        }
+
+		        session.setAttribute("categoryMap", map);
 
 				//Thymeleafで表示する準備
 				mv.addObject("cate", cate);

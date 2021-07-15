@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -49,30 +50,38 @@ public class CategoryController {
 
 	}
 
-	//カテゴリー登録画面表示
+	//カテゴリー登録
 		@PostMapping("/todo/category")
 		public ModelAndView addCate(
 				ModelAndView mv,
 				@RequestParam("category")String categoryName) {
 
-//			User u =(User)session.getAttribute("userInfo");
+
 
 			Category c=new Category(categoryName);
-			categoryRepository.saveAndFlush(c);
+
+			List<Category> cate=categoryRepository.findByCategoryName(categoryName);
+
+			 if (!(cate.size()==0) ){
+					cate = new ArrayList<Category>();
+					mv.addObject("msg", "入力されたカテゴリー名は既に登録されています");
+					mv.setViewName("addCategory");
+				}else {
+
+                        categoryRepository.saveAndFlush(c);
+						mv.addObject("msg", "登録が完了しました");
+
+						mv.setViewName("category");//フォワード先
+				}
 
 
-			return Cate(mv);
+
+
+
+
+			return mv;
 
 		}
-//
-//		//カテゴリー登録画面表示
-//		@RequestMapping("/category/list")
-//		public ModelAndView List(ModelAndView mv) {
-//			//addCategory.htmlにフォワード
-//			mv.setViewName("addCategory");
-//			return mv;
-//
-//		}
 
 		//カテゴリー別の一覧表示
 			@PostMapping("/category/list")
@@ -83,6 +92,17 @@ public class CategoryController {
 
 
 				List<Task>t=taskRepository.findByCategoryCode(categoryCode);
+
+				List<Category> cate=categoryRepository.findAll();
+
+				//Thymeleafで表示する準備
+				mv.addObject("cate", cate);
+
+				mv.addObject("categoryCode", categoryCode);
+
+
+
+
 
 				mv.addObject("t",t);
 

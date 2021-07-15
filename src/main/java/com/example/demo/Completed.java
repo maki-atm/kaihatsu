@@ -38,6 +38,9 @@ public class Completed {
 	@Column(name="user_code")
 	private int userCode;
 
+	@Column(name="category_code")
+	private int categoryCode;
+
 
 
 
@@ -45,10 +48,25 @@ public class Completed {
 
 	}
 
-	public Completed( String text, Date date, Time time, String place, String priority, String remarks, String color,
-			int priNum, int userCode) {
 
+	public Completed(Integer code, String text, Date date, Time time, String place, String priority, String remarks,
+		String color, int priNum, int userCode, int categoryCode) {
+	super();
+	this.code = code;
+	this.text = text;
+	this.date = date;
+	this.time = time;
+	this.place = place;
+	this.priority = priority;
+	this.remarks = remarks;
+	this.color = color;
+	this.priNum = priNum;
+	this.userCode = userCode;
+	this.categoryCode = categoryCode;
+     }
 
+	public Completed(String text, Date date, Time time, String place, String priority, String remarks,
+			String color, int priNum, int userCode, int categoryCode) {
 		this.text = text;
 		this.date = date;
 		this.time = time;
@@ -58,22 +76,11 @@ public class Completed {
 		this.color = color;
 		this.priNum = priNum;
 		this.userCode = userCode;
+		this.categoryCode = categoryCode;
+	     }
 
-	}
 
-	public Completed(Integer code, String text, Date date, Time time, String place, String priority , String remarks, String color,int priNum,int userCode) {
-		this.code = code;
-		this.text = text;
-		this.date = date;
-		this.time = time;
-		this.place = place;
-		this.priority = priority;
-		this.remarks = remarks;
-		this.color = color;
-		this.priNum = priNum;
-		this.userCode = userCode;
 
-	}
 	public Integer getCode() {
 		return code;
 	}
@@ -153,6 +160,17 @@ public class Completed {
 	public void setColor(String color) {
 		this.color = color;
 	}
+
+
+	public int getCategoryCode() {
+		return categoryCode;
+	}
+
+
+	public void setCategoryCode(int categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+
 
 
 

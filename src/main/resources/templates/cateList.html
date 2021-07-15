@@ -3,12 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>ToDo</title>
 </head>
 <body>
+<h2 th:text="${session.categoryMap.get(__${task.categoryCode}__)}"></h2>
 	<table border="1">
 		<tr>
 			<th class="CHECK">実行済み</th>
+			<th class="CATE">カテゴリー</th>
 			<th class="TEXT">タスク</th>
 			<th colspan="2">期限</th>
 			<th class="PLACE">場所</th>
@@ -24,7 +26,7 @@
 			<form th:action="'/todo/'+${task.code}+'/completed'">
 				<td><input type="submit" value="✓" class="button"></td>
 			</form>
-
+                 <td  th:text="${session.categoryMap.get(__${task.categoryCode}__)}"></td>
                 <td  th:text="${task.text}" id="TEXT" th:style="'color:'+${task.color}" ></td>
 			    <td class="DATE" th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
 

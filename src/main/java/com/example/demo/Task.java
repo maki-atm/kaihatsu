@@ -48,36 +48,6 @@ public class Task {
 
 	}
 
- public Task( String text, Date date, Time time, String place, String priority, String remarks, String color,
-			int priNum, int userCode) {
-
-
-		this.text = text;
-		this.date = date;
-		this.time = time;
-		this.place = place;
-		this.priority = priority;
-		this.remarks = remarks;
-		this.color = color;
-		this.priNum = priNum;
-		this.userCode = userCode;
-
-	}
-
-	public Task(Integer code, String text, Date date, Time time, String place, String priority , String remarks, String color,int priNum,int userCode) {
-		this.code = code;
-		this.text = text;
-		this.date = date;
-		this.time = time;
-		this.place = place;
-		this.priority = priority;
-		this.remarks = remarks;
-		this.color = color;
-		this.priNum = priNum;
-		this.userCode = userCode;
-
-	}
-
 
 
 	public Task(Integer code, String text, Date date, Time time, String place, String priority, String remarks,
