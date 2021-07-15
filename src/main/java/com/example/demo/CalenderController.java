@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,7 +35,7 @@ public class CalenderController {
 	}
 
 	//日付ごとのタスク表示
-	@PostMapping("/todo/calender")
+	@GetMapping("/todo/calender/day")
 	public ModelAndView ClenderDate(
 			@RequestParam("date") String strDate,
 			ModelAndView mv) {
@@ -44,6 +44,7 @@ public class CalenderController {
 				User u =(User)session.getAttribute("userInfo");
 
 		//Date型に変換
+				strDate = strDate.replace("/","-");
 				Date date = Date.valueOf(strDate);
 
 				List<Task> td =taskRepository.findByUserCodeAndDate(u.getCode(),date);
