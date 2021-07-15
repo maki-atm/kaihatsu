@@ -2,18 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ToDo</title>
 <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 <span th:replace="menu"></span>
+<h2>カテゴリー一覧</h2>
+<font color="red" th:text="${message}"></font>
 <table border="1">
 <tr>
-<th>カテゴリー</th><th>移動</th>
+<th>カテゴリー名</th><th>　</th>
 </tr>
 		<span  th:each="c:${cate}">
 		<tr >
-        <td ><form action="/category/list" method="post"><input type="submit" th:value="${c.categoryName}"><input type="hidden" name="code" th:value="${c.categoryCode}"></form></td>
+        <td th:text="${c.categoryName}"></td><td><form action="/category/list" method="post"><input type="submit" value="移動" class="button"><input type="hidden" name="code" th:value="${c.categoryCode}"></form></td>
 
 		</tr>
 		</span>
