@@ -12,12 +12,25 @@
 <font color="red" th:text="${message}"></font>
 <table border="1">
 <tr>
-<th>カテゴリー名</th><th>　</th>
+<th>カテゴリー名</th><th>　</th><th>削除</th>
 </tr>
 		<span  th:each="c:${cate}">
 		<tr >
         <td th:text="${c.categoryName}"></td><td><form action="/category/list" method="post"><input type="submit" value="移動" class="button"><input type="hidden" name="code" th:value="${c.categoryCode}"></form></td>
+        <td>
 
+
+   <script>
+function f() {
+	return confirm("カテゴリーを消去すると、登録されているタスクも消去されますがよろしいですか？");
+}
+</script>
+<form onSubmit="f();" action="/category/delete" >
+    <input type="hidden" th:value="${c.categoryCode}" name="categoryCode">
+	<input type="submit" value="削除">
+</form>
+
+         </td>
 		</tr>
 		</span>
 

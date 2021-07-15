@@ -122,6 +122,23 @@ public class CategoryController {
 
 			}
 
+			@RequestMapping("/category/delete")
+			public ModelAndView Delete(
+					ModelAndView mv,
+					@RequestParam("categoryCode")int categoryCode) {
+
+				List<Task>record=taskRepository.findByCategoryCode(categoryCode);
+
+				if (!record.isEmpty()) {
+					taskRepository.deleteByCategoryCode(categoryCode);
+					categoryRepository.deleteById(categoryCode);
+
+				}
+
+
+				return Cate(mv);
+			}
+
 
 
 }

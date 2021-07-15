@@ -144,6 +144,7 @@ public class ToDoController {
 	//タスク新規登録画面表示
 	@RequestMapping("/todo/new")
 	public ModelAndView addTask(ModelAndView mv) {
+		User u = (User) session.getAttribute("userInfo");
 
 		List<Category> cate=categoryRepository.findAll();
 
