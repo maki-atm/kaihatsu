@@ -18,5 +18,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 	List<Task> findByUserCodeOrderByDateAscTimeAsc(Integer code);
 	List<Task> findByUserCodeOrderByPriNumAsc(Integer code);
 	List<Task> findByCategoryCode(Integer categoryCode);
+	List<Task> deleteByUserCode(Integer code);
+
 
 }

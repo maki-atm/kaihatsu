@@ -40,7 +40,6 @@ public class Difference {
 	}
 
 	//残り日数を格納する配列を返すメソッド
-	@SuppressWarnings("null")
 	public ArrayList<Difference> getDifDay(List<Task> t) {
 
 		Difference d = null;

@@ -25,6 +25,9 @@ public class AccountController {
 
 	@Autowired
 	TaskRepository taskRepository;
+	
+	@Autowired
+	CompletedRepository completedRepository;
 
 	@Autowired
 	CategoryRepository categoryRepository;
@@ -147,29 +150,28 @@ public class AccountController {
 			 return mv;
 		 }
 
+		
+		 
 		//ユーザー削除
-//		 @PostMapping("/delete/")
-//		 public ModelAndView newUser(
-//				 ModelAndView mv,
-//				 @RequestParam("name")String name,
-//				 @RequestParam("email")String  email,
-//				 @RequestParam("password")String password) {
-//
-//			 User u=new User(name,email,password);
-//			 List<User> user = userRepository.findByEmail(u.getEmail());
-//
-//			 if (!(user.size()==0) ){
-//					user = new ArrayList<User>();
-//					mv.addObject("msg", "既に登録済みです");
-//					mv.setViewName("newUser");
-//				}else {
-//					 userRepository.saveAndFlush(u);
-//
-//						mv.addObject("msg", "登録が完了しました");
-//
-//						mv.setViewName("login");//フォワード先
-//				}
-//
-//			 return mv;
-//		 }
+		 @PostMapping("/deleteUser")
+		 public ModelAndView deleteUser(
+				 ModelAndView mv,
+				 @RequestParam("name")String name,
+				 @RequestParam("email")String email,
+				 @RequestParam("password")String password) {
+
+			 User u = (User) session.getAttribute("userInfo");
+
+			 taskRepository.deleteByUserCode(u.getCode());
+			 completedRepository.deleteByUserCode(u.getCode());
+			 
+			 //カテゴリーも消したい・・・
+			 userRepository.deleteById(u.getCode());
+
+
+						mv.setViewName("login");//フォワード先
+
+
+			 return mv;
+		 }
 }
