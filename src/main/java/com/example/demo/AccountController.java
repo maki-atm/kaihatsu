@@ -182,8 +182,21 @@ public class AccountController {
 
 			 User u = (User) session.getAttribute("userInfo");
 
-			 taskRepository.deleteByUserCode(u.getCode());
-			 completedRepository.deleteByUserCode(u.getCode());
+			 List<Task> listT = taskRepository.findByUserCode(u.getCode());
+			 List<Completed> listC = completedRepository.findByUserCode(u.getCode());
+			 List<Category> listCA = categoryRepository.findByUserCode(u.getCode());
+
+			 if(!(listT.size()==0)) {
+				 taskRepository.deleteByUserCode(u.getCode());
+			 }
+
+			 if(!(listC.size()==0)) {
+				 completedRepository.deleteByUserCode(u.getCode());
+			 }
+
+//			 if(!(listCA.size()==0)) {
+//				 categoryRepository.deleteByUserCode(u.getCode());
+//			 }
 
 			 //カテゴリーも消したい・・・
 			 userRepository.deleteById(u.getCode());
