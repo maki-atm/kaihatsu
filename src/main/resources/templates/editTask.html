@@ -13,6 +13,20 @@
 <br>
 <form th:action="'/todo/'+${t.code}+'/edit'" method="post">
 <table border="1">
+<tr>
+    <th>カテゴリー</th>
+    <td>
+    <select name="category">
+    <option th:each="c:${cate}" th:value="${c.categoryCode}" th:text="${c.categoryName}"></opthion>
+    </select></td>
+    </tr>
+ <tr>
+    <th>カテゴリー</th>
+    <td>
+    <select name="category">
+    <opthion th:each="c:${category}"><a th:each="${c.categoryName}><input type="hidden" th:value="${c.categoryCode} name="code"></opthion>
+    </select></td>
+    </tr>
 	<tr>
 		<th>タスク</th><td><input type="text" name="text" th:value="${t.text}" required id="box"></td>
 	</tr>

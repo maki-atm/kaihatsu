@@ -28,6 +28,9 @@ public class ToDoController {
 	UserRepository userRepository;
 
 	@Autowired
+	CategoryRepository categoryRepository;
+
+	@Autowired
 	HttpSession session;
 
 	@Autowired
@@ -50,6 +53,8 @@ public class ToDoController {
 
 		//残り日数のリスト取得
 		ArrayList<Difference> list = difference.getDifDay(t);
+
+//		List<Category> c=categoryRepository.findByCategoryCode(categoryCode);
 
 
 		mv.addObject("list", list);
@@ -136,6 +141,12 @@ public class ToDoController {
 	//タスク新規登録画面表示
 	@RequestMapping("/todo/new")
 	public ModelAndView addTask(ModelAndView mv) {
+
+		List<Category> cate=categoryRepository.findAll();
+
+		//Thymeleafで表示する準備
+		mv.addObject("cate", cate);
+
 		//addTask.htmlにフォワード
 		mv.setViewName("addTask");
 		return mv;
@@ -152,7 +163,8 @@ public class ToDoController {
 			@RequestParam("place") String place,
 			@RequestParam("priority") int priNum,
 			@RequestParam("remarks") String remarks,
-			@RequestParam("color") String color) {
+			@RequestParam("color") String color,
+			@RequestParam("category") int categoryCode) {
 
 		//優先度を数字で受け取り、対応した文字を格納
 		String priority = null;
@@ -181,7 +193,7 @@ public class ToDoController {
 		User u = (User) session.getAttribute("userInfo");
 
 		//task,date,time,place,priorityを元にタスク情報を登録
-		Task t = new Task(text, date, time, place, priority, remarks, color, priNum, u.getCode());
+		Task t = new Task(text, date, time, place, priority, remarks, color, priNum, u.getCode(),categoryCode);
 
 		taskRepository.saveAndFlush(t);
 
@@ -220,6 +232,12 @@ public class ToDoController {
 			t = recode.get();
 		}
 
+
+		List<Category> cate=categoryRepository.findAll();
+
+		//Thymeleafで表示する準備
+		mv.addObject("cate", cate);
+
 		//Thmeleafで表示する準備
 		mv.addObject("t", t);
 
@@ -241,7 +259,8 @@ public class ToDoController {
 			@RequestParam("place") String place,
 			@RequestParam("priority") int priNum,
 			@RequestParam("remarks") String remarks,
-			@RequestParam("color") String color) {
+			@RequestParam("color") String color,
+			@RequestParam("category") int categoryCode) {
 
 		//優先度を数字で受け取り、対応した文字を格納
 		String priority = null;
@@ -277,7 +296,7 @@ public class ToDoController {
 		User u = (User) session.getAttribute("userInfo");
 
 		//指定したコードのタスク情報を変更
-		Task t = new Task(code, text, date, time, place, priority, remarks, color, priNum, u.getCode());
+		Task t = new Task(code, text, date, time, place, priority, remarks, color, priNum, u.getCode(),categoryCode);
 		taskRepository.saveAndFlush(t);
 
 		return displayTask(mv);

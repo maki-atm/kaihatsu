@@ -27,6 +27,9 @@ public class AccountController {
 	TaskRepository taskRepository;
 
 	@Autowired
+	CategoryRepository categoryRepository;
+
+	@Autowired
 	Difference difference;
 
 	@RequestMapping("/")
@@ -81,6 +84,12 @@ public class AccountController {
 
 				//残り日数のリスト取得
 				ArrayList<Difference> dlist = difference.getDifDay(t);
+
+				List<Category> cate=categoryRepository.findAll();
+				cate.get(1).getCategoryName();
+
+				//Thymeleafで表示する準備
+				mv.addObject("cate", cate);
 
 
 				mv.addObject("list", dlist);
