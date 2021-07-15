@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ToDo</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<span th:replace="menu"></span>
+<h2>退会手続き</h2>
+<span th:replace="time"></span>
+<br>
+ <br>
+
+<table border="1">
+<tr>
+	<th>名前</th>
+	<td th:text=${session.userInfo.name}></td>
+</tr>
+<tr>
+	<th>メールアドレス</th>
+	<td th:text=${session.userInfo.email}></td>
+</tr>
+
+</table>
+
+	<br>
+<div style="color:red">
+上記のユーザー情報の退会手続きをします。
+<br>
+登録したカテゴリーとタスクは消去されます。
+</div>
+<br>
+
+<form action="/deleteUser" method="post">
+	<input class="button" type = "submit" value="　　　退会　　　">
+</form>
+
+</body>
+</html>

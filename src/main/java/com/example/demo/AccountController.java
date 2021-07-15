@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +28,7 @@ public class AccountController {
 
 	@Autowired
 	TaskRepository taskRepository;
-	
+
 	@Autowired
 	CompletedRepository completedRepository;
 
@@ -161,26 +162,34 @@ public class AccountController {
 			 return mv;
 		 }
 
-		
-		 
+		 @GetMapping("/deleteUser")
+		 public ModelAndView godeleteUser(
+				 ModelAndView mv) {
+
+			 User u = (User) session.getAttribute("userInfo");
+
+			mv.setViewName("deleteUser");//フォワード先
+
+
+			 return mv;
+		 }
+
+
 		//ユーザー削除
 		 @PostMapping("/deleteUser")
 		 public ModelAndView deleteUser(
-				 ModelAndView mv,
-				 @RequestParam("name")String name,
-				 @RequestParam("email")String email,
-				 @RequestParam("password")String password) {
+				 ModelAndView mv) {
 
 			 User u = (User) session.getAttribute("userInfo");
 
 			 taskRepository.deleteByUserCode(u.getCode());
 			 completedRepository.deleteByUserCode(u.getCode());
-			 
+
 			 //カテゴリーも消したい・・・
 			 userRepository.deleteById(u.getCode());
 
 
-						mv.setViewName("login");//フォワード先
+			mv.setViewName("deleteUserFin");//フォワード先
 
 
 			 return mv;
