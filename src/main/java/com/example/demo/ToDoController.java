@@ -2,8 +2,6 @@ package com.example.demo;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,41 +30,33 @@ public class ToDoController {
 	@Autowired
 	HttpSession session;
 
+	@Autowired
+	Difference difference;
 
 	//タスク情報一覧表示
 	@RequestMapping("/todo")
 	public ModelAndView displayTask(ModelAndView mv) {
 
-		User u =(User)session.getAttribute("userInfo");
+		User u = (User) session.getAttribute("userInfo");
 		List<Task> t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
-
-
 
 		//今日の日付取得
 		long miliseconds = System.currentTimeMillis();
-        Date today = new Date(miliseconds);
+		Date today = new Date(miliseconds);
 
-        //今日のタスク件数取得
-		List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(),today);
+		//今日のタスク件数取得
+		List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(), today);
 		int countTask = d.size();
 
+		//残り日数のリスト取得
+		ArrayList<Difference> list = difference.getDifDay(t);
 
-		ArrayList<Long> list=new ArrayList<Long>();
-		long dif = 0;
-			for(Task i : t) {
-				//i.getDate();
-				LocalDate localD = i.getDate().toLocalDate();
-				LocalDate localT = today.toLocalDate();
-				dif = ChronoUnit.DAYS.between(localT,localD);
-				list.add(dif);
-			}
 
 		mv.addObject("list", list);
 
 		//Thmeleafで表示する準備
 		mv.addObject("countTask", countTask);
 		mv.addObject("t", t);
-
 
 		//index.htmlにフォワード
 		mv.setViewName("index");
@@ -79,48 +69,62 @@ public class ToDoController {
 	@PostMapping("/search")
 	public ModelAndView search(
 			ModelAndView mv,
-			@RequestParam("keyword")String keyword) {
-		List<Task> task=null;
+			@RequestParam("keyword") String keyword) {
+		List<Task> task = null;
 
-		User u =(User)session.getAttribute("userInfo");
-		task=taskRepository.findByUserCodeAndTextLike(u.getCode(),"%" + keyword + "%");
+		User u = (User) session.getAttribute("userInfo");
+		task = taskRepository.findByUserCodeAndTextLike(u.getCode(), "%" + keyword + "%");
 
+		//今日の日付取得
+		long miliseconds = System.currentTimeMillis();
+		Date today = new Date(miliseconds);
+
+		//今日のタスク件数取得
+		List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(), today);
+		int countTask = d.size();
+
+		//残り日数のリスト取得
+		ArrayList<Difference> list=difference.getDifDay(task);
+
+		mv.addObject("list", list);
+		mv.addObject("countTask", countTask);
 		mv.addObject("t", task);
-		mv.addObject("keyword" , keyword);
+		mv.addObject("keyword", keyword);
 
 		mv.setViewName("index");
 
 		return mv;
 	}
 
-
-
 	//並べ替え
 	@PostMapping("/todo")
 	public ModelAndView sortTask(ModelAndView mv,
 			@RequestParam("sort") String sort) {
 
+		User u = (User) session.getAttribute("userInfo");
+		List<Task> t = null;
 
-		User u =(User)session.getAttribute("userInfo");
-		List<Task> t=null;
-
-		if(sort.equals("DATE")) {
-			 t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
-		}else if(sort.equals("PRIORITY")) {
-			 t =taskRepository.findByUserCodeOrderByPriNumAsc(u.getCode());
+		if (sort.equals("DATE")) {
+			t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
+		} else if (sort.equals("PRIORITY")) {
+			t = taskRepository.findByUserCodeOrderByPriNumAsc(u.getCode());
 		}
 
 		//今日の日付取得
-			long miliseconds = System.currentTimeMillis();
-		 	Date today = new Date(miliseconds);
+		long miliseconds = System.currentTimeMillis();
+		Date today = new Date(miliseconds);
 
 		//今日のタスク件数取得
-			List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(),today);
-			int countTask = d.size();
+		List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(), today);
+		int countTask = d.size();
+
+		//残り日数のリスト取得
+		ArrayList<Difference> list=difference.getDifDay(t);
 
 		//Thmeleafで表示する準備
 		mv.addObject("countTask", countTask);
 		mv.addObject("t", t);
+		mv.addObject("list", list);
 
 		//index.htmlにフォワード
 		mv.setViewName("index");
@@ -150,15 +154,14 @@ public class ToDoController {
 			@RequestParam("remarks") String remarks,
 			@RequestParam("color") String color) {
 
-
 		//優先度を数字で受け取り、対応した文字を格納
-		String priority=null;
+		String priority = null;
 
-		if(priNum==1) {
+		if (priNum == 1) {
 			priority = "高";
-		}else if(priNum == 2) {
+		} else if (priNum == 2) {
 			priority = "中";
-		}else if(priNum == 3) {
+		} else if (priNum == 3) {
 			priority = "低";
 		}
 
@@ -168,17 +171,17 @@ public class ToDoController {
 		//Time型に変換
 		Time time = null;
 
-		if(!strTime.equals("")) {
+		if (!strTime.equals("")) {
 			time = Time.valueOf(strTime + ":00");
-		}else {
+		} else {
 
 		}
 
 		//ユーザ情報のセッションを受け取る
-		User u =(User)session.getAttribute("userInfo");
+		User u = (User) session.getAttribute("userInfo");
 
 		//task,date,time,place,priorityを元にタスク情報を登録
-		Task t = new Task(text, date, time, place, priority,remarks,color,priNum,u.getCode());
+		Task t = new Task(text, date, time, place, priority, remarks, color, priNum, u.getCode());
 
 		taskRepository.saveAndFlush(t);
 
@@ -202,7 +205,6 @@ public class ToDoController {
 		return displayTask(mv);
 
 	}
-
 
 	//タスク変更画面表示
 	@RequestMapping("/todo/{task.code}/edit")
@@ -242,13 +244,13 @@ public class ToDoController {
 			@RequestParam("color") String color) {
 
 		//優先度を数字で受け取り、対応した文字を格納
-		String priority=null;
+		String priority = null;
 
-		if(priNum==1) {
+		if (priNum == 1) {
 			priority = "高";
-		}else if(priNum == 2) {
+		} else if (priNum == 2) {
 			priority = "中";
-		}else if(priNum == 3) {
+		} else if (priNum == 3) {
 			priority = "低";
 		}
 
@@ -258,26 +260,24 @@ public class ToDoController {
 		//strTimeの文字数取得
 		int tm = strTime.length();
 
-		Time time=null;
+		Time time = null;
 		//文字数が5（hh:㎜）のとき「:00」を追加（時間を変更したとき）
 		//時間を変更していないときはそのまま（hh：㎜：ss）でOK
-		if(tm == 0) {
+		if (tm == 0) {
 
-		}
-		else if(tm == 5) {
+		} else if (tm == 5) {
 			time = Time.valueOf(strTime + ":00");
 		}
 
 		//Time型に変換
 
-	//	Time time = Time.valueOf(strTime);
-
+		//	Time time = Time.valueOf(strTime);
 
 		//ユーザ情報のセッションを受け取る
-		User u =(User)session.getAttribute("userInfo");
+		User u = (User) session.getAttribute("userInfo");
 
 		//指定したコードのタスク情報を変更
-		Task t = new Task(code, text, date, time, place, priority,remarks,color,priNum,u.getCode());
+		Task t = new Task(code, text, date, time, place, priority, remarks, color, priNum, u.getCode());
 		taskRepository.saveAndFlush(t);
 
 		return displayTask(mv);
@@ -288,7 +288,7 @@ public class ToDoController {
 	@RequestMapping("/todo/{task.code}/completed")
 	public ModelAndView compTask(
 			ModelAndView mv,
-			@PathVariable(name="task.code") int code) {
+			@PathVariable(name = "task.code") int code) {
 		Task t = null;
 
 		//指定したコードのタスク情報を取得
@@ -298,7 +298,8 @@ public class ToDoController {
 			t = recode.get();
 		}
 
-		Completed comp = new Completed(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getRemarks(),t.getColor(),t.getPriNum(),t.getUserCode());
+		Completed comp = new Completed(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),
+				t.getRemarks(), t.getColor(), t.getPriNum(), t.getUserCode());
 
 		completedRepository.saveAndFlush(comp);
 
@@ -318,7 +319,7 @@ public class ToDoController {
 	public ModelAndView completedTask(
 			ModelAndView mv) {
 
-		User u =(User)session.getAttribute("userInfo");
+		User u = (User) session.getAttribute("userInfo");
 		//全タスク情報取得
 		List<Completed> t = completedRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
 
@@ -336,7 +337,7 @@ public class ToDoController {
 	@PostMapping("/todo/{task.code}/completed2")
 	public ModelAndView completedTask(
 			ModelAndView mv,
-			@PathVariable(name="task.code") int code) {
+			@PathVariable(name = "task.code") int code) {
 
 		Completed t = null;
 
@@ -348,7 +349,8 @@ public class ToDoController {
 		}
 
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
-		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),t.getColor(),t.getRemarks(),t.getPriNum(),t.getUserCode());
+		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(), t.getColor(),
+				t.getRemarks(), t.getPriNum(), t.getUserCode());
 		taskRepository.saveAndFlush(task);
 
 		//実行済みテーブルから指定したコードのタスク情報を削除
@@ -379,6 +381,40 @@ public class ToDoController {
 		return completedTask(mv);
 
 	}
+
+
+	//残り日数を格納する配列を返すメソッド
+//	private ArrayList<Difference> getDifDay(List<Task> t) {
+//
+//		Difference d = new Difference();
+//		//今日の日付取得
+//			long miliseconds = System.currentTimeMillis();
+//			Date today = new Date(miliseconds);
+//
+//		ArrayList<Difference> list = null;
+//		long dif = 0;
+//		for (Task i : t) {
+//			//i.getDate();
+//			LocalDate localD = i.getDate().toLocalDate();
+//			LocalDate localT = today.toLocalDate();
+//			d.setDif(ChronoUnit.DAYS.between(localT, localD));
+//			if(dif>=0) {
+//				Difference de=new Difference(d.getDif(),"日");
+//
+//				//String strDif= String.valueOf(dif);
+//				list.add(de);
+//			}else {
+//
+//			}
+//
+//
+//
+//
+//		}
+//		return list;
+//	}
+
+
 
 
 }

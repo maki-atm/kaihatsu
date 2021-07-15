@@ -1,8 +1,6 @@
 package com.example.demo;
 
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +25,9 @@ public class AccountController {
 
 	@Autowired
 	TaskRepository taskRepository;
+
+	@Autowired
+	Difference difference;
 
 	@RequestMapping("/")
 	public String login() {
@@ -78,17 +79,11 @@ public class AccountController {
 				List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(),today);
 				int countTask = d.size();
 
-				ArrayList<Long> l=new ArrayList<Long>();
-				long dif = 0;
-					for(Task i : t) {
-						//i.getDate();
-						LocalDate localD = i.getDate().toLocalDate();
-						LocalDate localT = today.toLocalDate();
-						dif = ChronoUnit.DAYS.between(localT,localD);
-						l.add(dif);
-					}
+				//残り日数のリスト取得
+				ArrayList<Difference> dlist = difference.getDifDay(t);
 
-				mv.addObject("list", l);
+
+				mv.addObject("list", dlist);
 
 				//Thmeleafで表示する準備
 				mv.addObject("countTask", countTask);
@@ -128,8 +123,6 @@ public class AccountController {
 			 User u=new User(name,email,password);
 			 List<User> user = userRepository.findByEmail(u.getEmail());
 
-
-
 			 if (!(user.size()==0) ){
 					user = new ArrayList<User>();
 					mv.addObject("msg", "既に登録済みです");
@@ -141,31 +134,6 @@ public class AccountController {
 
 						mv.setViewName("login");//フォワード先
 				}
-
-//			 boolean check =true;
-
-//				for (User u : users) {
-//					if (id.equals(u.getCode())) {
-//
-//						check=false;
-//						break;
-//
-//					}
-//				}
-
-//				if(check==false) {
-//					mv.addObject("msg", "登録済みのユーザーIDです");
-//					mv.setViewName("newUser");
-//
-//				}else {
-//					 userRepository.saveAndFlush(u);
-//
-//					mv.addObject("msg", "登録が完了しました");
-//
-//					mv.setViewName("login");//フォワード先
-//
-//					}
-
 
 			 return mv;
 		 }

@@ -47,12 +47,15 @@
 
 	<table id="t">
 		<tr><th>残り日数</th></tr>
-	 	<tr th:each="list:${list}">
+		<tr th:each="LIST:${list}">
+<th:block th:if="${LIST.bl}">
+		<td th:text="${LIST.dif}+'日'"></td>
+</th:block>
+<th:block th:unless="${LIST.bl}">
+		<td th:text="${LIST.dif}+'日超過'" style="color:red"></td>
+</th:block>
 
-	 			<td th:text="${list}+'日'"></td>
-
-
-	 	</tr>
+		</tr>
 	</table>
 
 	<table border="1">
