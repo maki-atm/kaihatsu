@@ -23,13 +23,18 @@ public class CategoryController {
 	@Autowired
 	HttpSession session;
 
+	//カテゴリー一覧表示
 	@RequestMapping("/category")
-	public ModelAndView Cate(ModelAndView mv) {
+	public ModelAndView Cate(
+			ModelAndView mv) {
 
-	//	User u =(User)session.getAttribute("userInfo");
+		User u =(User)session.getAttribute("userInfo");
 
-		//Itemテーブルからすべてのレコードを取得
-				List<Category> cate=categoryRepository.findAll();
+		//カテゴリーテーブルからすべてのレコードを取得
+		List<Category> cate=categoryRepository.findByUserCode(u.getCode());
+
+
+				session.getAttribute("userInfo");
 
 				//Thymeleafで表示する準備
 				mv.addObject("cate", cate);
@@ -44,6 +49,9 @@ public class CategoryController {
 	//カテゴリー登録画面表示
 	@RequestMapping("/todo/category")
 	public ModelAndView addCate(ModelAndView mv) {
+
+		User u = (User) session.getAttribute("userInfo");
+
 		//addCategory.htmlにフォワード
 		mv.setViewName("addCategory");
 		return mv;
@@ -54,13 +62,15 @@ public class CategoryController {
 		@PostMapping("/todo/category")
 		public ModelAndView addCate(
 				ModelAndView mv,
-				@RequestParam("category")String categoryName) {
+				@RequestParam("category")String categoryName
+) {
 
+			User u = (User) session.getAttribute("userInfo");
 
+			Category c=new Category(categoryName,u.getCode());
 
-			Category c=new Category(categoryName);
+			List<Category> cate=categoryRepository.findByCategoryNameAndUserCode(categoryName,u.getCode());
 
-			List<Category> cate=categoryRepository.findByCategoryName(categoryName);
 
 			 if (!(cate.size()==0) ){
 					cate = new ArrayList<Category>();
@@ -71,7 +81,7 @@ public class CategoryController {
                         categoryRepository.saveAndFlush(c);
 						mv.addObject("msg", "登録が完了しました");
 
-						mv.setViewName("category");//フォワード先
+						return Cate(mv);
 				}
 
 

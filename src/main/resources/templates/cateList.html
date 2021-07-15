@@ -6,7 +6,9 @@
 <title>ToDo</title>
 </head>
 <body>
-<h2 th:text="${session.categoryMap.get(__${task.categoryCode}__)}"></h2>
+<span th:replace="menu"></span>
+<h2 th:text="${session.categoryMap.get(__${categoryCode}__)}"></h2>
+<span th:replace="time" id="body"></span>
 	<table border="1">
 		<tr>
 			<th class="CHECK">実行済み</th>

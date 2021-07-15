@@ -18,19 +18,29 @@ public class Category {
 	@Column(name="category_name")
 	private String categoryName;
 
+	@Column(name="user_code")
+	private int userCode;
+
+
 	public Category() {
 
 	}
 
-	public Category(Integer categoryCode, String categoryName) {
+
+
+	public Category(Integer categoryCode, String categoryName, int userCode) {
 		super();
 		this.categoryCode = categoryCode;
 		this.categoryName = categoryName;
+		this.userCode = userCode;
 	}
 
-	public Category(String categoryName) {
+	public Category( String categoryName, int userCode) {
 		this.categoryName = categoryName;
+		this.userCode = userCode;
 	}
+
+
 
 	public Integer getCategoryCode() {
 		return categoryCode;
