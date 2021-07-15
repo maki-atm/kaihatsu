@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+<title>Insert title here</title>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<th class="CHECK">実行済み</th>
+			<th class="TEXT">タスク</th>
+			<th colspan="2">期限</th>
+			<th class="PLACE">場所</th>
+			<th class="PRI">優先度</th>
+			<th class="RE">備考</th>
+			<th class="EDIT">編集</th>
+			<th class="DEL">削除</th>
+		</tr>
+
+		<span  th:each="task:${t}">
+		<tr >
+
+			<form th:action="'/todo/'+${task.code}+'/completed'">
+				<td><input type="submit" value="✓" class="button"></td>
+			</form>
+
+                <td  th:text="${task.text}" id="TEXT" th:style="'color:'+${task.color}" ></td>
+			    <td class="DATE" th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
+
+			    <td class="TIME" th:text="${#dates.format(task.time, 'H:mm')}"></td>
+				<td th:text="${task.place}"></td>
+                <td  th:text="${task.priority}"></td>
+                <td th:text="${task.remarks}"></td>
+			<form th:action="'/todo/'+${task.code}+'/edit'">
+				<td ><input type="submit" value="編集" class="button"></td>
+			</form>
+
+			<form action="/todo/delete" method="post">
+				<input type="hidden" name="code" th:value="${task.code}">
+				<td ><input type="submit" value="×" class="button"></td>
+			</form>
+		</tr>
+		</span>
+
+	</table>
+</body>
+</html>

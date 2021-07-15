@@ -39,6 +39,10 @@ public class Task {
 	@Column(name="user_code")
 	private int userCode;
 
+	@Column(name="category_code")
+	private int categoryCode;
+
+
 
 	public Task() {
 
@@ -72,6 +76,47 @@ public class Task {
 		this.priNum = priNum;
 		this.userCode = userCode;
 
+	}
+
+
+
+	public Task(Integer code, String text, Date date, Time time, String place, String priority, String remarks,
+			String color, int priNum, int userCode, int categoryCode) {
+		super();
+		this.code = code;
+		this.text = text;
+		this.date = date;
+		this.time = time;
+		this.place = place;
+		this.priority = priority;
+		this.remarks = remarks;
+		this.color = color;
+		this.priNum = priNum;
+		this.userCode = userCode;
+		this.categoryCode = categoryCode;
+	}
+
+	public Task(String text, Date date, Time time, String place, String priority, String remarks,
+			String color, int priNum, int userCode, int categoryCode) {
+
+		this.text = text;
+		this.date = date;
+		this.time = time;
+		this.place = place;
+		this.priority = priority;
+		this.remarks = remarks;
+		this.color = color;
+		this.priNum = priNum;
+		this.userCode = userCode;
+		this.categoryCode = categoryCode;
+	}
+
+	public int getCategoryCode() {
+		return categoryCode;
+	}
+
+	public void setCategoryCode(int categoryCode) {
+		this.categoryCode = categoryCode;
 	}
 
 	public Integer getCode() {
