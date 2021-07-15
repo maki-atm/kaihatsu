@@ -11,25 +11,20 @@ header{
     font-size: 16px;
 }
 .container{
-    padding-top: 4rem;
+    padding-top: 2rem;
 }
-.title{
-    color: #fff;
-    margin-bottom: 2rem;
-    text-align: center;
-}
-.read{
-    color: #fff;
-    line-height: 1.6;
-    margin:0 auto 2rem;
-    width: 800px;
+
+h3{
+	 background:  #FFD700;
 }
 
 .gnav {
     display: flex;
     height: 5rem;
     margin: 0 auto;
-    width: 1000px;
+    width: 100%;
+   /* background: #FFD700;*/
+
 }
 .gnav > li {/*親階層のみ幅を25%にする*/
     width: 25%;
@@ -40,12 +35,12 @@ header{
     position: relative;
 }
 .gnav li a {
-    background: #001b34;
+    background: #d5d5d5;
     border-right: 1px solid #eee;
-    color: #fff;
+    color: #400040;
     display: block;
-    height: 2rem;
-    line-height: 2rem;
+    height: 3rem;
+    line-height: 3rem;
     text-align: center;
     text-decoration: none;
     width: 100%;
@@ -61,7 +56,7 @@ header{
     border-top: 1px solid #eee;
 }
 .gnav li:hover > ul > li {
-    height: 2rem;
+    height: 3rem;
     opacity: 1;
     overflow: visible;
 }
@@ -77,14 +72,14 @@ header{
 }
 /*hover*/
 .gnav > li:hover > a {/*親階層*/
-    background: #00305c;
+    background: #ffffb3;
 }
 
 .gnav > li li > a {/*子階層*/
-    background: #00305c;
+    background: #ffffff;
 }
 .gnav > li li:hover > a {
-    background: #004789;
+    background: #fdf44f;
 }
 
 
@@ -94,15 +89,8 @@ header{
     border: 5px solid transparent;
     border-top: 5px solid #fff;
     content: "";
-    right: 1rem;
+    right: 2rem;
     position: absolute;
-    top: 1rem;
+    top: 1.5rem;
     transform: translateY(-40%);
-}
-
-.gnav li:nth-child(5) ul li ul:before {/*一番右のメニューの孫階層*/
-    border: 5px solid transparent;
-    border-right: 5px solid #fff;
-    left: auto;
-    right: -20px;
 }
