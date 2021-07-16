@@ -10,6 +10,7 @@
 <span th:replace="menu"></span>
 <h2>タスクの編集</h2>
 <span th:replace="time"></span>
+<font style="color:red">※は必須項目です</font>
 <br>
 <form th:action="'/todo/'+${t.code}+'/edit'" method="post">
 <table border="1">
@@ -17,11 +18,11 @@
     <th>カテゴリー</th>
     <td>
     <select name="category">
-    <option th:each="c:${cate}" th:value="${c.categoryCode}" th:text="${c.categoryName}"></opthion>
+    <option th:each="c:${session.categoryMap}" th:value="${c.key}" th:text="${c.value}"></opthion>
     </select></td>
     </tr>
  <tr>
-    <th>カテゴリー</th>
+    <th>カテゴリー　<font style="color:red">※</font></th>
     <td>
     <select name="category">
     <opthion th:each="c:${category}"><a th:each="${c.categoryName}><input type="hidden" th:value="${c.categoryCode} name="code"></opthion>
@@ -31,7 +32,7 @@
 		<th>タスク</th><td><input type="text" name="text" th:value="${t.text}" required id="box"></td>
 	</tr>
 	<tr>
-		<th>期限</th>
+		<th>期限　<font style="color:red ">※は日付のみ必須</font></th>
 		<td> <input type="date" name="date" th:value="${t.date}" required>　<input type="time" name="time" th:value="${t.time}"></input></td>
 	</tr>
 	<tr>

@@ -10,6 +10,7 @@
 <span th:replace="menu"></span>
 <h2>新規タスク追加</h2>
 <span th:replace="time"></span>
+<font style="color:red">※は必須項目です</font>
 <br>
 <form action ="/todo/new" method="post">
 <table border="1">
@@ -21,10 +22,10 @@
     </select></td>
     </tr>
 	<tr>
-		<th>タスク</th><td><input type="text" name="text" required id="box"></td>
+		<th>タスク　<font style="color:red">※</font></th><td><input type="text" name="text" required id="box"></td>
 	</tr>
 	<tr>
-		<th>期限</th>
+		<th>期限　<font style="color:red">※は日付のみ必須</font></th>
 		<td> <input type="date" name="date" required></input><input type="time" name="time"></input></td>
 	</tr>
 	<tr>
