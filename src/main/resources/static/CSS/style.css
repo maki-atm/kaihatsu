@@ -1,13 +1,12 @@
 @charset "UTF-8";
 
 
-#box{
-	width:600px;
-	height:50px;
-}
+
+
 
 body {
 	text-align: center;
+	padding-bottom: 2rem;
 }
 
 h1{
@@ -53,9 +52,37 @@ table {
   box-shadow: 0 0 15px -6px #00000073;
 }
 
+/* 残り日数テーブル */
 #t{
-
 	 width:70px;
+}
+
+/* テキストボックス  */
+#box{
+	width:600px;
+	height:50px;
+	font-size:11pt;
+}
+
+/* セレクトボックス  */
+#select {
+	width:150px;
+	height:50px;
+	font-size:11pt;
+}
+
+/* 色選択のプレビュー表示 */
+#spColor{
+	font-size:15pt;
+
+}
+
+#addFont{
+	font-size:14pt;
+}
+
+#kome{
+	font-size:11pt;
 }
 
 
@@ -159,7 +186,6 @@ div.right1{
   font-family: 'Share Tech Mono', monospace;
   color: black;
   line-height: 1.2;
-
 }
 
 /* 日付のスタイル */
