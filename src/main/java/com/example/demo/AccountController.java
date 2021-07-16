@@ -92,6 +92,7 @@ public class AccountController {
 				ArrayList<Difference> dlist = difference.getDifDay(t);
 
 				List<Category> cate=categoryRepository.findByUserCode(userCode);
+				a
 
 				 //Mapの宣言
 		        Map<Integer, String> map = new HashMap<>();
