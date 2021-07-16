@@ -195,9 +195,9 @@ public class AccountController {
 				 completedRepository.deleteByUserCode(u.getCode());
 			 }
 
-//			 if(!(listCA.size()==0)) {
-//				 categoryRepository.deleteByUserCode(u.getCode());
-//			 }
+			 if(!(listCA.size()==0)) {
+				 categoryRepository.deleteByUserCode(u.getCode());
+			 }
 
 
 			 userRepository.deleteById(u.getCode());
