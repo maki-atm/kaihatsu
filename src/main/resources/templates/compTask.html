@@ -44,7 +44,7 @@
 			</form>
 			 <td  th:text="${session.categoryMap.get(__${task.categoryCode}__)}"></td>
 				<td th:text="${task.text}" th:style="'color:'+${task.color}"></td>
-			    <td th:text="${#dates.format(task.date, 'y年M月d日')"></td>
+			    <td th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
 			    <td th:text="${#dates.format(task.time, 'HH:mm')}"></td>
 
 				<td th:text="${task.place}"></td>

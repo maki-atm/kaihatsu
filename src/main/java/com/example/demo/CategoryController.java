@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,9 @@ public class CategoryController {
 	@Autowired
 	HttpSession session;
 
+	@Autowired
+	Difference difference;
+
 	//カテゴリー一覧表示
 	@RequestMapping("/category")
 	public ModelAndView Cate(
@@ -42,8 +46,8 @@ public class CategoryController {
 
 				session.getAttribute("userInfo");
 
-				//Thymeleafで表示する準備
-				mv.addObject("cate", cate);
+		//Thymeleafで表示する準備
+		mv.addObject("cate", cate);
 
 		//addCategory.htmlにフォワード
 		mv.setViewName("category");
@@ -120,14 +124,25 @@ public class CategoryController {
 
 				List<Category> cate=categoryRepository.findAll();
 
+				User u = (User) session.getAttribute("userInfo");
+
+				//今日の日付取得
+				long miliseconds = System.currentTimeMillis();
+				Date today = new Date(miliseconds);
+
+				//今日のタスク件数取得
+				List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(), today);
+				int countTask = d.size();
+
+				//残り日数のリスト取得
+				ArrayList<Difference> list = difference.getDifDay(t);
+
 				//Thymeleafで表示する準備
+				mv.addObject("list", list);
+				mv.addObject("countTask", countTask);
 				mv.addObject("cate", cate);
 
 				mv.addObject("categoryCode", categoryCode);
-
-
-
-
 
 				mv.addObject("t",t);
 
