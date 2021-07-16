@@ -204,7 +204,7 @@ public class AccountController {
 				 categoryRepository.deleteByUserCode(u.getCode());
 			 }
 
-			 //カテゴリーも消したい・・・
+			 
 			 userRepository.deleteById(u.getCode());
 
 
