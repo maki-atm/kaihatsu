@@ -130,6 +130,11 @@ table tr:hover{
 
 div.right1{
 	text-align:right;
+
+}
+
+#right1{
+	display:inline;
 }
 
 
@@ -173,6 +178,7 @@ div.right1{
 
 #right{
 	text-align:right;
+
 }
 
 /* 時計   */

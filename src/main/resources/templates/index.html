@@ -24,7 +24,7 @@
 		</select>
 		<input type="submit" value="並べ替え" class="button">　　
 	</form>
-<br>
+
 	<form action="/search" method="post" id="right1">
 		<input type="text" name="keyword" th:value="${keyword}" placeholder="search for task">
 		<input type="submit" value="検索" class="button">　　
@@ -81,7 +81,7 @@
                 <td  th:text="${task.text}" id="TEXT" th:style="'color:'+${task.color}" ></td>
 			    <td class="DATE" th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
 
-			    <td class="TIME" th:text="${#dates.format(task.time, 'H:mm')}"></td>
+			    <td class="TIME" th:text="${#dates.format(task.time, 'HH:mm')}"></td>
 				<td th:text="${task.place}"></td>
                 <td  th:text="${task.priority}"></td>
                 <td th:text="${task.remarks}"></td>

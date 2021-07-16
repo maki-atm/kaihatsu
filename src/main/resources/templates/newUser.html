@@ -9,8 +9,9 @@
 <body>
 <img th:src="@{/image/logo.png}" >
 <h1>新規登録</h1>
+
 <font color="red" th:text="${msg}"></font>
-<br>
+<br><br>
 <form action="/newUser" method="post">
 　　　　　名前：<input type="text" name="name"required>
 <br>
@@ -19,7 +20,7 @@
 　　パスワード：<input type="password" name="password" required>
 <br>
 <br>
-<input type="submit" value="登録" class="button">
+<input type="submit" value="　　　登録　　　" class="button">
 </form>
 <br>
 <a href="/">ログイン画面に戻る</a>
