@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -177,6 +178,7 @@ public class AccountController {
 
 
 		//ユーザー削除
+		 @Transactional
 		 @PostMapping("/deleteUser")
 		 public ModelAndView deleteUser(
 				 ModelAndView mv) {

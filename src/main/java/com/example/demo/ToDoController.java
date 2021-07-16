@@ -384,8 +384,8 @@ public class ToDoController {
 		}
 
 		//戻すボタン押下時にtask,date,time,place,priorityを元にタスク情報を登録
-		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(), t.getColor(),
-				t.getRemarks(), t.getPriNum(), t.getUserCode(),t.getCategoryCode());
+		Task task = new Task(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),
+				t.getRemarks(),t.getColor(), t.getPriNum(), t.getUserCode(),t.getCategoryCode());
 		taskRepository.saveAndFlush(task);
 
 		//実行済みテーブルから指定したコードのタスク情報を削除
