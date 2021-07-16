@@ -17,7 +17,7 @@
     <th>カテゴリー</th>
     <td>
     <select name="category">
-    <option th:each="c:${cate}" th:value="${c.categoryCode}" th:text="${session.categoryMap.get(__${categoryCode}__)}"></opthion>
+    <option th:each="c:${session.categoryMap}" th:value="${c.value.categoryCode}" th:text="${c.value.categoryName}"></opthion>
     </select></td>
     </tr>
 	<tr>

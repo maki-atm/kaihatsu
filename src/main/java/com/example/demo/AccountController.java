@@ -91,8 +91,8 @@ public class AccountController {
 				//残り日数のリスト取得
 				ArrayList<Difference> dlist = difference.getDifDay(t);
 
-				List<Category> cate=categoryRepository.findByUserCode(userCode);
-				a
+				List<Category> cate=categoryRepository.findByUserCode(u.getCode());
+
 
 				 //Mapの宣言
 		        Map<Integer, String> map = new HashMap<>();
@@ -199,7 +199,7 @@ public class AccountController {
 //				 categoryRepository.deleteByUserCode(u.getCode());
 //			 }
 
-			 
+
 			 userRepository.deleteById(u.getCode());
 
 
