@@ -7,59 +7,65 @@
 
 </head>
 <body>
-<span th:replace="menu"></span>
-<h2>新規タスク追加</h2>
-<span th:replace="time"></span>
-<font style="color:red">※は必須項目です</font>
-<br>
-<form action ="/todo/new" method="post">
-<table border="1">
-    <tr>
-    <th>カテゴリー</th>
-    <td>
-    <select name="category">
-    <option th:each="c:${session.categoryMap}" th:value="${c.key}" th:text="${c.value}"></opthion>
-    </select></td>
-    </tr>
-	<tr>
-		<th>タスク　<font style="color:red">※</font></th><td><input type="text" name="text" required id="box"></td>
-	</tr>
-	<tr>
-		<th>期限　<font style="color:red">※は日付のみ必須</font></th>
-		<td> <input type="date" name="date" required></input><input type="time" name="time"></input></td>
-	</tr>
-	<tr>
-		<th>場所</th><td><input type="text" name="place" id="box"></td>
+	<span th:replace="menu"></span>
+	<h2>新規タスク追加</h2>
+	<span th:replace="time"></span>
 
-	</tr>
-	<tr>
-		<th>優先度</th>
-		<td>
-		<select name="priority">
-				<option value="1">高</option>
-				<option value="2">中</option>
-				<option value="3">低</option>
-				</select>
-				</td>
-	</tr>
-	<tr>
-	<th>色選択</th>
-	<td><select name="color" >
-	<option value="black" style="background-color:black" selected id="color">BLACK</option>
-	<option value="red" style="background-color:red">RED</option>
-	<option value="blue" style="background-color:blue">BLUE</option>
-	<option value="green" style="background-color:green">GREEN</option>
-	<option value="orange" style="background-color:orange">ORANGE</option>
-	<option value="Deeppink" style="background-color:Deeppink">PINK</option>
-	</select></td>
-	</tr>
-	<tr>
-	<th>備考</th><td><input type="text" name="remarks" id="box"></td>
-	</tr>
-	</table>
-<br>
-	<input type="submit" value="完了" class="button">
-</form>
+	<br>
+	<div style="color: red">※は必須項目です</div>
+
+	<br>
+	<form action="/todo/new" method="post">
+		<table border="1">
+			<tr>
+				<th>カテゴリー</th>
+				<td><select name="category" id="select">
+						<option th:each="c:${session.categoryMap}" th:value="${c.key}"
+							th:text="${c.value}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<th>タスク <div style="color: red" id="kome">※</div></th>
+				<td><input type="text" name="text" required id="box"></td>
+			</tr>
+			<tr>
+				<th>期限 <div style="color: red"  id="kome">※日付のみ必須</div></th>
+				<td><input id="select" type="date" name="date" required></input>
+					<input type="time" name="time" id="select"></input></td>
+			</tr>
+			<tr>
+				<th>場所</th>
+				<td><input type="text" name="place" id="box"></td>
+
+			</tr>
+			<tr id="addFont">
+				<th>優先度</th>
+				<td><input type="radio" name="priority" value="1"> 高　　　　
+					<input	type="radio" name="priority" value="2"> 中　　　　
+					<input	type="radio" name="priority" value="3"> 低</td>
+			</tr>
+			<tr id="addFont">
+				<th>色選択</th>
+				<td><input type="radio" name="color" value="black">BLACK
+						<span style="color: black" id="spColor">■　 </span>
+					<input type="radio" name="color" value="red"> RED
+						<span style="color: red" id="spColor">■　 </span>
+					<input type="radio" name="color" value="blue"> BLUE
+						<span style="color: blue" id="spColor">■　 </span>
+					<input type="radio" name="color" value="green"> GREEN
+						<span style="color: green"	id="spColor">■　 </span>
+					<input type="radio" name="color" value="orange"> ORANGE
+						<span style="color: orange"	id="spColor">■　 </span>
+					<input type="radio" name="color" value="Deeppink"> PINK
+						<span style="color: Deeppink" id="spColor">■　</span></td>
+			</tr>
+			<tr>
+				<th>備考</th>
+				<td><input type="text" name="remarks" id="box"></td>
+			</tr>
+		</table>
+		<br> <input type="submit" value="　　完了　　" class="button">
+	</form>
 
 	<br>
 
