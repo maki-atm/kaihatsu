@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,6 +46,7 @@ public class AccountController {
 		return "login";
 	}
 
+	//ログイン
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public ModelAndView doLogin(
 				@RequestParam("email") String email,
@@ -65,17 +67,20 @@ public class AccountController {
 
 		//アドレスが一致するとき
 			//顧客情報のリストを取得
-			 User userInfo = list.get(0);
+			 User user = list.get(0);
 
-			 if( !(userInfo.getPassword().equals(password))) {
+			 if( !(user.getPassword().equals(password))) {
 
 				 mv.addObject("message", "パスワードが一致しません");
 				 mv.setViewName("login");
 					 return mv;
 
 			 }else {
-				//セッションスコープに顧客情報とカテゴリ情報を格納する
-				session.setAttribute("userInfo", userInfo);
+
+
+				//セッションスコープにパスワード以外の顧客情報とカテゴリ情報を格納する
+				User userInfo = new User(user.getCode(),user.getName(),user.getEmail());
+								session.setAttribute("userInfo", userInfo);
 
 				User u =(User)session.getAttribute("userInfo");
 				List<Task> t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
@@ -176,6 +181,7 @@ public class AccountController {
 
 
 		//ユーザー削除
+		 @Transactional
 		 @PostMapping("/deleteUser")
 		 public ModelAndView deleteUser(
 				 ModelAndView mv) {
@@ -194,9 +200,9 @@ public class AccountController {
 				 completedRepository.deleteByUserCode(u.getCode());
 			 }
 
-//			 if(!(listCA.size()==0)) {
-//				 categoryRepository.deleteByUserCode(u.getCode());
-//			 }
+			 if(!(listCA.size()==0)) {
+				 categoryRepository.deleteByUserCode(u.getCode());
+			 }
 
 			 //カテゴリーも消したい・・・
 			 userRepository.deleteById(u.getCode());
