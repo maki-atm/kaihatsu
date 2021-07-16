@@ -6,7 +6,8 @@
 
 body {
 	text-align: center;
-	padding-bottom: 2rem;
+	padding-bottom: 5rem;
+	padding-top: 2rem;
 }
 
 h1{
@@ -42,7 +43,7 @@ h2:first-letter {
 
 /* テーブル     */
 table {
-  empty-cells: show;
+ empty-cells: show;
   border-collapse: collapse;
   margin: 0 auto;
   padding: 0;

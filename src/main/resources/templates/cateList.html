@@ -5,10 +5,31 @@
 <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 <title>ToDo</title>
 </head>
-<body>
 <span th:replace="menu"></span>
 <h2 th:text="${session.categoryMap.get(__${categoryCode}__)}"></h2>
 <span th:replace="time" id="body"></span>
+
+
+	<div class="countTask">
+	<a th:text="本日のタスクは" ></a>
+	<font color="blue" size="20" th:text="${countTask}"></font>
+	<a th:text=" 件です"></a></div>
+	<br>
+	<div style="display:inline-flex">
+
+	<table id="t">
+		<tr><th>残り日数</th></tr>
+			<tr th:each="LIST:${list}">
+		<th:block th:if="${LIST.bl}">
+			<td th:text="${LIST.dif}+'日'"></td>
+		</th:block>
+		<th:block th:unless="${LIST.bl}">
+			<td th:text="${LIST.dif}+'日超過'" style="color:red"></td>
+		</th:block>
+
+		</tr>
+	</table>
+
 	<table border="1">
 		<tr>
 			<th class="CHECK">実行済み</th>
@@ -48,5 +69,7 @@
 		</span>
 
 	</table>
+
+	</div>
 </body>
 </html>
