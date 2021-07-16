@@ -13,15 +13,14 @@
 
 	<br>
 	<div style="color: red">※は必須項目です</div>
-
+	
 	<br>
 	<form action="/todo/new" method="post">
 		<table border="1">
 			<tr>
-				<th>カテゴリー</th>
+				<th>カテゴリー <div style="color: red" id="kome">※</div></th>
 				<td><select name="category" id="select">
-						<option th:each="c:${session.categoryMap}" th:value="${c.key}"
-							th:text="${c.value}"></option>
+					<option th:each="c:${session.categoryMap}" th:value="${c.key}"	th:text="${c.value}"></option>
 				</select></td>
 			</tr>
 			<tr>
@@ -30,7 +29,7 @@
 			</tr>
 			<tr>
 				<th>期限 <div style="color: red"  id="kome">※日付のみ必須</div></th>
-				<td><input id="select" type="date" name="date" required></input>
+				<td><input id="select" type="date" name="date" required></input>　　　
 					<input type="time" name="time" id="select"></input></td>
 			</tr>
 			<tr>
@@ -68,9 +67,6 @@
 	</form>
 
 	<br>
-
-
-
 
 </body>
 </html>
