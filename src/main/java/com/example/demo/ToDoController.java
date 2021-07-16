@@ -3,7 +3,9 @@ package com.example.demo;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -142,14 +144,20 @@ public class ToDoController {
 	}
 
 	//タスク新規登録画面表示
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/todo/new")
 	public ModelAndView addTask(ModelAndView mv) {
 		User u = (User) session.getAttribute("userInfo");
 
 		List<Category> cate=categoryRepository.findAll();
 
+		  Map<Integer, String> map = new HashMap<>();
+
+		map  = (Map<Integer, String>) session.getAttribute("categoryMap");
+
 		//Thymeleafで表示する準備
 		mv.addObject("cate", cate);
+		//mv.addObject("categoryMap", map);
 
 		//addTask.htmlにフォワード
 		mv.setViewName("addTask");
