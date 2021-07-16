@@ -10,56 +10,55 @@
 <span th:replace="menu"></span>
 <h2>タスクの変更</h2>
 <span th:replace="time"></span>
+<br><br>
 <font style="color:red">※は必須項目です</font>
-<br>
+<br><br>
 <form th:action="'/todo/'+${t.code}+'/edit'" method="post">
 <table border="1">
 <tr>
-    <th>カテゴリー</th>
-    <td>
-    <select name="category">
-    <option th:each="c:${session.categoryMap}" th:value="${c.key}" th:text="${c.value}"></opthion>
-    </select></td>
-    </tr>
- <tr>
     <th>カテゴリー　<font style="color:red">※</font></th>
     <td>
-    <select name="category">
-    <opthion th:each="c:${category}"><a th:each="${c.categoryName}><input type="hidden" th:value="${c.categoryCode} name="code"></opthion>
+    <select name="category" id="select">
+    <option th:each="c:${session.categoryMap}" th:value="${c.key}" th:text="${c.value}"></option>
     </select></td>
     </tr>
+
 	<tr>
-		<th>タスク</th><td><input type="text" name="text" th:value="${t.text}" required id="box"></td>
+		<th>タスク  <div style="color: red" id="kome">※</div></th><td><input type="text" name="text" th:value="${t.text}" required id="box"></td>
 	</tr>
 	<tr>
-		<th>期限　<font style="color:red ">※は日付のみ必須</font></th>
-		<td> <input type="date" name="date" th:value="${t.date}" required>　<input type="time" name="time" th:value="${t.time}"></input></td>
+		<th>期限　<font style="color:red " id="kome">※は日付のみ必須</font></th>
+		<td> <input type="date" name="date" id="select" th:value="${t.date}" required>　　　<input type="time" name="time" id="select" th:value="${t.time}"></input></td>
 	</tr>
 	<tr>
 		<th>場所</th><td><input type="text" name="place" th:value="${t.place}" id="box"></td>
 
 	</tr>
-	<tr>
+	<tr id="addFont">
 		<th>優先度</th>
-		<td><select name="priority">
-				<option value="1">高</option>
-				<option value="2">中</option>
-				<option value="3">低</option>
-				</select></td>
+		<td><input type="radio" name="priority" value="1" th:checked="${t.priNum == 1}"> 高　　　　
+			<input	type="radio" name="priority" value="2" th:checked="${t.priNum == 2}"> 中　　　　
+			<input	type="radio" name="priority" value="3" th:checked="${t.priNum == 3}"> 低</td>
 	</tr>
 	<tr>
-	<th>色選択</th>
-	<td><select name="color">
-	<option value="black" style="background-color:black" selected id="color">BLACK</option>
-	<option value="red" style="background-color:red">RED</option>
-	<option value="blue" style="background-color:blue">BLUE</option>
-	<option value="green" style="background-color:green">GREEN</option>
-	<option value="orange" style="background-color:orange">ORANGE</option>
-	<option value="Deeppink" style="background-color:Deeppink">PINK</option>
-	</select></td>
+	<th id="addFont">色選択</th>
+		<td>
+					<input type="radio" name="color" value="black" th:checked="${t.color =='black'}">BLACK
+						<span style="color: black" id="spColor">■　 </span>
+					<input type="radio" name="color" value="red" th:checked="${t.color =='red'}"> RED
+						<span style="color: red" id="spColor">■　 </span>
+					<input type="radio" name="color" value="blue" th:checked="${t.color =='blue'}"> BLUE
+						<span style="color: blue" id="spColor">■　 </span>
+					<input type="radio" name="color" value="green" th:checked="${t.color =='green'}"> GREEN
+						<span style="color: green"	id="spColor">■　 </span>
+					<input type="radio" name="color" value="orange" th:checked="${t.color =='orange'}"> ORANGE
+						<span style="color: orange"	id="spColor">■　 </span>
+					<input type="radio" name="color" value="Deeppink" th:checked="${t.color =='Deeppink'}"> PINK
+						<span style="color: Deeppink" id="spColor">■　</span>
+		</td>
 	</tr>
 	<tr>
-	<th>備考</th><td><input type="text" name="remarks" id="box"></td>
+		<th>備考</th><td><input type="text" name="remarks" id="box"></td>
 	</tr>
 	</table>
 <br>
