@@ -12,7 +12,7 @@
 <font color="red" th:text="${message}"></font>
 <table border="1">
 <tr>
-<th>カテゴリー名</th><th>　</th><th>削除</th>
+<th>カテゴリー名</th><th>移動</th><th>削除</th>
 </tr>
 		<span  th:each="c:${cate}">
 		<tr >
@@ -27,7 +27,7 @@ function f() {
 </script>
 <form onSubmit="f();" action="/category/delete" >
     <input type="hidden" th:value="${c.categoryCode}" name="categoryCode">
-	<input type="submit" value="削除">
+	<input type="submit" value="削除" class="button">
 </form>
 
          </td>

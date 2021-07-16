@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class CategoryController {
 
 	@Autowired
 	TaskRepository taskRepository;
+
+	@Autowired
+	CompletedRepository completedRepository;
 
 	@Autowired
 	HttpSession session;
@@ -122,18 +126,31 @@ public class CategoryController {
 
 			}
 
+			//カテゴリーの削除
 			@RequestMapping("/category/delete")
+			@Transactional
 			public ModelAndView Delete(
 					ModelAndView mv,
 					@RequestParam("categoryCode")int categoryCode) {
 
 				List<Task>record=taskRepository.findByCategoryCode(categoryCode);
+				List<Completed>rec=completedRepository.findByCategoryCode(categoryCode);
+				List<Category>r=categoryRepository.findByCategoryCode(categoryCode);
 
-				if (!record.isEmpty()) {
+				if (!record.isEmpty() ) {
 					taskRepository.deleteByCategoryCode(categoryCode);
-					categoryRepository.deleteById(categoryCode);
-
 				}
+
+				if(! rec.isEmpty()) {
+					completedRepository.deleteByCategoryCode(categoryCode);
+				}
+
+				if(! r.isEmpty()) {
+					categoryRepository.deleteById(categoryCode);
+				}
+
+
+
 
 
 				return Cate(mv);

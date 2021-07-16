@@ -13,5 +13,7 @@ public interface CompletedRepository extends JpaRepository<Completed, Integer> {
 	List<Completed> findByUserCodeOrderByPriNumAsc(Integer code);
 	List<Completed> findByUserCode(Integer code);
 	List<Completed> deleteByUserCode(Integer code);
+	List<Completed> findByCategoryCode(Integer categoryCode);
+	List<Completed> deleteByCategoryCode(Integer code);
 
 	}
