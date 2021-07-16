@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +45,6 @@ public class AccountController {
 		return "login";
 	}
 
-	//ログイン
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public ModelAndView doLogin(
 				@RequestParam("email") String email,
@@ -67,20 +65,17 @@ public class AccountController {
 
 		//アドレスが一致するとき
 			//顧客情報のリストを取得
-			 User user = list.get(0);
+			 User userInfo = list.get(0);
 
-			 if( !(user.getPassword().equals(password))) {
+			 if( !(userInfo.getPassword().equals(password))) {
 
 				 mv.addObject("message", "パスワードが一致しません");
 				 mv.setViewName("login");
 					 return mv;
 
 			 }else {
-
-
-				//セッションスコープにパスワード以外の顧客情報とカテゴリ情報を格納する
-				User userInfo = new User(user.getCode(),user.getName(),user.getEmail());
-								session.setAttribute("userInfo", userInfo);
+				//セッションスコープに顧客情報とカテゴリ情報を格納する
+				session.setAttribute("userInfo", userInfo);
 
 				User u =(User)session.getAttribute("userInfo");
 				List<Task> t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
@@ -96,7 +91,7 @@ public class AccountController {
 				//残り日数のリスト取得
 				ArrayList<Difference> dlist = difference.getDifDay(t);
 
-				List<Category> cate=categoryRepository.findAll();
+				List<Category> cate=categoryRepository.findByUserCode(userCode);
 
 				 //Mapの宣言
 		        Map<Integer, String> map = new HashMap<>();
@@ -181,7 +176,6 @@ public class AccountController {
 
 
 		//ユーザー削除
-		 @Transactional
 		 @PostMapping("/deleteUser")
 		 public ModelAndView deleteUser(
 				 ModelAndView mv) {
@@ -200,9 +194,9 @@ public class AccountController {
 				 completedRepository.deleteByUserCode(u.getCode());
 			 }
 
-			 if(!(listCA.size()==0)) {
-				 categoryRepository.deleteByUserCode(u.getCode());
-			 }
+//			 if(!(listCA.size()==0)) {
+//				 categoryRepository.deleteByUserCode(u.getCode());
+//			 }
 
 			 
 			 userRepository.deleteById(u.getCode());

@@ -1,7 +1,9 @@
 package com.example.demo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
@@ -83,6 +85,15 @@ public class CategoryController {
 				}else {
 
                         categoryRepository.saveAndFlush(c);
+                        List<Category> cate2=categoryRepository.findByUserCode(u.getCode());
+                        Map<Integer, String> map = new HashMap<>();
+
+                        for(Category cg : cate2) {
+        		            // MapにListのキーと値を追加
+        		            map.put(cg.getCategoryCode(), cg.getCategoryName());
+        		        }
+
+                        session.setAttribute("categoryMap", map);
 						mv.addObject("msg", "登録が完了しました");
 
 						return Cate(mv);
