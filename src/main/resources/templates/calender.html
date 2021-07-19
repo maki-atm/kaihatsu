@@ -16,8 +16,34 @@
 <link rel="stylesheet"
 	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css">
 <script type="text/javascript" th:inline="javascript">
+
+
+//$(document).ready(function() {
+
+
+   // var SelectedDates = {};
+   // SelectedDates[new Date('04/05/2016')] = new Date('04/05/2016');
+   // SelectedDates[new Date('05/04/2017')] = new Date('05/04/2017');
+   // SelectedDates[new Date('06/06/2018')] = new Date('06/06/2018');
+
+  //  $('#txtDate').datepicker({
+    //    beforeShowDay: function(date) {
+      //      var Highlight = SelectedDates[date];
+        //    if (Highlight) {
+          //      return [true, "Highlighted", Highlight];
+            //}
+        //    else {
+          //      return [true, '', ''];
+   //         }
+     //   }
+//    });
+//});
+
+
 	$(function() {
-		$("#datepicker").datepicker({
+//	var SelectedDate = new Array(getElementById("date"));
+
+	$("#datepicker").datepicker({
 
 			// 日付が選択された時、日付をテキストフィールドへセット
 			onSelect : function(dateText, inst) {
@@ -39,9 +65,11 @@
 <h2>カレンダー</h2>
 <span th:replace="time" id="body"></span>
 <br>
-<font>日付をクリックするとタスクが表示されます</font>
-<br>
+<font style=color:red>日付をクリックするとタスクが表示されます</font>
+<br><br>
+
 	<div id="datepicker"></div>
+
 	<br>
 	<br>
 

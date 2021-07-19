@@ -24,9 +24,22 @@ public class CalenderController {
 
 	//カレンダー表示
 	@RequestMapping("/todo/calender")
-	public ModelAndView goClender(
+	public ModelAndView goCalendar(
 			ModelAndView mv) {
 
+//		User user =(User)session.getAttribute("userInfo");
+//
+//		List<Task> task=taskRepository.findByUserCodeOrderByDateAscTimeAsc(user.getCode());
+//
+//		ArrayList<Date> list = new ArrayList<>();
+//
+//		//Date da=null;
+//		for( Task a :task) {
+//
+//			list.add(a.getDate());
+//		}
+////
+//		mv.addObject("date",list);
 		mv.setViewName("calender");
 
 

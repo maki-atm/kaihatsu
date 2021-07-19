@@ -2,8 +2,6 @@
 
 
 
-
-
 body {
 	text-align: center;
 	padding-bottom: 5rem;
@@ -140,11 +138,15 @@ div.right1{
 
 
 .TEXT{
-	width:30%;
+	width:22%;
+}
+
+.CATE{
+	width:11%;
 }
 
 .CHECK{
-	width:9%;
+	width:6%;
 }
 
 .PLACE{
@@ -152,7 +154,7 @@ div.right1{
 }
 
 .DATE{
-	width:8%;
+	width:7.5%;
 	padding : 10px;
 }
 .TIME{

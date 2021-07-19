@@ -20,6 +20,8 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 	List<Task> findByCategoryCode(Integer categoryCode);
 	List<Task> deleteByUserCode(Integer code);
 	List<Task> deleteByCategoryCode(Integer code);
+	
+
 
 
 }
