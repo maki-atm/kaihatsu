@@ -10,31 +10,35 @@
 <body>
 <span th:replace="menu"></span>
 
-<div style="display:inline-flex">
+
 	<h2 th:text="${#dates.format(date, 'M月d日')}+'のタスク'" ></h2>
-</div>
 
 
-	<font color="orange">
+
+
 <span th:replace="time"></span>
 <br>
-</font>
-	<div class="right">
-	<form action="/todo" method="post">
-	<select name="sort">
-	<option value="DATE">期限の早い順</option>
-	<option value="PRIORITY">優先度の高い順</option>
-	</select>
-	<input type="submit" value="並べ替え" class="button">
-	</form>
-	<br>
-	<form action="/search" method="post">
-	<input type="text" name="keyword" th:value="${keyword}">
-	<input type="submit" value="検索" class="button">
-	</form>
-     </div>
 
-     <br>
+	<div class="right1">
+	<form action="/todo/calendar" method="post">
+	<input type="hidden" name="date" th:value="${date}">
+		<select name="sort">
+			<option value="DATE">期限の早い順</option>
+			<option value="PRIORITY">優先度の高い順</option>
+		</select>
+		<input type="submit" value=" 並べ替え " class="button">
+	</form>
+
+	<form action="/todo/calendar/search" method="post">
+	<input type="hidden" name="date" th:value="${date}">
+	<input type="text" name="keyword" th:value="${keyword}">
+	<input type="submit" value=" 検索 " class="button">
+	</form>
+    </div>
+
+
+	<br>
+
 
 	<table border="1">
 		<tr><th class="CHECK">実行済み</th>
@@ -54,12 +58,14 @@
 			<form th:action="'/todo/'+${task.code}+'/completed'">
 				<td ><input type="submit" value=" ✓ " class="button"></td>
 			</form>
-				<td  th:text="${task.text}" id="TEXT"></td>
-			    <td th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
-			    <td th:text="${#dates.format(task.time, 'H:mm')}"></td>
+			  	<td th:text="${session.categoryMap.get(__${task.categoryCode}__)}"></td>
+				 <td ><a th:text="${task.text}" id="TEXT"></a><font th:style="'color:'+${task.color}">●</font >  </td>
+			    <td class="DATE" th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
+			    <td class="TIME" th:text="${#dates.format(task.time, 'H:mm')}"></td>
 
 				<td th:text="${task.place}"></td>
                 <td  th:text="${task.priority}"></td>
+				<td th:text="${task.remarks}"></td>
 			<form th:action="'/todo/'+${task.code}+'/edit'">
 				<td ><input type="submit" value="変更" class="button"></td>
 			</form>
@@ -71,6 +77,8 @@
 		</tr>
 		</span>
 	</table>
+
+
 	<br>
 
 
