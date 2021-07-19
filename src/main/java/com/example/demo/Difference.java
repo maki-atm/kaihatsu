@@ -69,33 +69,5 @@ public class Difference {
 		return list;
 	}
 
-//	//残り日数を格納する配列を返すメソッド
-//		public ArrayList<Difference> getDifDay2(List<Category> t) {
-//
-//			Difference d = null;
-//
-//			//今日の日付取得
-//			long miliseconds = System.currentTimeMillis();
-//			Date today = new Date(miliseconds);
-//
-//			ArrayList<Difference> list =  new ArrayList<>();
-//
-//			for (Category i : t) {
-//				LocalDate localD = i.getDate().toLocalDate();
-//				LocalDate localT = today.toLocalDate();
-//				dif = (ChronoUnit.DAYS.between(localT, localD));
-//				if (dif >= 0) {
-//					bl = true;
-//					d = new Difference(dif, bl);
-//					list.add(d);
-//				} else {
-//					dif=Math.abs(dif);
-//					bl = false;
-//					d = new Difference(dif, bl);
-//					list.add(d);
-//				}
-//
-//			}
-//			return list;
-//		}
+
 }

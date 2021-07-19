@@ -22,6 +22,8 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 	List<Task> deleteByCategoryCode(Integer code);
 	List<Task> findByUserCodeOrderByCategoryCodeAscDateAscTimeAsc(Integer code);
 	List<Task> findByUserCodeOrderByCategoryCodeAscPriNumAsc(Integer code);
+	List<Task> findByCategoryCodeOrderByDateAscTimeAsc(Integer categoryCode);
+	List<Task> findByCategoryCodeOrderByPriNumAsc(Integer categoryCode);
 
 	//CalendaerController
 	List<Task> findByUserCodeAndDateOrderByTimeAsc(Integer userCode,Date date);

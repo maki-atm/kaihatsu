@@ -113,7 +113,7 @@ public class CategoryController {
 		}
 
 		//カテゴリー別の一覧表示
-			@PostMapping("/category/list")
+			@RequestMapping("/category/list")
 			public ModelAndView List(
 					ModelAndView mv,
 					@RequestParam("code")int categoryCode
@@ -162,12 +162,12 @@ public class CategoryController {
 
 
 				User u = (User) session.getAttribute("userInfo");
-				List<Category> t =null;
+				List<Task> t =null;
 
 				if (sort.equals("DATE")) {
-					t = categoryRepository.findByCategoryCodeOrderByDateAscTimeAsc(categoryCode);
+					t = taskRepository.findByCategoryCodeOrderByDateAscTimeAsc(categoryCode);
 				} else if (sort.equals("PRIORITY")) {
-					t= categoryRepository.findByCategoryCodeOrderByPriNumAsc(categoryCode);
+					t= taskRepository.findByCategoryCodeOrderByPriNumAsc(categoryCode);
 				}
 
 
@@ -183,10 +183,10 @@ public class CategoryController {
 				int countTask = d.size();
 
 				//残り日数のリスト取得
-//				ArrayList<Difference> list = difference.getDifDay(t);
+				ArrayList<Difference> list = difference.getDifDay(t);
 
 				//Thymeleafで表示する準備
-//				mv.addObject("list", list);
+			mv.addObject("list", list);
 				mv.addObject("countTask", countTask);
 
 				mv.addObject("categoryCode", categoryCode);
