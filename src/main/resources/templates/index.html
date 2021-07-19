@@ -15,6 +15,11 @@
 <span th:replace="time" id="body"></span>
 <br>
 </font>
+<div class="countTask">
+	<a th:text="本日までのタスクは" ></a>
+	<font color="blue" size="20" th:text="${countTask}"></font>
+	<a th:text=" 件です"></a></div>
+	<br>
 
 	<form action="/todo" method="post" id="inline">
 		<select name="sort" th:selected="${sort}">
@@ -30,19 +35,7 @@
 		<input type="text" name="keyword" th:value="${keyword}" placeholder="search for task">
 		<input type="submit" value=" 検索 " class="button">
 	</form>
-
-
-
-	<div class="countTask">
-	<a th:text="本日までのタスクは" ></a>
-	<font color="blue" size="20" th:text="${countTask}"></font>
-	<a th:text=" 件です"></a></div>
-	<br>
-
-
-
-
-
+<br><br>
 
 <div style="display:inline-flex">
 

@@ -19,7 +19,7 @@
 </tr>
 		<span  th:each="c:${cate}">
 		<tr >
-        <td th:text="${c.categoryName}"></td><td><form action="/category/list" method="get"><input type="submit" value="表示" class="button"><input type="hidden" name="code" th:value="${c.categoryCode}"></form></td>
+        <td th:text="${c.categoryName}"></td><td><form action="/category/list" method="get"><input type="submit" value="　　表示　　" class="button"><input type="hidden" name="code" th:value="${c.categoryCode}"></form></td>
         <td>
 
 
@@ -30,7 +30,7 @@ function f() {
 </script>
 <form onSubmit="f();" action="/category/delete" >
     <input type="hidden" th:value="${c.categoryCode}" name="categoryCode">
-	<input type="submit" value="削除" class="button">
+	<input type="submit" value="　　削除　　" class="button">
 </form>
 
          </td>

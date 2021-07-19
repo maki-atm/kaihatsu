@@ -19,7 +19,7 @@
     <th>カテゴリー　<font style="color:red">※</font></th>
     <td>
     <select name="category" id="select">
-    <option th:each="c:${session.categoryMap}" th:value="${c.key}" th:text="${c.value}"></option>
+    <option th:each="c:${session.categoryMap}" th:value="${c.key}" th:text="${c.value}" th:selected="${t.categoryCode == c.key}"></option>
     </select></td>
     </tr>
 

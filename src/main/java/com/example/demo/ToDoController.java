@@ -38,11 +38,6 @@ public class ToDoController {
 	@Autowired
 	Difference difference;
 
-	@Autowired
-	CategoryController CateC;
-
-	@Autowired
-	CalendarController CalC;
 
 
 	//タスク情報一覧表示
@@ -62,11 +57,6 @@ public class ToDoController {
 
 		//残り日数のリスト取得
 		ArrayList<Difference> list = difference.getDifDay(t);
-
-//		List<Category> cate=categoryRepository.findAll();
-
-//		//Thymeleafで表示する準備
-//		mv.addObject("cate", cate);
 
 
 		mv.addObject("list", list);
@@ -315,8 +305,6 @@ public class ToDoController {
 		}
 
 
-		//	Time time = Time.valueOf(strTime);
-
 		//ユーザ情報のセッションを受け取る
 		User u = (User) session.getAttribute("userInfo");
 
@@ -403,10 +391,6 @@ public class ToDoController {
 				t = completedRepository.findByUserCodeOrderByCategoryCodeAscPriNumAsc(u.getCode());
 			}
 
-
-
-
-		//	mv.addObject("cate", cate);
 
 			//Thmeleafで表示する準備
 			mv.addObject("t", t);
