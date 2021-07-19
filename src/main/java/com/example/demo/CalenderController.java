@@ -55,11 +55,11 @@ public class CalenderController {
 		List<Task> td =taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),date);
 
 		//登録されているカテゴリー取得
-		List<Category> cate=categoryRepository.findAll();
+	//	List<Category> cate=categoryRepository.findAll();
 
 
 		//Thymeleafで表示する準備
-		mv.addObject("cate", cate);
+	//	mv.addObject("cate", cate);
 		mv.addObject("td", td);
 		mv.addObject("date",date);
 		mv.setViewName("calDate");
@@ -81,11 +81,7 @@ public class CalenderController {
 		User u = (User) session.getAttribute("userInfo");
 		td = taskRepository.findByUserCodeAndTextLike(u.getCode(), "%" + keyword + "%");
 
-		//登録されているカテゴリー取得
-		List<Category> cate=categoryRepository.findAll();
 
-
-		mv.addObject("cate", cate);
 		mv.addObject("td", td);
 		mv.addObject("keyword", keyword);
 		mv.addObject("date",date);
@@ -115,11 +111,9 @@ public class CalenderController {
 			td = taskRepository.findByUserCodeAndDateOrderByCategoryCodeAscPriNumAsc(u.getCode(),date);
 		}
 
-		//登録されているカテゴリー取得
-		List<Category> cate=categoryRepository.findAll();
+
 
 		//Thmeleafで表示する準備
-		mv.addObject("cate", cate);
 		mv.addObject("td", td);
 		mv.addObject("date",date);
 

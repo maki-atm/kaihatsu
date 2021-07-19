@@ -104,10 +104,6 @@ public class CategoryController {
 				}
 
 
-
-
-
-
 			return mv;
 
 		}
@@ -131,7 +127,7 @@ public class CategoryController {
 				Date today = new Date(miliseconds);
 
 				//今日のタスク件数取得
-				List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(), today);
+				List<Task> d = taskRepository.findByUserCodeAndDateAndCategoryCode(u.getCode(), today,categoryCode);
 				int countTask = d.size();
 
 				//残り日数のリスト取得
@@ -170,16 +166,12 @@ public class CategoryController {
 					t= taskRepository.findByCategoryCodeOrderByPriNumAsc(categoryCode);
 				}
 
-
-
-
-
 				//今日の日付取得
 				long miliseconds = System.currentTimeMillis();
 				Date today = new Date(miliseconds);
 
 				//今日のタスク件数取得
-				List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(), today);
+				List<Task> d = taskRepository.findByUserCodeAndDateAndCategoryCode(u.getCode(), today,categoryCode);
 				int countTask = d.size();
 
 				//残り日数のリスト取得
