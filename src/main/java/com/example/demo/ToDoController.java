@@ -228,6 +228,7 @@ public class ToDoController {
 		if (!record.isEmpty()) {
 			taskRepository.deleteById(code);
 		}
+		
 
 		//実行済みタスク一覧表示
 		return displayTask(mv);
@@ -319,7 +320,7 @@ public class ToDoController {
 
 	}
 
-	//実行済みタスクへ移動
+	//実行済みタスクへ移動　★
 	@RequestMapping("/todo/{task.code}/completed")
 	public ModelAndView compTask(
 			ModelAndView mv,
