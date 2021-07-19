@@ -109,6 +109,10 @@ public class CalenderController {
 			td = taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),date);
 		} else if (sort.equals("PRIORITY")) {
 			td = taskRepository.findByUserCodeAndDateOrderByPriNumAsc(u.getCode(),date);
+		}else if(sort.equals("CATEGORY_D")) {
+			td = taskRepository.findByUserCodeAndDateOrderByCategoryCodeAscDateAscTimeAsc(u.getCode(),date);
+		}else if(sort.equals("CATEGORY_P")) {
+			td = taskRepository.findByUserCodeAndDateOrderByCategoryCodeAscPriNumAsc(u.getCode(),date);
 		}
 
 		//登録されているカテゴリー取得
