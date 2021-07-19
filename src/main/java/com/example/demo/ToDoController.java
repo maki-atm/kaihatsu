@@ -225,6 +225,7 @@ public class ToDoController {
 
 	}
 
+
 	//タスク一覧から削除
 	@PostMapping("/todo/delete")
 	public ModelAndView addTask(
