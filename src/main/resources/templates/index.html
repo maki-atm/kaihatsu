@@ -25,7 +25,7 @@
 		</select>
 		<input type="submit" value=" 並べ替え " class="button">
 	</form>
-　　
+　　　　　
 	<form action="/search" method="post" id="inline">
 		<input type="text" name="keyword" th:value="${keyword}" placeholder="search for task">
 		<input type="submit" value=" 検索 " class="button">
@@ -79,7 +79,7 @@
 				<td><input type="submit" value="✓" class="button"></td>
 			</form>
                 <td  th:text="${session.categoryMap.get(__${task.categoryCode}__)}"></td>
-                <td ><a th:text="${task.text}" id="TEXT"></a><font th:style="'color:'+${task.color}">●</font >  </td>
+                <td ><a th:text="${task.text}" id="TEXT"></a><font th:style="'color:'+${task.color}"> ●</font >  </td>
 			    <td class="DATE" th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
 
 			    <td class="TIME" th:text="${#dates.format(task.time, 'HH:mm')}"></td>

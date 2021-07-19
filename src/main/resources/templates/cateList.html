@@ -8,6 +8,17 @@
 <span th:replace="menu"></span>
 <h2 th:text="${session.categoryMap.get(__${categoryCode}__)}"></h2>
 <span th:replace="time" id="body"></span>
+<br>
+<div class="countTask">
+	<a th:text="本日までの"></a>
+	<a th:text="${session.categoryMap.get(__${categoryCode}__)}"></a>
+	<a th:text="タスクは" ></a>
+	<font color="blue" size="20" th:text="${countTask}"></font>
+	<a th:text=" 件です"></a></div>
+	<br>
+
+
+
 
 <form action="/category/list" method="post">
 	<select name="sort">
@@ -17,15 +28,8 @@
 	<input type="submit" value=" 並べ替え " class="button">
     <input type="hidden" name="code" th:value="${categoryCode}">
 	</form>
-
-	<div class="countTask">
-	<a th:text="本日までの"></a>
-	<a th:text="${session.categoryMap.get(__${categoryCode}__)}"></a>
-	<a th:text="タスクは" ></a>
-	<font color="blue" size="20" th:text="${countTask}"></font>
-	<a th:text=" 件です"></a></div>
-	<br>
-	<div style="display:inline-flex">
+<br>
+<div style="display:inline-flex">
 
 	<table id="t">
 		<tr><th>残り日数</th></tr>
@@ -56,11 +60,11 @@
 		<span  th:each="task:${t}">
 		<tr >
 
-			<form th:action="'/todo/'+${task.code}+'/completed'" method="post">
+			<form th:action="'/category/'+${task.code}+'/completed'" method="post">
 				<td><input type="submit" value="✓" class="button"></td>
 			</form>
                  <td  th:text="${session.categoryMap.get(__${task.categoryCode}__)}"></td>
-                <td  th:text="${task.text}" id="TEXT" th:style="'color:'+${task.color}" ></td>
+                <td ><span th:text="${task.text}"></span><font th:style="'color:'+${task.color}"> ●</font ></td>
 			    <td class="DATE" th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
 
 			    <td class="TIME" th:text="${#dates.format(task.time, 'HH:mm')}"></td>
@@ -71,9 +75,9 @@
 				<td ><input type="submit" value="編集" class="button"></td>
 			</form>
 
-			<form action="/todo/delete" method="post">
+			<form action="/category/task/delete" method="post">
 				<input type="hidden" name="code" th:value="${task.code}">
-				<input type="hidden" name="date" th:value="${task.date}">
+				<input type="hidden" name="cateCode" th:value="${task.categoryCode}">
 				<td ><input type="submit" value="×" class="button"></td>
 			</form>
 		</tr>

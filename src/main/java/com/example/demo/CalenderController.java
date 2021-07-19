@@ -121,6 +121,7 @@ public class CalenderController {
 		//Thmeleafで表示する準備
 		mv.addObject("td", td);
 		mv.addObject("date",date);
+		mv.addObject("sort", sort);
 
 		//フォワード
 		mv.setViewName("calDate");

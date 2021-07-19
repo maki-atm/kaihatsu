@@ -332,7 +332,6 @@ public class ToDoController {
 	@PostMapping("/todo/{task.code}/completed")
 	public ModelAndView compTask(
 			ModelAndView mv,
-			@RequestParam("flag") int flag,
 			@PathVariable(name = "task.code") int code) {
 		Task t = null;
 

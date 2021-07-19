@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -189,6 +191,52 @@ public class CategoryController {
 				mv.setViewName("cateList");
 
 				return mv;
+
+			}
+
+			//タスク一覧から削除
+			@PostMapping("/category/task/delete")
+			public ModelAndView addTask(
+					ModelAndView mv,
+					@RequestParam("code") int code,
+					@RequestParam("cateCode") int cateCode) {
+				//指定したコードのユーザ情報を削除
+				Optional<Task> record = taskRepository.findById(code);
+
+				if (!record.isEmpty()) {
+					taskRepository.deleteById(code);
+				}
+
+				return List(mv,cateCode);
+			}
+
+
+			//実行済みタスクへ移動
+			@PostMapping("/category/{task.code}/completed")
+			public ModelAndView compTask(
+					ModelAndView mv,
+					@PathVariable(name = "task.code") int code) {
+				Task t = null;
+
+				//指定したコードのタスク情報を取得
+				Optional<Task> recode = taskRepository.findById(code);
+
+				if (!recode.isEmpty()) {
+					t = recode.get();
+				}
+
+				Completed comp = new Completed(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),
+						t.getRemarks(), t.getColor(), t.getPriNum(), t.getUserCode(),t.getCategoryCode());
+
+				completedRepository.saveAndFlush(comp);
+
+				//指定したコードのユーザ情報を削除
+				Optional<Task> record = taskRepository.findById(code);
+
+				if (!record.isEmpty()) {
+					taskRepository.deleteById(code);
+				}
+				return  List(mv,t.getCategoryCode());
 
 			}
 

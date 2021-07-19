@@ -22,11 +22,11 @@
 
 	<form action="/todo/calendar" method="post" id="inline">
 	<input type="hidden" name="date" th:value="${date}">
-		<select name="sort">
-			<option value="DATE">期限の早い順</option>
-			<option value="PRIORITY">優先度の高い順</option>
-			<option value="CATEGORY_D">カテゴリー別（期限の早い順）</option>
-	        <option value="CATEGORY_P">カテゴリー別（優先度の高い順）</option>
+		<select name="sort" th:selected="${sort}">
+			<option value="DATE" th:selected="${sort}==DATE">期限の早い順</option>
+			<option value="PRIORITY" th:selected="${sort}==PRIORITY">優先度の高い順</option>
+			<option value="CATEGORY_D" th:selected="${sort}==CATEGORY_D">カテゴリー別（期限の早い順）</option>
+	        <option value="CATEGORY_P" th:selected="${sort}==CATEGORY_P">カテゴリー別（優先度の高い順）</option>
 		</select>
 		<input type="submit" value=" 並べ替え " class="button">　　　
 	</form>
@@ -38,7 +38,7 @@
 	</form>
 
 	<br>
-
+	<br>
 
 	<table border="1">
 		<tr><th class="CHECK">実行済み</th>
@@ -55,12 +55,11 @@
 <span  th:each="task:${td}">
 		<tr  >
 
-			<form th:action="'/calendar/'+${task.code}+'/completed'">
-			<input type="hidden" name="code" th:value="${date}">
+			<form th:action="'/calendar/'+${task.code}+'/completed'" method="post">
 				<td ><input type="submit" value=" ✓ " class="button"></td>
 			</form>
 			  	<td th:text="${session.categoryMap.get(__${task.categoryCode}__)}"></td>
-				 <td ><a th:text="${task.text}" id="TEXT"></a><font th:style="'color:'+${task.color}">●</font >  </td>
+				 <td ><a th:text="${task.text}" id="TEXT"></a><font th:style="'color:'+${task.color}"> ●</font >  </td>
 			    <td class="DATE" th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
 			    <td class="TIME" th:text="${#dates.format(task.time, 'H:mm')}"></td>
 
@@ -71,8 +70,9 @@
 				<td ><input type="submit" value="変更" class="button"></td>
 			</form>
 
-			<form action="/todo/delete" method="post">
+			<form action="/calendar/delete" method="post">
 				<input type="hidden" name="code" th:value="${task.code}">
+				<input type="hidden" name="date" th:value="${task.date}">
 				<td ><input type="submit" value=" × " class="button"></td>
 			</form>
 		</tr>
