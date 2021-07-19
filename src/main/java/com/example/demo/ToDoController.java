@@ -458,38 +458,5 @@ public class ToDoController {
 	}
 
 
-	//残り日数を格納する配列を返すメソッド
-//	private ArrayList<Difference> getDifDay(List<Task> t) {
-//
-//		Difference d = new Difference();
-//		//今日の日付取得
-//			long miliseconds = System.currentTimeMillis();
-//			Date today = new Date(miliseconds);
-//
-//		ArrayList<Difference> list = null;
-//		long dif = 0;
-//		for (Task i : t) {
-//			//i.getDate();
-//			LocalDate localD = i.getDate().toLocalDate();
-//			LocalDate localT = today.toLocalDate();
-//			d.setDif(ChronoUnit.DAYS.between(localT, localD));
-//			if(dif>=0) {
-//				Difference de=new Difference(d.getDif(),"日");
-//
-//				//String strDif= String.valueOf(dif);
-//				list.add(de);
-//			}else {
-//
-//			}
-//
-//
-//
-//
-//		}
-//		return list;
-//	}
-
-
-
 
 }
