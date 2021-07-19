@@ -116,7 +116,7 @@ public class CategoryController {
 					) {
 
 
-				List<Task>t=taskRepository.findByCategoryCode(categoryCode);
+				List<Task>t=taskRepository.findByCategoryCodeOrderByDateAscTimeAsc(categoryCode);
 
 				List<Category> cate=categoryRepository.findAll();
 
