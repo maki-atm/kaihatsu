@@ -76,17 +76,17 @@ public class CalenderController {
 			@RequestParam("keyword") String keyword,
 			@RequestParam("date") Date date) {
 
-		List<Task> task = null;
+		List<Task> td = null;
 
 		User u = (User) session.getAttribute("userInfo");
-		task = taskRepository.findByUserCodeAndTextLike(u.getCode(), "%" + keyword + "%");
+		td = taskRepository.findByUserCodeAndTextLike(u.getCode(), "%" + keyword + "%");
 
 		//登録されているカテゴリー取得
 		List<Category> cate=categoryRepository.findAll();
 
 
 		mv.addObject("cate", cate);
-		mv.addObject("t", task);
+		mv.addObject("td", td);
 		mv.addObject("keyword", keyword);
 		mv.addObject("date",date);
 
@@ -103,12 +103,12 @@ public class CalenderController {
 			@RequestParam("date") Date date) {
 
 		User u = (User) session.getAttribute("userInfo");
-		List<Task> t = null;
+		List<Task> td = null;
 
 		if (sort.equals("DATE")) {
-			t = taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),date);
+			td = taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),date);
 		} else if (sort.equals("PRIORITY")) {
-			t = taskRepository.findByUserCodeOrderByPriNumAsc(u.getCode());
+			td = taskRepository.findByUserCodeAndDateOrderByPriNumAsc(u.getCode(),date);
 		}
 
 		//登録されているカテゴリー取得
@@ -116,7 +116,7 @@ public class CalenderController {
 
 		//Thmeleafで表示する準備
 		mv.addObject("cate", cate);
-		mv.addObject("t", t);
+		mv.addObject("td", td);
 		mv.addObject("date",date);
 
 		//フォワード

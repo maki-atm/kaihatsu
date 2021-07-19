@@ -16,7 +16,6 @@
 <br>
 </font>
 
-    <div class="right1">
 	<form action="/todo" method="post" id="right1">
 		<select name="sort">
 			<option value="DATE">期限の早い順</option>
@@ -24,14 +23,14 @@
 			<option value="CATEGORY_D">カテゴリー別（期限の早い順）</option>
 	        <option value="CATEGORY_P">カテゴリー別（優先度の高い順）</option>
 		</select>
-		<input type="submit" value=" 並べ替え " class="button">　　
+		<input type="submit" value=" 並べ替え " class="button">
 	</form>
 
 	<form action="/search" method="post" id="right1">
 		<input type="text" name="keyword" th:value="${keyword}" placeholder="search for task">
-		<input type="submit" value=" 検索 " class="button">　　
+		<input type="submit" value=" 検索 " class="button">
 	</form>
-	</div>
+
 
 
 	<div class="countTask">
