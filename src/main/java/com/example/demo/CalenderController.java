@@ -52,7 +52,7 @@ public class CalenderController {
 		strDate = strDate.replace("/","-");
 		Date date = Date.valueOf(strDate);
 
-		List<Task> td =taskRepository.findByUserCodeAndDate(u.getCode(),date);
+		List<Task> td =taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),date);
 
 		//登録されているカテゴリー取得
 		List<Category> cate=categoryRepository.findAll();
@@ -106,7 +106,7 @@ public class CalenderController {
 		List<Task> t = null;
 
 		if (sort.equals("DATE")) {
-			t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
+			t = taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),date);
 		} else if (sort.equals("PRIORITY")) {
 			t = taskRepository.findByUserCodeOrderByPriNumAsc(u.getCode());
 		}
