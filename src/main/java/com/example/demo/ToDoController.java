@@ -119,9 +119,9 @@ public class ToDoController {
 		} else if (sort.equals("PRIORITY")) {
 			t = taskRepository.findByUserCodeOrderByPriNumAsc(u.getCode());
 		}else if(sort.equals("CATEGORY_D")) {
-			t = taskRepository.findByUserCodeOrderByCategoryAscCodeDateAscTimeAsc(u.getCode());
+			t = taskRepository.findByUserCodeOrderByCategoryCodeAscDateAscTimeAsc(u.getCode());
 		}else if(sort.equals("CATEGORY_P")) {
-			t = taskRepository.findByUserCodeOrderByCategoryAscCodePriNumAsc(u.getCode());
+			t = taskRepository.findByUserCodeOrderByCategoryCodeAscPriNumAsc(u.getCode());
 		}
 
 		//今日の日付取得
@@ -386,9 +386,9 @@ public class ToDoController {
 			} else if (sort.equals("PRIORITY")) {
 				t= completedRepository.findByUserCodeOrderByPriNumAsc(u.getCode());
 			}else if(sort.equals("CATEGORY_D")) {
-				t = completedRepository.findByUserCodeOrderByCategoryAscCodeDateAscTimeAsc(u.getCode());
+				t = completedRepository.findByUserCodeOrderByCategoryCodeAscDateAscTimeAsc(u.getCode());
 			}else if(sort.equals("CATEGORY_P")) {
-				t = completedRepository.findByUserCodeOrderByCategoryAscCodePriNumAsc(u.getCode());
+				t = completedRepository.findByUserCodeOrderByCategoryCodeAscPriNumAsc(u.getCode());
 			}
 
 

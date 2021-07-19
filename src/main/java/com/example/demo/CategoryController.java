@@ -165,12 +165,12 @@ public class CategoryController {
 				List<Category> t =null;
 
 				if (sort.equals("DATE")) {
-					t = categoryRepository.findByUserCodeAndCategoryCodeOrderByDateAscTimeAsc(u.getCode(),categoryCode);
+					t = categoryRepository.findByCategoryCodeOrderByDateAscTimeAsc(categoryCode);
 				} else if (sort.equals("PRIORITY")) {
-					t= categoryRepository.findByUserCodeAndCategoryCodeOrderByPriNumAsc(u.getCode(),categoryCode);
+					t= categoryRepository.findByCategoryCodeOrderByPriNumAsc(categoryCode);
 				}
 
-				
+
 
 
 
@@ -183,10 +183,10 @@ public class CategoryController {
 				int countTask = d.size();
 
 				//残り日数のリスト取得
-				ArrayList<Difference> list = difference.getDifDay(t);
+//				ArrayList<Difference> list = difference.getDifDay(t);
 
 				//Thymeleafで表示する準備
-				mv.addObject("list", list);
+//				mv.addObject("list", list);
 				mv.addObject("countTask", countTask);
 
 				mv.addObject("categoryCode", categoryCode);

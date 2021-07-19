@@ -13,8 +13,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 	List<Category> deleteByCategoryCode(int userCode);
 	List<Category> deleteByUserCode(int userCode);
 	List<Category> findByCategoryCode(int categoryCode);
-	List<Category>findByUserCodeAndCategoryCodeOrderByDateAscTimeAsc (int userCode ,int categoryCode);
-	List<Category> findByUserCodeAndCategoryCodeOrderByPriNumAsc(int userCode ,int categoryCode);
+	List<Category>findByCategoryCodeOrderByDateAscTimeAsc (int categoryCode);
+	List<Category> findByCategoryCodeOrderByPriNumAsc(int categoryCode);
 
 
 
