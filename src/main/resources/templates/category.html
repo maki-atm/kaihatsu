@@ -19,7 +19,7 @@
 </tr>
 		<span  th:each="c:${cate}">
 		<tr >
-        <td th:text="${c.categoryName}"></td><td><form action="/category/list" method="post"><input type="submit" value="表示" class="button"><input type="hidden" name="code" th:value="${c.categoryCode}"></form></td>
+        <td th:text="${c.categoryName}"></td><td><form action="/category/list" method="get"><input type="submit" value="表示" class="button"><input type="hidden" name="code" th:value="${c.categoryCode}"></form></td>
         <td>
 
 
