@@ -228,7 +228,7 @@ public class ToDoController {
 		if (!record.isEmpty()) {
 			taskRepository.deleteById(code);
 		}
-		
+
 
 		//実行済みタスク一覧表示
 		return displayTask(mv);
@@ -305,7 +305,6 @@ public class ToDoController {
 			time = Time.valueOf(strTime + ":00");
 		}
 
-		//Time型に変換
 
 		//	Time time = Time.valueOf(strTime);
 
