@@ -5,7 +5,7 @@
 body {
 	text-align: center;
 	padding-bottom: 5rem;
-	padding-top: 2rem;
+	padding-top: 1rem;
 }
 
 h1{
@@ -81,6 +81,12 @@ table {
 }
 
 #kome{
+	font-size:11pt;
+}
+
+#category{
+	width:300px;
+	height:25px;
 	font-size:11pt;
 }
 

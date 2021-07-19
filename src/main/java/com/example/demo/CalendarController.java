@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class CalenderController {
+public class CalendarController {
 
 	@Autowired
 	HttpSession session;
@@ -35,17 +35,17 @@ public class CalenderController {
 
 
 	//カレンダー表示
-	@RequestMapping("/todo/calender")
+	@RequestMapping("/todo/calendar")
 	public ModelAndView goCalendar(
 			ModelAndView mv) {
 
-		mv.setViewName("calender");
+		mv.setViewName("calendar");
 		return mv;
 
 	}
 
 	//日付ごとのタスク表示
-	@GetMapping("/todo/calender/day")
+	@GetMapping("/todo/calendar/day")
 	public ModelAndView CalendarDate(
 			@RequestParam("date") String strDate,
 			ModelAndView mv) {
@@ -59,12 +59,9 @@ public class CalenderController {
 
 		List<Task> td =taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),date);
 
-		//登録されているカテゴリー取得
-	//	List<Category> cate=categoryRepository.findAll();
-
 
 		//Thymeleafで表示する準備
-	//	mv.addObject("cate", cate);
+
 		mv.addObject("td", td);
 		mv.addObject("date",date);
 		mv.setViewName("calDate");

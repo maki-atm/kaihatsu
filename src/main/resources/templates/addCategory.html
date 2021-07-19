@@ -8,9 +8,11 @@
 <body>
 <span th:replace="menu"></span>
 <h2>カテゴリー登録</h2>
+<br>
 <font color="red" th:text="${msg}"></font>
+<br>
 <form action="/todo/category" method="post">
-<input type="text" name="category">
+<input type="text" name="category" id="category">
 
 <input type="submit" value="　登録　" class="button">
 </form>

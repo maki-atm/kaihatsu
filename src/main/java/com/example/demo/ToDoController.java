@@ -42,7 +42,7 @@ public class ToDoController {
 	CategoryController CateC;
 
 	@Autowired
-	CalenderController CalC;
+	CalendarController CalC;
 
 
 	//タスク情報一覧表示

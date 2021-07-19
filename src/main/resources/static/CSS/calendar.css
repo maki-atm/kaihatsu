@@ -1,17 +1,11 @@
 @charset "UTF-8";
 
 
-.Highlighted a{
-   background-color : Green !important;
-   background-image :none !important;
-   color: White !important;
-   font-weight:bold !important;
-   font-size: 12pt;
-}
-
 
 body {
 	text-align: center;
+	padding-bottom: 5rem;
+	padding-top: 1rem;
 }
 
 h1{
