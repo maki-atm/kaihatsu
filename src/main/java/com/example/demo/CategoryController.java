@@ -152,6 +152,53 @@ public class CategoryController {
 
 			}
 
+			//カテゴリー別の一覧表示並べ替え
+			@PostMapping("/category/list")
+			public ModelAndView List(
+					ModelAndView mv,
+					@RequestParam("code")int categoryCode,
+					@RequestParam("sort") String sort
+					) {
+
+
+				User u = (User) session.getAttribute("userInfo");
+				List<Category> t =null;
+
+				if (sort.equals("DATE")) {
+					t = categoryRepository.findByUserCodeAndCategoryCodeOrderByDateAscTimeAsc(u.getCode(),categoryCode);
+				} else if (sort.equals("PRIORITY")) {
+					t= categoryRepository.findByUserCodeAndCategoryCodeOrderByPriNumAsc(u.getCode(),categoryCode);
+				}
+
+				
+
+
+
+				//今日の日付取得
+				long miliseconds = System.currentTimeMillis();
+				Date today = new Date(miliseconds);
+
+				//今日のタスク件数取得
+				List<Task> d = taskRepository.findByUserCodeAndDate(u.getCode(), today);
+				int countTask = d.size();
+
+				//残り日数のリスト取得
+				ArrayList<Difference> list = difference.getDifDay(t);
+
+				//Thymeleafで表示する準備
+				mv.addObject("list", list);
+				mv.addObject("countTask", countTask);
+
+				mv.addObject("categoryCode", categoryCode);
+
+				mv.addObject("t",t);
+
+				mv.setViewName("cateList");
+
+				return mv;
+
+			}
+
 			//カテゴリーの削除
 			@RequestMapping("/category/delete")
 			@Transactional

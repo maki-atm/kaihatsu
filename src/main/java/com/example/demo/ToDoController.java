@@ -118,6 +118,10 @@ public class ToDoController {
 			t = taskRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
 		} else if (sort.equals("PRIORITY")) {
 			t = taskRepository.findByUserCodeOrderByPriNumAsc(u.getCode());
+		}else if(sort.equals("CATEGORY_D")) {
+			t = taskRepository.findByUserCodeOrderByCategoryAscCodeDateAscTimeAsc(u.getCode());
+		}else if(sort.equals("CATEGORY_P")) {
+			t = taskRepository.findByUserCodeOrderByCategoryAscCodePriNumAsc(u.getCode());
 		}
 
 		//今日の日付取得
@@ -367,6 +371,40 @@ public class ToDoController {
 		return mv;
 
 	}
+
+	//実行済みタスク並べ替え
+		@PostMapping("/todo/completed")
+		public ModelAndView sortCompTask(
+				ModelAndView mv,
+				@RequestParam("sort") String sort) {
+
+			User u = (User) session.getAttribute("userInfo");
+			List<Completed> t =null;
+
+			if (sort.equals("DATE")) {
+				t = completedRepository.findByUserCodeOrderByDateAscTimeAsc(u.getCode());
+			} else if (sort.equals("PRIORITY")) {
+				t= completedRepository.findByUserCodeOrderByPriNumAsc(u.getCode());
+			}else if(sort.equals("CATEGORY_D")) {
+				t = completedRepository.findByUserCodeOrderByCategoryAscCodeDateAscTimeAsc(u.getCode());
+			}else if(sort.equals("CATEGORY_P")) {
+				t = completedRepository.findByUserCodeOrderByCategoryAscCodePriNumAsc(u.getCode());
+			}
+
+
+
+
+		//	mv.addObject("cate", cate);
+
+			//Thmeleafで表示する準備
+			mv.addObject("t", t);
+
+			//compTask.htmlへフォワード
+			mv.setViewName("compTask");
+
+			return mv;
+
+		}
 
 	//実行済みタスク一覧から未実行タスクへ戻す
 	@PostMapping("/todo/{task.code}/completed2")
