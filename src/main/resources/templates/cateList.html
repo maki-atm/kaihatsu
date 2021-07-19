@@ -9,13 +9,13 @@
 <h2 th:text="${session.categoryMap.get(__${categoryCode}__)}"></h2>
 <span th:replace="time" id="body"></span>
 
-<form action="/todo/completed" method="post">
+<form action="/category/list" method="post">
 	<select name="sort">
 	<option value="DATE">期限の早い順</option>
 	<option value="PRIORITY">優先度の高い順</option>
-
 	</select>
 	<input type="submit" value=" 並べ替え " class="button">
+
 	</form>
 
 	<div class="countTask">
