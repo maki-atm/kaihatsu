@@ -149,6 +149,10 @@ div.right1{
 	width:6%;
 }
 
+.CHECK2{
+	width:9%;
+}
+
 .PLACE{
 	width:8%;
 }
@@ -157,7 +161,18 @@ div.right1{
 	width:7.5%;
 	padding : 10px;
 }
+
+.DATE2{
+	width:9%;
+	padding : 0 18px;
+}
+
 .TIME{
+	width:6%;
+	padding : 10px;
+}
+
+.TIME2{
 	width:6%;
 	padding : 10px;
 }

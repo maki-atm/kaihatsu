@@ -17,7 +17,7 @@
 	<option value="DATE">期限の早い順</option>
 	<option value="PRIORITY">優先度の高い順</option>
 	</select>
-	<input type="submit" value="並べ替え" class="button">
+	<input type="submit" value=" 並べ替え " class="button">
 	</form>
      </div>
 
@@ -44,15 +44,15 @@
 			</form>
 			 <td  th:text="${session.categoryMap.get(__${task.categoryCode}__)}"></td>
 				<td ><a th:text="${task.text}"></a> <font th:style="'color:'+${task.color}">●</font></td>
-			    <td th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
-			    <td th:text="${#dates.format(task.time, 'HH:mm')}"></td>
+			    <td class="DATE2" th:text="${#dates.format(task.date, 'y年M月d日')}"></td>
+			    <td class="TIME2"th:text="${#dates.format(task.time, 'HH:mm')}"></td>
 
 				<td th:text="${task.place}"></td>
                 <td th:text="${task.priority}"></td>
                  <td th:text="${task.remarks}"></td>
 			<form action="/todo/completed/delete" method="post">
 				<input type="hidden" name="code" th:value="${task.code}">
-				<td ><input type="submit" value="×" class="button"></td>
+				<td ><input type="submit" value=" × " class="button"></td>
 			</form>
 		</tr>
 
