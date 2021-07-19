@@ -19,8 +19,8 @@
 <span th:replace="time"></span>
 <br>
 
-	<div class="right1">
-	<form action="/todo/calendar" method="post" id="right1">
+
+	<form action="/todo/calendar" method="post" id="inline">
 	<input type="hidden" name="date" th:value="${date}">
 		<select name="sort">
 			<option value="DATE">期限の早い順</option>
@@ -31,13 +31,11 @@
 		<input type="submit" value=" 並べ替え " class="button">　　　
 	</form>
 <span>　　　</span>
-	<form action="/todo/calendar/search" method="post" id="right1">
+	<form action="/todo/calendar/search" method="post" id="inline">
 	<input type="hidden" name="date" th:value="${date}">
-	<input type="text" name="keyword" th:value="${keyword}">
+	<input type="text" name="keyword" th:value="${keyword}" placeholder="search for task">
 	<input type="submit" value=" 検索 " class="button">
 	</form>
-    </div>
-
 
 	<br>
 

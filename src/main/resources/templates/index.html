@@ -16,7 +16,7 @@
 <br>
 </font>
 
-	<form action="/todo" method="post" >
+	<form action="/todo" method="post" id="inline">
 		<select name="sort">
 			<option value="DATE">期限の早い順</option>
 			<option value="PRIORITY">優先度の高い順</option>
@@ -26,7 +26,7 @@
 		<input type="submit" value=" 並べ替え " class="button">
 	</form>
 　　
-	<form action="/search" method="post" >
+	<form action="/search" method="post" id="inline">
 		<input type="text" name="keyword" th:value="${keyword}" placeholder="search for task">
 		<input type="submit" value=" 検索 " class="button">
 	</form>
