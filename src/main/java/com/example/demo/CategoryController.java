@@ -184,6 +184,7 @@ public class CategoryController {
 				mv.addObject("categoryCode", categoryCode);
 
 				mv.addObject("t",t);
+				mv.addObject("sort",sort);
 
 				mv.setViewName("cateList");
 

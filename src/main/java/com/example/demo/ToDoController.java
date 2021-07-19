@@ -139,6 +139,7 @@ public class ToDoController {
 		mv.addObject("countTask", countTask);
 		mv.addObject("t", t);
 		mv.addObject("list", list);
+		mv.addObject("sort", sort);
 
 		//index.htmlにフォワード
 		mv.setViewName("index");
@@ -398,6 +399,7 @@ public class ToDoController {
 
 			//Thmeleafで表示する準備
 			mv.addObject("t", t);
+			mv.addObject("sort", sort);
 
 			//compTask.htmlへフォワード
 			mv.setViewName("compTask");
