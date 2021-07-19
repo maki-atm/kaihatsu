@@ -55,7 +55,8 @@
 <span  th:each="task:${td}">
 		<tr  >
 
-			<form th:action="'/todo/'+${task.code}+'/completed'">
+			<form th:action="'/calendar/'+${task.code}+'/completed'">
+			<input type="hidden" name="code" th:value="${date}">
 				<td ><input type="submit" value=" ✓ " class="button"></td>
 			</form>
 			  	<td th:text="${session.categoryMap.get(__${task.categoryCode}__)}"></td>

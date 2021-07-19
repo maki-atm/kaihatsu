@@ -38,6 +38,13 @@ public class ToDoController {
 	@Autowired
 	Difference difference;
 
+	@Autowired
+	CategoryController CateC;
+
+	@Autowired
+	CalenderController CalC;
+
+
 	//タスク情報一覧表示
 	@RequestMapping("/todo")
 	public ModelAndView displayTask(ModelAndView mv) {
@@ -320,10 +327,11 @@ public class ToDoController {
 
 	}
 
-	//実行済みタスクへ移動　★
-	@RequestMapping("/todo/{task.code}/completed")
+	//実行済みタスクへ移動
+	@PostMapping("/todo/{task.code}/completed")
 	public ModelAndView compTask(
 			ModelAndView mv,
+			@RequestParam("flag") int flag,
 			@PathVariable(name = "task.code") int code) {
 		Task t = null;
 
@@ -345,10 +353,13 @@ public class ToDoController {
 		if (!record.isEmpty()) {
 			taskRepository.deleteById(code);
 		}
-
 		return displayTask(mv);
 
 	}
+
+
+
+
 
 	//実行済みタスク一覧表示
 	@RequestMapping("/todo/completed")

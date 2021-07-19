@@ -34,7 +34,7 @@
 
 
 	<div class="countTask">
-	<a th:text="本日のタスクは" ></a>
+	<a th:text="本日までのタスクは" ></a>
 	<font color="blue" size="20" th:text="${countTask}"></font>
 	<a th:text=" 件です"></a></div>
 	<br>
@@ -75,7 +75,7 @@
 		<span  th:each="task:${t}">
 		<tr >
 
-			<form th:action="'/todo/'+${task.code}+'/completed'">
+			<form th:action="'/todo/'+${task.code}+'/completed'" method="post">
 				<td><input type="submit" value="✓" class="button"></td>
 			</form>
                 <td  th:text="${session.categoryMap.get(__${task.categoryCode}__)}"></td>

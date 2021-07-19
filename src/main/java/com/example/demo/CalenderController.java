@@ -2,12 +2,14 @@ package com.example.demo;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +23,9 @@ public class CalenderController {
 
 	@Autowired
 	TaskRepository taskRepository;
+
+	@Autowired
+	CompletedRepository completedRepository;
 
 	@Autowired
 	CategoryRepository categoryRepository;
@@ -41,7 +46,7 @@ public class CalenderController {
 
 	//日付ごとのタスク表示
 	@GetMapping("/todo/calender/day")
-	public ModelAndView ClenderDate(
+	public ModelAndView CalendarDate(
 			@RequestParam("date") String strDate,
 			ModelAndView mv) {
 
@@ -124,5 +129,54 @@ public class CalenderController {
 
 	}
 
+	//タスク一覧から削除
+		@PostMapping("/calendar/delete")
+		public ModelAndView addTask(
+				ModelAndView mv,
+				@RequestParam("code") int code,
+				@RequestParam("date") String date) {
+			//指定したコードのユーザ情報を削除
+			Optional<Task> record = taskRepository.findById(code);
+
+			if (!record.isEmpty()) {
+				taskRepository.deleteById(code);
+			}
+
+			return CalendarDate(date,mv);
+
+		}
+
+
+	//実行済みタスクへ移動
+		@PostMapping("/calendar/{task.code}/completed")
+		public ModelAndView compTask(
+				ModelAndView mv,
+				@PathVariable(name = "task.code") int code) {
+			Task t = null;
+
+			//指定したコードのタスク情報を取得
+			Optional<Task> recode = taskRepository.findById(code);
+
+			if (!recode.isEmpty()) {
+				t = recode.get();
+			}
+
+			Completed comp = new Completed(t.getText(), t.getDate(), t.getTime(), t.getPlace(), t.getPriority(),
+					t.getRemarks(), t.getColor(), t.getPriNum(), t.getUserCode(),t.getCategoryCode());
+
+			completedRepository.saveAndFlush(comp);
+
+			//指定したコードのユーザ情報を削除
+			Optional<Task> record = taskRepository.findById(code);
+
+			if (!record.isEmpty()) {
+				taskRepository.deleteById(code);
+			}
+
+			String date=t.getDate().toString();
+
+			return CalendarDate(date,mv);
+
+		}
 }
 

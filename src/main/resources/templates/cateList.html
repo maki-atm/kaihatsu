@@ -54,7 +54,7 @@
 		<span  th:each="task:${t}">
 		<tr >
 
-			<form th:action="'/todo/'+${task.code}+'/completed'">
+			<form th:action="'/todo/'+${task.code}+'/completed'" method="post">
 				<td><input type="submit" value="✓" class="button"></td>
 			</form>
                  <td  th:text="${session.categoryMap.get(__${task.categoryCode}__)}"></td>
@@ -71,6 +71,7 @@
 
 			<form action="/todo/delete" method="post">
 				<input type="hidden" name="code" th:value="${task.code}">
+				<input type="hidden" name="date" th:value="${task.date}">
 				<td ><input type="submit" value="×" class="button"></td>
 			</form>
 		</tr>
