@@ -19,7 +19,9 @@
 	</form>
 
 	<div class="countTask">
-	<a th:text="このカテゴリー内の本日のタスクは" ></a>
+	<a th:text="本日までの"></a>
+	<a th:text="${session.categoryMap.get(__${categoryCode}__)}"></a>
+	<a th:text="タスクは" ></a>
 	<font color="blue" size="20" th:text="${countTask}"></font>
 	<a th:text=" 件です"></a></div>
 	<br>
