@@ -263,7 +263,17 @@ public class CategoryController {
 					categoryRepository.deleteById(categoryCode);
 				}
 
+				User u = (User) session.getAttribute("userInfo");
 
+				List<Category> cate=categoryRepository.findByUserCode(u.getCode());
+                Map<Integer, String> map = new HashMap<>();
+
+                for(Category cg : cate) {
+		            // MapにListのキーと値を追加
+		            map.put(cg.getCategoryCode(), cg.getCategoryName());
+		        }
+
+                session.setAttribute("categoryMap", map);
 
 
 
