@@ -120,6 +120,7 @@ public class CategoryController {
 
 				List<Task>t=taskRepository.findByCategoryCodeOrderByDateAscTimeAsc(categoryCode);
 
+
 				List<Category> cate=categoryRepository.findAll();
 
 				User u = (User) session.getAttribute("userInfo");
@@ -208,6 +209,7 @@ public class CategoryController {
 				}
 
 				return List(mv,cateCode);
+
 			}
 
 

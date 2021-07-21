@@ -38,6 +38,9 @@ public class ToDoController {
 	@Autowired
 	Difference difference;
 
+	@Autowired
+	CategoryController cateCon;
+
 
 
 	//タスク情報一覧表示
@@ -157,6 +160,7 @@ public class ToDoController {
 
 		map  = (Map<Integer, String>) session.getAttribute("categoryMap");
 
+
 		//Thymeleafで表示する準備
 		mv.addObject("cate", cate);
 		//mv.addObject("categoryMap", map);
@@ -203,6 +207,10 @@ public class ToDoController {
 
 		}
 
+		if(categoryCode==0) {
+			mv.addObject("msg","まずカテゴリー追加をしてください");
+			return cateCon.addCate(mv);
+		}
 		//ユーザ情報のセッションを受け取る
 		User u = (User) session.getAttribute("userInfo");
 

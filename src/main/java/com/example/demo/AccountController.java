@@ -161,6 +161,10 @@ public class AccountController {
 
 				} else {
 					userRepository.saveAndFlush(u);
+					Category c = new Category("（なし）",u.getCode());
+					categoryRepository.saveAndFlush(c);
+
+
 
 					mv.addObject("msg", "登録が完了しました");
 
