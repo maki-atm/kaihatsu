@@ -25,12 +25,19 @@
 
    <script>
 function f() {
-	return confirm("カテゴリーを消去すると、登録されているタスクも消去されますがよろしいですか？");
+	var result= confirm("カテゴリーを消去すると、登録されているタスクも消去されますがよろしいですか？");
+
+	if(result){
+		return true;
+	}else{
+		return false;
+	}
+
 }
 </script>
-<form onSubmit="f();" action="/category/delete" >
+<form action="/category/delete">
     <input type="hidden" th:value="${c.categoryCode}" name="categoryCode">
-	<input type="submit" value="　　削除　　" class="button">
+	<input onclick="return f();" type="submit" value="　　削除　　" class="button">
 </form>
 
          </td>
