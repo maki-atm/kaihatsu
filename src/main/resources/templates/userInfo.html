@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ToDo</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<span th:replace="menu"></span>
+<h2>ユーザ情報</h2>
+<span th:replace="time"></span>
+<br>
+ <br>
+<font color="red" th:text=${msg}></font>
+<br>
+<br>
+<table border="1">
+<tr>
+	<th>名前</th>
+	<td th:text=${session.userInfo.name}></td>
+</tr>
+<tr>
+	<th>メールアドレス</th>
+	<td th:text=${session.userInfo.email}></td>
+</tr>
+
+</table>
+
+	<br>
+
+
+<form action="/editUser" method="post">
+	<input class="button" type = "submit" value="　　　名前・メールアドレスの変更　　　">
+
+</form>
+<br>
+<form action="/check" method="get">
+	<input class="button" type = "submit" value="　　　パスワードの変更　　　">
+</form>
+
+</body>
+</html>
