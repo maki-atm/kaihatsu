@@ -61,12 +61,19 @@ public class ToDoController {
 		//残り日数のリスト取得
 		ArrayList<Difference> list = difference.getDifDay(t);
 
-
+//		List <Date>dateList = new ArrayList<>();
+//		for(Task i :t) {
+//			dateList.add(i.getDate());
+//		}
+//
+//		mv.addObject("dateList",dateList);
 		mv.addObject("list", list);
 
 		//Thmeleafで表示する準備
 		mv.addObject("countTask", countTask);
 		mv.addObject("t", t);
+
+
 
 		//index.htmlにフォワード
 		mv.setViewName("index");
@@ -198,14 +205,18 @@ public class ToDoController {
 		//Date型に変換
 		Date date = Date.valueOf(strDate);
 
+
 		//Time型に変換
+
 		Time time = null;
 
 		if (!strTime.equals("")) {
-			time = Time.valueOf(strTime + ":00");
+			time =Time.valueOf(strTime + ":00");
 		} else {
 
 		}
+
+
 
 		if(categoryCode==0) {
 			mv.addObject("msg","まずカテゴリー追加をしてください");

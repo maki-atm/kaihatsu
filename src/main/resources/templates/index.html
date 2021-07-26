@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <title>ToDo</title>
 <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.2/jquery.min.js"></script>
 
 </head>
+
 <body>
 <span th:replace="menu"></span>
 
@@ -19,6 +20,7 @@
 	<a th:text="本日までのタスクは" ></a>
 	<font color="blue" size="20" th:text="${countTask}"></font>
 	<a th:text=" 件です"></a></div>
+
 	<br>
 
 	<form action="/todo" method="post" id="inline">
@@ -104,4 +106,60 @@
 	<br>
 
 </body>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+var data = /*[[${t}]]*/;
+/*]]>*/
+
+
+setInterval(function(){
+	 // 現在の日時・時刻の情報を取得
+	  const d = new Date();
+
+	  // 年を取得
+	  let year = d.getFullYear();
+	  // 月を取得
+	  let month = d.getMonth() + 1;
+	  // 日を取得
+	  let date = d.getDate();
+	  // 時を取得
+	  let hour = d.getHours();
+	  // 分を取得
+	  let min = d.getMinutes();
+
+	  month = month < 10 ? "0" + month : month;
+	  date = date < 10 ? "0" + date : date;
+	  hour = hour < 10 ? "0" + hour : hour;
+	  min = min < 10 ? "0" + min : min;
+
+	for(var i=0 ; i<data.length ; i++){
+		console.log(data[i].time);
+		var today = year+ '-'+month + '-'+date
+		var nowTime = hour+':'+min+':00'
+		console.log(today);
+		console.log(nowTime);
+
+		if(today == data[i].date){
+			if(nowTime == data[i].time){
+				alert(data[i].text+'の期限です！');
+			}
+		}
+
+
+
+	}
+
+},60000);
+
+
+
+
+
+
+
+
+
+
+</script>
 </html>

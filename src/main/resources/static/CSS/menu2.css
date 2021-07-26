@@ -9,10 +9,13 @@ header{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99e379', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 */
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
     font-size: 16px;
+
+
 }
 .container{
     padding-top: 2rem;
 }
+
 
 h3{
 	 background:  #FFD700;
