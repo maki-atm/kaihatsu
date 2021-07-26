@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css">
 
 <title>新規登録</title>
 </head>
@@ -12,17 +12,24 @@
 
 <font color="red" th:text="${msg}"></font>
 <br><br>
+<div class="box2">
+ <fieldset id="inputs">
 <form action="/newUser" method="post">
 　　　　　名前：<input type="text" name="name"required>
 <br>
+<br>
 メールアドレス：<input type="text" name="email" required>
 <br>
+<br>
 　　パスワード：<input type="password" name="password" required>
+ </fieldset >
 <br>
 <br>
 <input type="submit" value="　　　登録　　　" class="button">
 </form>
 <br>
+<br>
 <a href="/">ログイン画面に戻る</a>
+</div>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,6 +72,71 @@ public class CalendarController {
 		return mv;
 
 	}
+
+	//前日のタスク表示
+		@GetMapping("/todo/calendar/yesterday")
+		public ModelAndView CalendarYesterDay(
+				@RequestParam("date_y") String strDateY,
+				ModelAndView mv) {
+
+			//ユーザ情報のセッションを受け取る
+			User u =(User)session.getAttribute("userInfo");
+
+			//LocalDate型に変換
+			//strDateY = strDateY.replace("/","-");
+			LocalDate ld= LocalDate.parse(strDateY, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+			ld=ld.minusDays(1);
+
+			 java.sql.Date yesterday = java.sql.Date.valueOf(ld);
+
+		//	LocalDate yesterday = Date.valueOf(ld);
+
+
+			List<Task> td =taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),yesterday);
+
+
+			//Thymeleafで表示する準備
+
+			mv.addObject("td", td);
+			mv.addObject("yesterday",yesterday);
+			mv.setViewName("yesterday");
+
+
+			return mv;
+
+		}
+
+		//翌日のタスク表示
+		@GetMapping("/todo/calendar/tomorrow")
+		public ModelAndView CalendarTomorrow(
+				@RequestParam("date_t") String strDateT,
+				ModelAndView mv) {
+
+			//ユーザ情報のセッションを受け取る
+			User u =(User)session.getAttribute("userInfo");
+
+			//Date型に変換
+			//strDateY = strDateY.replace("/","-");
+			LocalDate ld= LocalDate.parse(strDateT, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+			ld=ld.plusDays(1);
+
+			 java.sql.Date tomorrow = java.sql.Date.valueOf(ld);
+
+		//	LocalDate yesterday = Date.valueOf(ld);
+
+
+			List<Task> td =taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),tomorrow);
+
+			//Thymeleafで表示する準備
+
+			mv.addObject("td", td);
+			mv.addObject("tomorrow",tomorrow);
+			mv.setViewName("calDate");
+
+
+			return mv;
+
+		}
 
 	//検索
 	@PostMapping("/todo/calendar/search")
