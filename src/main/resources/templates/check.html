@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ToDo</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<span th:replace="menu"></span>
+
+<h2>パスワードの確認</h2>
+<br>
+<br>
+
+<font color="red" th:text=${message}></font>
+現在のパスワードを入力して下さい
+<br>
+<br>
+<form action="/check" method="post">
+<input type="password" name="password" placeholder="現在のパスワード">
+<input type="submit" value="送信" class="button">
+</form>
+
+</body>
+</html>

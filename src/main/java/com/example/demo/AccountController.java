@@ -59,7 +59,7 @@ public class AccountController {
 
 		//アドレスが一致しないとき
 		if (list == null || list.size() == 0) {
-			mv.addObject("message", "入力されたメールアドレスは登録されていません");
+			mv.addObject("message", "入力されたメールアドレスもしくはパスワードは正しくありません");
 			mv.setViewName("login");
 			return mv;
 		}
@@ -70,7 +70,7 @@ public class AccountController {
 
 		if (!(userInfo.getPassword().equals(password))) {
 
-			mv.addObject("message", "パスワードが一致しません");
+			mv.addObject("message", "入力されたメールアドレスもしくはパスワードは正しくありません");
 			mv.setViewName("login");
 			return mv;
 
@@ -161,10 +161,8 @@ public class AccountController {
 
 				} else {
 					userRepository.saveAndFlush(u);
-					Category c = new Category("（なし）",u.getCode());
+					Category c = new Category("（なし）", u.getCode());
 					categoryRepository.saveAndFlush(c);
-
-
 
 					mv.addObject("msg", "登録が完了しました");
 
@@ -172,14 +170,153 @@ public class AccountController {
 					return mv;
 				}
 
-
 			} else {
-			mv.addObject("msg", "メールアドレスを入力してください");
-			mv.setViewName("/newUser");
+				mv.addObject("msg", "メールアドレスを入力してください");
+				mv.setViewName("/newUser");
 			}
 		}
 		return mv;
 	}
+
+	//ユーザ情報表示画面遷移
+	@GetMapping("/userInfo")
+	public ModelAndView userInfo(
+			ModelAndView mv) {
+
+		User u = (User) session.getAttribute("userInfo");
+
+		mv.setViewName("userInfo");//フォワード先
+
+		return mv;
+	}
+
+	//ユーザ情報変更画面遷移
+	@PostMapping("/editUser")
+	public ModelAndView editUser(
+			ModelAndView mv) {
+
+		User u = (User) session.getAttribute("userInfo");
+
+		mv.setViewName("editUser");//フォワード先
+
+		return mv;
+	}
+
+	//ユーザ情報変更
+	@PostMapping("/edit")
+	public ModelAndView edit(
+			@RequestParam("NAME") String name,
+			@RequestParam("MAIL") String mail,
+			@RequestParam("PASS") String password,
+			ModelAndView mv) {
+
+		User u = (User) session.getAttribute("userInfo");
+
+		User user = new User(u.getCode(), name, mail,password);
+		userRepository.saveAndFlush(user);
+
+		//メアドから顧客データを検索して取得
+		List<User> list = null;
+		list = userRepository.findByEmail(mail);
+
+		User userInfo = list.get(0);
+
+		//セッションスコープに顧客情報とカテゴリ情報を格納する
+		session.setAttribute("userInfo", userInfo);
+
+		mv.addObject("msg", "変更が完了しました");
+		mv.setViewName("userInfo");//フォワード先
+
+		return userInfo(mv);
+	}
+
+	//パスワード再入力遷移
+	@GetMapping("/check")
+	public ModelAndView check(
+			ModelAndView mv) {
+
+		//	User u = (User) session.getAttribute("userInfo");
+
+		mv.setViewName("check");//フォワード先
+
+		return mv;
+	}
+
+	//パスワード再入力
+	@PostMapping("/check")
+	public ModelAndView check(
+			@RequestParam("password") String password,
+			ModelAndView mv) {
+
+		User u = (User) session.getAttribute("userInfo");
+
+
+		//顧客情報のリストを取得
+		List<User> list = null;
+
+
+		list = userRepository.findByEmail(u.getEmail());
+
+		User userInfo = list.get(0);
+
+		if (!(userInfo.getPassword().equals(password))) {
+
+			mv.addObject("message", "入力されたパスワードは正しくありません");
+			mv.setViewName("check");
+			return mv;
+
+		} else {
+
+			mv.setViewName("editPassword");//フォワード先
+
+			return mv;
+		}
+	}
+
+//	//パスワード再入力遷移
+//		@GetMapping("/edit/password")
+//		public ModelAndView editPassword(
+//				ModelAndView mv) {
+//
+//			//	User u = (User) session.getAttribute("userInfo");
+//
+//			mv.setViewName("editPassword");//フォワード先
+//
+//			return mv;
+//		}
+//
+		//パスワード変更
+				@PostMapping("/edit/password")
+				public ModelAndView editPassword(
+						@RequestParam("NAME") String name,
+						@RequestParam("MAIL") String mail,
+						@RequestParam("PASS") String password,
+						ModelAndView mv) {
+
+					//	User u = (User) session.getAttribute("userInfo");
+
+					User u = (User) session.getAttribute("userInfo");
+
+					User user = new User(u.getCode(), name, mail,password);
+					userRepository.saveAndFlush(user);
+
+					//メアドから顧客データを検索して取得
+					List<User> list = null;
+					list = userRepository.findByEmail(mail);
+
+					User userInfo = list.get(0);
+
+					//セッションスコープに顧客情報とカテゴリ情報を格納する
+					session.setAttribute("userInfo", userInfo);
+
+					mv.addObject("msg", "パスワードの変更が完了しました");
+
+					mv.setViewName("userInfo");//フォワード先
+
+					return mv;
+				}
+
+
 
 	//ユーザー削除画面遷移
 	@GetMapping("/deleteUser")
