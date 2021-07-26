@@ -34,7 +34,7 @@
 	</form>
 　　　　　
 	<form action="/search" method="post" id="inline">
-		<input type="text" name="keyword" th:value="${keyword}" placeholder="search for task">
+		<input type="text" name="keyword" th:value="${keyword}" placeholder=" 　　search for task">
 		<input type="submit" value=" 検索 " class="button">
 	</form>
 
@@ -135,19 +135,15 @@ setInterval(function(){
 	  min = min < 10 ? "0" + min : min;
 
 	for(var i=0 ; i<data.length ; i++){
-		console.log(data[i].time);
+
 		var today = year+ '-'+month + '-'+date
 		var nowTime = hour+':'+min+':00'
-		console.log(today);
-		console.log(nowTime);
 
 		if(today == data[i].date){
 			if(nowTime == data[i].time){
 				alert(data[i].text+'の期限です！');
 			}
 		}
-
-
 
 	}
 
