@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ToDo</title>
-<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -13,14 +13,20 @@
 <br>
 <br>
 
+
+<div class="box2">
 <font color="red" th:text=${message}></font>
-現在のパスワードを入力して下さい
-<br>
-<br>
+
 <form action="/check" method="post">
-<input type="password" name="password" placeholder="現在のパスワード">
+<fieldset id="inputs">
+現在のパスワード:
+<input type="password" name="password"  >
+</fieldset>
+<br>
+<br>
+
 <input type="submit" value="送信" class="button">
 </form>
-
+</div>
 </body>
 </html>
