@@ -74,32 +74,32 @@ public class CalendarController {
 	}
 
 	//前日のタスク表示
-		@GetMapping("/todo/calendar/yesterday")
+		@GetMapping("/todo/calendar/theDayBefore")
 		public ModelAndView CalendarYesterDay(
-				@RequestParam("date_y") String strDateY,
+				@RequestParam("BEFORE") String strDateB,
 				ModelAndView mv) {
 
 			//ユーザ情報のセッションを受け取る
 			User u =(User)session.getAttribute("userInfo");
 
 			//LocalDate型に変換
-			//strDateY = strDateY.replace("/","-");
-			LocalDate ld= LocalDate.parse(strDateY, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+			strDateB = strDateB.replace("-","/");
+			LocalDate ld= LocalDate.parse(strDateB, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 			ld=ld.minusDays(1);
 
-			 java.sql.Date yesterday = java.sql.Date.valueOf(ld);
+			 java.sql.Date date = java.sql.Date.valueOf(ld);
 
 		//	LocalDate yesterday = Date.valueOf(ld);
 
 
-			List<Task> td =taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),yesterday);
+			List<Task> td =taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),date);
 
 
 			//Thymeleafで表示する準備
 
 			mv.addObject("td", td);
-			mv.addObject("yesterday",yesterday);
-			mv.setViewName("yesterday");
+			mv.addObject("date",date);
+			mv.setViewName("calDate");
 
 
 			return mv;
@@ -107,30 +107,30 @@ public class CalendarController {
 		}
 
 		//翌日のタスク表示
-		@GetMapping("/todo/calendar/tomorrow")
+		@GetMapping("/todo/calendar/nextDay")
 		public ModelAndView CalendarTomorrow(
-				@RequestParam("date_t") String strDateT,
+				@RequestParam("NEXT") String strDateN,
 				ModelAndView mv) {
 
 			//ユーザ情報のセッションを受け取る
 			User u =(User)session.getAttribute("userInfo");
 
 			//Date型に変換
-			//strDateY = strDateY.replace("/","-");
-			LocalDate ld= LocalDate.parse(strDateT, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+			strDateN = strDateN.replace("-","/");
+			LocalDate ld= LocalDate.parse(strDateN, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 			ld=ld.plusDays(1);
 
-			 java.sql.Date tomorrow = java.sql.Date.valueOf(ld);
+			 java.sql.Date date = java.sql.Date.valueOf(ld);
 
 		//	LocalDate yesterday = Date.valueOf(ld);
 
 
-			List<Task> td =taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),tomorrow);
+			List<Task> td =taskRepository.findByUserCodeAndDateOrderByTimeAsc(u.getCode(),date);
 
 			//Thymeleafで表示する準備
 
 			mv.addObject("td", td);
-			mv.addObject("tomorrow",tomorrow);
+			mv.addObject("date",date);
 			mv.setViewName("calDate");
 
 

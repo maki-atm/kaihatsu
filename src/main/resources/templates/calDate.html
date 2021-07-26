@@ -13,9 +13,16 @@
 
 	<h2 th:text="${#dates.format(date, 'M月d日')}+'のタスク'" ></h2>
 
-<form action="/todo/calendar/yesterday">
-<input type="hidden" th:value="${date}" name="date_y">
-<input type="submit" value="昨日">
+<form action="/todo/calendar/theDayBefore">
+<input type="hidden" th:value="${date}" name="BEFORE">
+<input type="submit" value="←前日のタスク" class="button">
+</form>
+
+<br>
+
+<form action="/todo/calendar/nextDay">
+<input type="hidden" th:value="${date}" name="NEXT">
+<input type="submit" value="翌日のタスク→" class="button">
 </form>
 
 <span th:replace="time"></span>
